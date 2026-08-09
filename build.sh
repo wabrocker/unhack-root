@@ -21,7 +21,7 @@ REMOTE_DIR="domains/unhackdemocracy.us/public_html"
 rm -rf dist unhack-root-deploy.zip
 mkdir -p dist
 
-cp web/index.html dist/
+cp web/index.html web/logo.svg dist/
 cp web/.htaccess dist/.htaccess
 
 hash_of() { shasum -a 256 "$1" | cut -c1-8; }

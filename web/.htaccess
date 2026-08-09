@@ -10,6 +10,12 @@
   <FilesMatch "\.css$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
+
+  <!-- Not hashed, so a short bound rather than a long cache with no easy
+       way to force it — same reasoning as unhack-fl's data/*.json rule. -->
+  <FilesMatch "\.svg$">
+    Header set Cache-Control "public, max-age=300, must-revalidate"
+  </FilesMatch>
 </IfModule>
 
 <FilesMatch "^\.">
