@@ -1,0 +1,100 @@
+/* Same visual language as fl.unhackdemocracy.us on purpose — one project,
+   not two products. Deliberately plain: legibility over personality. */
+
+:root {
+  color-scheme: light dark;
+
+  --ink: #14181d;
+  --ink-soft: #4a5560;
+  --line: #d8dee5;
+  --bg: #ffffff;
+  --bg-soft: #f5f7f9;
+  --accent: #1a5f7a;
+  --warn: #8a5a00;
+  --radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f0f4f8;
+    --ink-soft: #b9c6d2;
+    --line: #333c46;
+    --bg: #12161a;
+    --bg-soft: #1a2027;
+    --accent: #8ecae6;
+    --warn: #e8b866;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 17px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.wrap { max-width: 44rem; margin: 0 auto; padding: 1.25rem; }
+
+h1 { font-size: 2.1rem; margin: 1.75rem 0 .25rem; letter-spacing: -.02em; }
+.subtitle {
+  color: var(--ink-soft); margin: 0 0 1rem;
+  font-size: .95rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .04em;
+}
+h2 { font-size: 1.2rem; margin: 2.25rem 0 .6rem; }
+h3 { font-size: 1.05rem; margin: 0 0 .4rem; }
+
+.lede { color: var(--ink-soft); margin: 0 0 1.25rem; font-size: 1.1rem; }
+.note { color: var(--ink-soft); font-size: .92rem; margin: 1em 0; }
+
+p { margin: 0 0 1rem; }
+ul { margin: 0 0 1rem; padding-left: 1.2rem; }
+li { margin-bottom: .35rem; }
+
+a { color: var(--accent); }
+
+.principles {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  margin: 1.5rem 0;
+}
+@media (max-width: 32rem) {
+  .principles { grid-template-columns: 1fr; }
+}
+.principles > div {
+  padding: .9rem 1rem; background: var(--bg-soft);
+  border-radius: var(--radius); border-left: 3px solid var(--accent);
+}
+.principles h3 { font-size: .95rem; margin: 0 0 .35rem; }
+.principles p { font-size: .92rem; color: var(--ink-soft); margin: 0; }
+
+.state-card {
+  margin: 1.5rem 0; padding: 1.25rem;
+  background: var(--bg-soft); border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.state-card.live { border-left: 3px solid var(--accent); }
+.state-card h3 { display: flex; align-items: center; gap: .5rem; font-size: 1.05rem; }
+.badge {
+  font-size: .72rem; font-weight: 700; letter-spacing: .03em;
+  text-transform: uppercase; padding: .15rem .5rem; border-radius: 999px;
+  background: var(--accent); color: var(--bg);
+}
+.state-card ul { font-size: .92rem; margin: .6rem 0 1rem; }
+
+.btn {
+  display: inline-block; font: inherit; font-weight: 700;
+  padding: .6rem 1.1rem; border-radius: var(--radius);
+  background: var(--accent); color: var(--bg); text-decoration: none;
+}
+.btn:hover { filter: brightness(1.1); }
+
+.state-card.pending { color: var(--ink-soft); }
+.state-card.pending h3 { color: var(--ink-soft); }
+
+footer {
+  border-top: 1px solid var(--line); margin-top: 3rem;
+  color: var(--ink-soft); font-size: .9rem; padding: 1.25rem 0 2rem;
+}
+footer a { color: var(--accent); }

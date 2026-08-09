@@ -1,0 +1,19 @@
+# Same cache policy as fl.unhackdemocracy.us: HTML always revalidates,
+# the hashed CSS URL is cached forever since a new deploy gives it a new
+# URL. See build.sh for the hash stamping.
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  <FilesMatch "\.css$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+Options -Indexes
