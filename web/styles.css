@@ -59,20 +59,45 @@ body {
 .menu-toggle:hover { border-color: var(--accent); }
 .menu-toggle[aria-expanded="true"] { border-color: var(--accent); }
 
-.site-menu {
-  display: flex; gap: 1.25rem; margin: 1.75rem 0 0;
-  padding: 0 0 .75rem; border-bottom: 1px solid var(--line);
-}
 .site-menu[hidden] { display: none; }
 .site-menu a { font-weight: 600; font-size: .9rem; color: var(--ink); text-decoration: none; }
-.site-menu a:hover { color: var(--accent); }
 
-/* Wide screens: tabs are always visible, no toggle needed. The [hidden]
-   attribute stays on the element either way (JS doesn't know about the
-   viewport) — this override just wins visually above the breakpoint. */
+/* Narrow screens: a real dropdown panel, not the same bar the wide
+   layout uses — anchored top-right near the button that opens it,
+   stacked vertically, boxed so it reads as a menu rather than a
+   second row of tabs. */
+header { position: relative; }
+.site-menu {
+  position: absolute; top: 0; right: 0; z-index: 10;
+  display: flex; flex-direction: column; gap: .1rem;
+  min-width: 9rem; padding: .4rem;
+  background: var(--bg); border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .12);
+}
+.site-menu a { padding: .5rem .6rem; border-radius: 6px; }
+.site-menu a:hover { background: var(--bg-soft); color: var(--accent); }
+
+/* Wide screens: tabs are always visible inline above the title instead —
+   no toggle needed. The [hidden] attribute stays on the element either
+   way (JS doesn't know about the viewport); this override just wins
+   visually above the breakpoint. */
 @media (min-width: 40rem) {
   .menu-toggle { display: none; }
-  .site-menu[hidden] { display: flex; }
+  /* Both branches, matching (not exceeding) the base rule's specificity
+     of .site-menu[hidden] — a plain .site-menu here loses to that base
+     rule regardless of source order, which is exactly the bug this
+     caused: tabs stuck invisible at desktop width. :not([hidden]) covers
+     resizing wider while the mobile dropdown happens to be open. */
+  .site-menu[hidden],
+  .site-menu:not([hidden]) {
+    display: flex; position: static; flex-direction: row; gap: 1.25rem;
+    min-width: 0; margin: 1.75rem 0 0; padding: 0 0 .75rem;
+    background: none; border: none; border-bottom: 1px solid var(--line);
+    box-shadow: none;
+  }
+  .site-menu[hidden] a, .site-menu:not([hidden]) a { padding: 0; border-radius: 0; }
+  .site-menu[hidden] a:hover, .site-menu:not([hidden]) a:hover { background: none; }
 }
 
 /* clamp rather than a fixed size: at narrow widths a fixed 2.1rem
@@ -140,12 +165,6 @@ a { color: var(--accent); }
   background: var(--accent); color: var(--bg); text-decoration: none;
 }
 .btn:hover { filter: brightness(1.1); }
-.btn-secondary {
-  background: var(--bg-soft); color: var(--ink);
-  border: 1px solid var(--line);
-}
-
-.home-links { display: flex; flex-wrap: wrap; gap: .75rem; margin: 2rem 0; }
 
 .state-card.pending { color: var(--ink-soft); }
 .state-card.pending h3 { color: var(--ink-soft); }
