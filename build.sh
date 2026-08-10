@@ -21,17 +21,18 @@ REMOTE_DIR="domains/unhackdemocracy.us/public_html"
 rm -rf dist unhack-root-deploy.zip
 mkdir -p dist
 
-cp web/index.html web/logo.svg web/social-preview.png web/social-preview-hero.jpg dist/
+cp web/logo.svg web/social-preview.png web/social-preview-hero.jpg dist/
 cp web/.htaccess dist/.htaccess
 
 hash_of() { shasum -a 256 "$1" | cut -c1-8; }
 
 CSS_HASH=$(hash_of web/styles.css)
-sed "s|href=\"styles\.css\"|href=\"styles.css?v=${CSS_HASH}\"|" \
-  web/index.html > dist/index.html
+for page in index about states; do
+  sed "s|href=\"styles\.css\"|href=\"styles.css?v=${CSS_HASH}\"|" \
+    "web/${page}.html" > "dist/${page}.html"
+  grep -q "styles.css?v=${CSS_HASH}" "dist/${page}.html" || { echo "FAIL: css not stamped in ${page}.html"; exit 1; }
+done
 cp web/styles.css "dist/styles.css"
-
-grep -q "styles.css?v=${CSS_HASH}" dist/index.html || { echo "FAIL: css not stamped"; exit 1; }
 
 ( cd dist && zip -qr ../unhack-root-deploy.zip . -x ".DS_Store" )
 

@@ -37,11 +37,48 @@ body {
 
 .wrap { max-width: 44rem; margin: 0 auto; padding: 1.25rem; }
 
-.brand { display: flex; align-items: center; gap: .75rem; margin-top: 1.75rem; }
-.brand img { border-radius: 10px; display: block; flex: none; }
-.brand h1 { margin: 0; }
+.brand-row {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: .5rem .75rem; margin-top: 1.75rem;
+}
+.brand {
+  display: flex; align-items: center; gap: .5rem; min-width: 0;
+  text-decoration: none; color: inherit;
+}
+.brand img { border-radius: 8px; display: block; flex: none; width: 34px; height: 34px; }
+.brand h1 { margin: 0; min-width: 0; }
 
-h1 { font-size: 2.1rem; margin: 1.75rem 0 .25rem; letter-spacing: -.02em; }
+.menu-toggle {
+  flex: none; width: 34px; height: 34px; padding: 0;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 4px;
+  background: transparent; border: 1px solid var(--line);
+  border-radius: var(--radius); cursor: pointer;
+}
+.menu-toggle span { width: 16px; height: 2px; background: var(--ink); display: block; }
+.menu-toggle:hover { border-color: var(--accent); }
+.menu-toggle[aria-expanded="true"] { border-color: var(--accent); }
+
+.site-menu {
+  display: flex; gap: 1.25rem; margin: 1.75rem 0 0;
+  padding: 0 0 .75rem; border-bottom: 1px solid var(--line);
+}
+.site-menu[hidden] { display: none; }
+.site-menu a { font-weight: 600; font-size: .9rem; color: var(--ink); text-decoration: none; }
+.site-menu a:hover { color: var(--accent); }
+
+/* Wide screens: tabs are always visible, no toggle needed. The [hidden]
+   attribute stays on the element either way (JS doesn't know about the
+   viewport) — this override just wins visually above the breakpoint. */
+@media (min-width: 40rem) {
+  .menu-toggle { display: none; }
+  .site-menu[hidden] { display: flex; }
+}
+
+/* clamp rather than a fixed size: at narrow widths a fixed 2.1rem
+   doesn't wrap (it's one flex child in .brand-row) and pushes the
+   menu-toggle button off-screen to the right. */
+h1 { font-size: clamp(1.15rem, 5.2vw, 2.1rem); margin: 0 0 .25rem; letter-spacing: -.02em; }
 .subtitle {
   color: var(--ink-soft); margin: 0 0 1rem;
   font-size: .95rem; font-weight: 600;
@@ -103,6 +140,12 @@ a { color: var(--accent); }
   background: var(--accent); color: var(--bg); text-decoration: none;
 }
 .btn:hover { filter: brightness(1.1); }
+.btn-secondary {
+  background: var(--bg-soft); color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.home-links { display: flex; flex-wrap: wrap; gap: .75rem; margin: 2rem 0; }
 
 .state-card.pending { color: var(--ink-soft); }
 .state-card.pending h3 { color: var(--ink-soft); }

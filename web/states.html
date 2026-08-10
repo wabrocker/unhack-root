@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Unhacking Democracy — concrete, cross-partisan ways to repair it</title>
-<meta name="description" content="Educating citizens on how democratic systems have been exploited — and giving concrete, cross-partisan ways to help repair them.">
+<title>State apps — Unhacking Democracy</title>
+<meta name="description" content="Florida is live now — county-by-county civic tools. Every other state: not yet, on purpose, until it's done properly.">
 <link rel="icon" href="logo.svg">
 <link rel="stylesheet" href="styles.css">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Unhacking Democracy">
-<meta property="og:title" content="Unhacking Democracy in the United States">
-<meta property="og:description" content="Concrete, cross-partisan ways to help repair democratic systems. Florida is live now.">
-<meta property="og:url" content="https://unhackdemocracy.us/">
+<meta property="og:title" content="State apps — Unhacking Democracy">
+<meta property="og:description" content="Florida is live now — county-by-county civic tools. Every other state: not yet, on purpose, until it's done properly.">
+<meta property="og:url" content="https://unhackdemocracy.us/states.html">
 <meta property="og:image" content="https://unhackdemocracy.us/social-preview.png">
 <meta property="og:image:width" content="1024">
 <meta property="og:image:height" content="1024">
 <meta property="og:image:alt" content="&quot;Way More Perilous Today&quot; (AI-generated, after Leutze 1851) — George Washington stands at the prow of a boat lettered DEMOCRACY, gazing toward the Statue of Liberty, while men in top hats fire a cannon down into the ship's own deck and ordinary workers cling to the hull pressing planks over the breaches.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Unhacking Democracy in the United States">
-<meta name="twitter:description" content="Concrete, cross-partisan ways to help repair democratic systems. Florida is live now.">
+<meta name="twitter:title" content="State apps — Unhacking Democracy">
+<meta name="twitter:description" content="Florida is live now — county-by-county civic tools. Every other state: not yet, on purpose, until it's done properly.">
 <meta name="twitter:image" content="https://unhackdemocracy.us/social-preview.png">
 </head>
 <body>
@@ -48,10 +48,32 @@
     </p>
   </header>
 
-  <p class="home-links">
-    <a class="btn" href="about.html">About Us — the mission →</a>
-    <a class="btn btn-secondary" href="states.html">State apps — pick yours →</a>
-  </p>
+  <h2>Pick your state</h2>
+
+  <div class="state-card live">
+    <h3>Florida <span class="badge">Live</span></h3>
+    <p>The first state, live now — county-by-county tools built on
+    Florida's own unusually strong public-records law:</p>
+    <ul>
+      <li>Find your county's poll-worker application — paid work, and
+      every county needs more people</li>
+      <li>Build a correctly-formed Chapter 119 public-records request in
+      minutes, for free, with no account and no API key required</li>
+      <li>All 67 counties, sourced from the state's own official data —
+      never a guessed contact or a constructed URL</li>
+    </ul>
+    <a class="btn" href="https://fl.unhackdemocracy.us">
+      Go to Unhack FL →
+    </a>
+  </div>
+
+  <div class="state-card pending">
+    <h3>Every other state</h3>
+    <p>Not yet. Records law, poll-worker eligibility, and registration
+    rules are state- and county-specific, so covering a state means doing
+    it properly, not just relabeling Florida's tools. Expansion comes one
+    state at a time, after each one actually works.</p>
+  </div>
 
   <footer>
     <p>
@@ -63,9 +85,6 @@
 </div>
 
 <script>
-// The only script on this page — a two-link disclosure menu. A real
-// button with aria-expanded rather than the checkbox-hack pattern, since
-// this is the one place on the site that needed any JS at all.
 (function () {
   var btn = document.getElementById("menu-toggle");
   var menu = document.getElementById("site-menu");
