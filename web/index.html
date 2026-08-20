@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://unhackdemocracy.us/social-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="1200">
-<meta property="og:image:alt" content="&quot;Far More Perilous Today&quot; (AI-generated, after Leutze 1851 and Schneier 2025) — George Washington stands at the prow of a boat lettered DEMOCRACY, gazing toward the Statue of Liberty, while men in top hats fire a cannon down into the ship's own deck and ordinary workers cling to the hull pressing planks over the breaches.">
+<meta property="og:image:alt" content="&quot;Far More Perilous Today&quot; (AI-generated, after Leutze 1851) — George Washington stands at the prow of a boat lettered DEMOCRACY, gazing toward the Statue of Liberty, while men in top hats fire a cannon down into the ship's own deck and ordinary workers cling to the hull pressing planks over the breaches.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Unhacking Democracy in the United States">
 <meta name="twitter:description" content="Concrete, cross-partisan ways to help repair democratic systems. Florida is live now.">
@@ -30,6 +30,15 @@
     <nav id="site-menu" class="site-menu" hidden>
       <a href="about.html">About Us</a>
       <a href="states.html">State Apps</a>
+      <div class="menu-group">
+        <button type="button" class="submenu-toggle" id="resources-toggle"
+                aria-expanded="false" aria-controls="resources-menu">Resources</button>
+        <div id="resources-menu" class="submenu" hidden>
+          <a href="resources.html">All Resources</a>
+          <a href="citizen-primer.html">Citizen Primer</a>
+          <a href="citizenship-test.html">Citizenship Test</a>
+        </div>
+      </div>
     </nav>
     <div class="brand-row">
       <a class="brand" href="index.html">
@@ -50,7 +59,7 @@
 
   <figure class="hero-art">
     <img src="social-preview-hero.jpg" width="1024" height="1024" alt="Painting in the style of Washington Crossing the Delaware: George Washington stands at the prow of a boat lettered DEMOCRACY, gazing toward the Statue of Liberty, while men in top hats fire a cannon down into the ship's own deck and ordinary workers cling to the hull pressing planks over the breaches.">
-    <figcaption>&ldquo;Far More Perilous Today&rdquo; — AI-generated, after Leutze (1851) and Schneier (2025)</figcaption>
+    <figcaption>&ldquo;Far More Perilous Today&rdquo; — AI-generated, after Leutze (1851)</figcaption>
   </figure>
 
   <footer>
@@ -63,23 +72,43 @@
 </div>
 
 <script>
-// The only script on this page — a two-link disclosure menu. A real
-// button with aria-expanded rather than the checkbox-hack pattern, since
-// this is the one place on the site that needed any JS at all.
+// Two disclosures, not one: the menu itself, and the Resources group
+// inside it. Closing the menu closes the group too, so reopening it
+// never restores a half-open state the button no longer describes.
 (function () {
   var btn = document.getElementById("menu-toggle");
   var menu = document.getElementById("site-menu");
+  var subBtn = document.getElementById("resources-toggle");
+  var sub = document.getElementById("resources-menu");
+
+  function setSub(open) {
+    if (!subBtn) return;
+    subBtn.setAttribute("aria-expanded", String(open));
+    sub.hidden = !open;
+  }
+  function setMenu(open) {
+    btn.setAttribute("aria-expanded", String(open));
+    menu.hidden = !open;
+    if (!open) setSub(false);
+  }
+
   btn.addEventListener("click", function () {
-    var open = btn.getAttribute("aria-expanded") === "true";
-    btn.setAttribute("aria-expanded", String(!open));
-    menu.hidden = open;
+    setMenu(btn.getAttribute("aria-expanded") !== "true");
   });
+  if (subBtn) {
+    subBtn.addEventListener("click", function () {
+      setSub(subBtn.getAttribute("aria-expanded") !== "true");
+    });
+  }
   menu.addEventListener("click", function (e) {
-    if (e.target.tagName === "A") {
-      btn.setAttribute("aria-expanded", "false");
-      menu.hidden = true;
-    }
+    if (e.target.tagName === "A") setMenu(false);
   });
+
+  // The group deliberately does NOT spring open on its own pages. At
+  // desktop width this panel is absolutely positioned, so opening it on
+  // load dropped it straight over the site title. The button carries
+  // data-section-current instead — it says "you are in here" without
+  // covering anything.
 })();
 </script>
 
