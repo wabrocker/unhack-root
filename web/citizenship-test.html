@@ -91,24 +91,25 @@
 
   <section id="play" hidden>
     <div id="progress" class="bar">
-      <div class="bar-track"><div class="bar-fill"></div></div>
-      <p class="bar-text"></p>
+      <div class="bar-track">
+        <div class="bar-started"></div>
+        <div class="bar-learned"></div>
+        <div class="bar-mark" title="Enough to expect a pass"></div>
+      </div>
+      <p class="bar-counts"></p>
+      <p class="bar-verdict"></p>
     </div>
 
     <div id="quiz" class="card"></div>
 
-    <div class="card">
-      <h3>Eight questions are not asked here</h3>
+    <details class="card fold">
+      <summary>Eight questions are not asked here</summary>
       <p>Their answers change with elections and appointments, or depend
       on where you live. Storing a fixed answer would mean confidently
       teaching the wrong one the day after an election, so these link to
       the source instead:</p>
-      <ul id="lookup-list"></ul>
-      <p class="source">Current answers:
-        <a id="updates-link" href="https://www.uscis.gov/citizenship/testupdates" rel="noopener">USCIS test updates</a>.
-        Your own senators, representative, governor and state capital are
-        on your state and district's official sites.</p>
-    </div>
+      <div id="lookup-list"></div>
+    </details>
   </section>
 
   <p class="source">All 128 questions from

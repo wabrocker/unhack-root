@@ -288,3 +288,39 @@ footer a { color: var(--accent); }
 .fb-also { margin: 0 0 .9rem; font-size: .9rem; color: var(--ink-soft); }
 .q-need { margin: -.6rem 0 .8rem; font-size: .85rem; font-weight: 700; color: var(--accent); }
 .q-need:empty { display: none; }
+
+/* A fold, for material that has to be present but must not compete with
+   the thing the page is for. <details> rather than script: it works with
+   JavaScript off, it is keyboard-operable for free, and find-in-page
+   still reaches inside a closed one in current browsers. */
+.fold > summary {
+  cursor: pointer; font-weight: 700; font-size: 1.05rem;
+  list-style: none; display: flex; align-items: center; gap: .5rem;
+}
+.fold > summary::-webkit-details-marker { display: none; }
+.fold > summary::before { content: "\25B8"; font-size: .8em; color: var(--ink-soft); }
+.fold[open] > summary::before { content: "\25BE"; }
+.fold > summary:hover { color: var(--accent); }
+.fold > *:not(summary) { margin-top: .9rem; }
+
+.find-group { margin: 1rem 0 0; padding-top: .9rem; border-top: 1px solid var(--line); }
+.find-group:first-child { border-top: 0; padding-top: 0; }
+.find-qs { margin: 0 0 .5rem; padding-left: 1.1rem; font-size: .95rem; }
+.find-where { margin: 0; font-size: .88rem; color: var(--ink-soft); }
+
+/* Progress against the real pass mark, not against an abstract 100%. Two
+   segments — learned, and started-but-not-yet-learned — plus a tick at the
+   point where a 20-question draw would be expected to pass. */
+.bar-track { position: relative; }
+.bar-started, .bar-learned {
+  position: absolute; top: 0; left: 0; height: 100%; transition: width .3s ease;
+}
+.bar-started { background: var(--line); }
+.bar-learned { background: var(--accent); }
+.bar-mark {
+  position: absolute; top: -3px; width: 2px; height: calc(100% + 6px);
+  background: var(--ink-soft); opacity: .8;
+}
+.bar-counts { margin: .5rem 0 .15rem; font-size: .85rem; color: var(--ink-soft); }
+.bar-verdict { margin: 0; font-size: .85rem; color: var(--ink-soft); }
+.bar-verdict.ready { color: var(--ok); font-weight: 700; }

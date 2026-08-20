@@ -269,13 +269,45 @@ function showFeedback(correct) {
   next.focus();
 }
 
+// The real test: 20 questions drawn from all 128, 12 correct to pass. That
+// turns "do I know this well enough" from a feeling into arithmetic —
+// knowing a fraction p of the bank, a 20-question draw is expected to
+// yield 20p, so 12 needs p of about 0.6, or ~77 of the 128.
+//
+// Deliberately conservative in two ways. Unknown questions are counted as
+// wrong, though five options mean you would guess a few right; and the
+// eight lookup questions count against the total even though they are not
+// drilled here, because the officer can still ask them. Telling somebody
+// they are ready when they are not is the one error this must not make.
+const TEST_DRAW = 20;
+const TEST_PASS = 12;
+const READY_AT = Math.ceil(TEST_PASS / TEST_DRAW * CIVICS.length);   // 77
+
 function progress() {
   const total = pool().length;
   const done = pool().filter((c) => (state.seen[c.n] || 0) >= MASTERY).length;
+  const started = pool().filter((c) => {
+    const v = state.seen[c.n] || 0;
+    return v > 0 && v < MASTERY;
+  }).length;
+
   const bar = document.getElementById("progress");
-  bar.querySelector(".bar-fill").style.width = (done / total * 100) + "%";
-  bar.querySelector(".bar-text").textContent =
-    `${done} of ${total} learned · ${state.right}/${state.asked} answered correctly`;
+  bar.querySelector(".bar-learned").style.width = (done / total * 100) + "%";
+  bar.querySelector(".bar-started").style.width = (started / total * 100) + "%";
+  bar.querySelector(".bar-mark").style.left = (READY_AT / total * 100) + "%";
+
+  bar.querySelector(".bar-counts").textContent =
+    `${done} learned · ${started} started · ${total - done - started} not seen yet`;
+
+  const expect = Math.round(done / CIVICS.length * TEST_DRAW);
+  const ready = done >= READY_AT;
+  const verdict = bar.querySelector(".bar-verdict");
+  verdict.className = "bar-verdict " + (ready ? "ready" : "");
+  verdict.textContent = ready
+    ? `On track to pass — a ${TEST_DRAW}-question test should give you about `
+      + `${expect}, and ${TEST_PASS} passes.`
+    : `The test asks ${TEST_DRAW} of the ${CIVICS.length} and needs ${TEST_PASS} right. `
+      + `Right now you would expect about ${expect}. Around ${READY_AT} learned is the mark.`;
 }
 
 function finish() {
@@ -315,12 +347,54 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   document.getElementById("gate-curious").addEventListener("click", start);
 
-  // The lookup questions get listed rather than quizzed, so they are not
-  // simply missing from a tool that claims to cover the test.
-  const ul = document.getElementById("lookup-list");
-  CIVICS.filter((c) => c.kind === "lookup").forEach((c) => {
-    const li = el("li", null, c.q);
-    ul.appendChild(li);
+  // Where to actually FIND each of the eight, which is the part that makes
+  // this section useful rather than merely honest. Kept here and not in
+  // civics-data.js: that file is a faithful transcription of the USCIS
+  // document, and telling somebody which website to open is our editorial
+  // addition, not theirs.
+  //
+  // The USCIS page is not merely *a* source for the four federal offices —
+  // it is *the* source. The officer grades against what USCIS publishes,
+  // so a newer name found elsewhere is still the wrong answer to give.
+  const FIND = [
+    { where: "USCIS test updates",
+      href: CIVICS_UPDATES,
+      note: "USCIS publishes the current names, and the interview is graded "
+          + "against what it says here \u2014 so this is the answer to learn, "
+          + "not just a place to check.",
+      qs: [30, 38, 39, 57] },
+    { where: "senate.gov",
+      href: "https://www.senate.gov/senators/senators-contact.htm",
+      note: "Choose your state to see both of its senators.",
+      qs: [23] },
+    { where: "house.gov",
+      href: "https://www.house.gov/representatives/find-your-representative",
+      note: "Takes your ZIP code, because representatives go by district "
+          + "rather than by state \u2014 which is why your neighbours two "
+          + "streets over may have a different one.",
+      qs: [29] },
+    { where: "usa.gov state directory",
+      href: "https://www.usa.gov/state-governments",
+      note: "Your state's own site carries the governor and the capital.",
+      qs: [61, 62] },
+  ];
+
+  const box = document.getElementById("lookup-list");
+  FIND.forEach((f) => {
+    const grp = el("div", "find-group");
+    const qs = el("ul", "find-qs");
+    f.qs.forEach((n) => {
+      const c = CIVICS.find((x) => x.n === n);
+      if (c) qs.appendChild(el("li", null, c.q));
+    });
+    grp.appendChild(qs);
+    const p = el("p", "find-where");
+    const a = el("a", null, f.where);
+    a.href = f.href; a.rel = "noopener";
+    p.appendChild(document.createTextNode("Look these up at "));
+    p.appendChild(a);
+    p.appendChild(document.createTextNode(". " + f.note));
+    grp.appendChild(p);
+    box.appendChild(grp);
   });
-  document.getElementById("updates-link").href = CIVICS_UPDATES;
 });
