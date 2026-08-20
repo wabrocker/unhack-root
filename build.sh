@@ -29,13 +29,21 @@ rm -rf dist unhack-root-deploy.zip
 mkdir -p dist
 
 cp web/logo.svg web/social-preview.jpg web/social-preview-hero.jpg dist/
+cp web/civics-data.js web/civics-quiz.js dist/
 cp web/.htaccess dist/.htaccess
 
 hash_of() { shasum -a 256 "$1" | cut -c1-8; }
 
+# The civics quiz's two scripts get the same content hash treatment as the
+# stylesheet, and for the same reason: a stale cached quiz that scores
+# answers against last week's data is worse than a broken one, because it
+# looks like it is working. Both files share one hash — they always ship
+# together, so busting them together costs nothing.
+JS_HASH=$(hash_of web/civics-data.js)$(hash_of web/civics-quiz.js)
 CSS_HASH=$(hash_of web/styles.css)
 for page in index about states resources citizen-primer citizenship-test; do
-  sed "s|href=\"styles\.css\"|href=\"styles.css?v=${CSS_HASH}\"|" \
+  sed -e "s|href=\"styles\.css\"|href=\"styles.css?v=${CSS_HASH}\"|" \
+      -e "s|src=\"civics-\([a-z]*\)\.js\"|src=\"civics-\1.js?v=${JS_HASH}\"|g" \
     "web/${page}.html" > "dist/${page}.html"
   grep -q "styles.css?v=${CSS_HASH}" "dist/${page}.html" || { echo "FAIL: css not stamped in ${page}.html"; exit 1; }
 done

@@ -11,6 +11,8 @@
   --bg-soft: #f5f7f9;
   --accent: #1a5f7a;
   --warn: #8a5a00;
+  --ok: #1d6b3f;
+  --bad: #9b2c2c;
   --radius: 10px;
 }
 
@@ -23,6 +25,8 @@
     --bg-soft: #1a2027;
     --accent: #8ecae6;
     --warn: #e8b866;
+    --ok: #74d99f;
+    --bad: #f08a8a;
   }
 }
 
@@ -243,3 +247,44 @@ footer a { color: var(--accent); }
   border: 1px solid var(--line); border-radius: 999px;
 }
 .page-nav a:hover { background: var(--bg-soft); border-color: var(--accent); }
+
+
+/* ---- Civics quiz ---------------------------------------------------
+   Deliberately plainer than the rest of the site is playful. The people
+   using this are adults preparing for a government interview, and a
+   study tool that looks like a game is a study tool they will not
+   trust with something that matters. */
+.gate-buttons { display: flex; flex-direction: column; gap: .6rem; align-items: flex-start; }
+.btn.ghost { background: none; color: var(--accent); border: 1px solid var(--line); }
+.btn.ghost:hover { background: var(--bg-soft); filter: none; }
+
+.bar { margin: 1.5rem 0 1rem; }
+.bar-track { height: 6px; background: var(--bg-soft); border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.bar-fill { height: 100%; width: 0; background: var(--accent); transition: width .3s ease; }
+.bar-text { margin: .5rem 0 0; font-size: .85rem; color: var(--ink-soft); }
+
+.q-meta { margin: 0 0 .3rem; font-size: .78rem; font-weight: 700; letter-spacing: .04em;
+          text-transform: uppercase; color: var(--ink-soft); }
+.q-text { font-size: 1.15rem; line-height: 1.4; margin: 0 0 1rem; }
+
+.q-options { display: flex; flex-direction: column; gap: .5rem; }
+.q-option {
+  font: inherit; text-align: left; cursor: pointer;
+  padding: .7rem .9rem; border-radius: var(--radius);
+  border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+}
+.q-option:hover:not(:disabled) { border-color: var(--accent); background: var(--bg-soft); }
+.q-option:disabled { cursor: default; opacity: .75; }
+/* The right answer is always revealed, including when it was picked —
+   the correction is the part that teaches, so it never gets skipped. */
+.q-option.is-right { border-color: var(--ok); color: var(--ok); font-weight: 700; opacity: 1; }
+.q-option.is-wrong { border-color: var(--bad); color: var(--bad); text-decoration: line-through; opacity: 1; }
+
+.q-feedback:not(:empty) { margin-top: 1.1rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+.fb-verdict { margin: 0 0 .4rem; font-weight: 800; }
+.q-feedback.ok .fb-verdict { color: var(--ok); }
+.q-feedback.no .fb-verdict { color: var(--bad); }
+.fb-answer { margin: 0 0 .4rem; font-weight: 700; }
+.fb-also { margin: 0 0 .9rem; font-size: .9rem; color: var(--ink-soft); }
+.q-need { margin: -.6rem 0 .8rem; font-size: .85rem; font-weight: 700; color: var(--accent); }
+.q-need:empty { display: none; }

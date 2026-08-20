@@ -60,44 +60,61 @@
       and giving concrete, cross-partisan ways to help repair them.
     </p>
   </header>
-
-
   <h2>The Citizenship Test</h2>
 
-  <p class="lede">The civics test asked at the naturalization interview —
-  the real questions, from the government's own published list.</p>
+  <p class="lede">The civics questions asked at the naturalization
+  interview — all of them, from the government's own published list.</p>
 
-  <div class="card pending">
-    <h3>Which test applies to you <span class="badge soft">In progress</span></h3>
-    <p>There are currently <strong>two</strong> civics tests in force, and
-    which one you sit depends on when your Form N-400 was filed:</p>
-    <ul>
-      <li><strong>Filed before 20 October 2025</strong> — the 2008 test.
-      Up to 10 questions drawn from a bank of 100; 6 correct to pass.</li>
-      <li><strong>Filed on or after 20 October 2025</strong> — the 2025
-      test. 20 questions drawn from a bank of 128; 12 correct to pass.</li>
-    </ul>
-    <p>Most study material still shows only the older test, which is the
-    single most consequential thing to get right here: practising the
-    wrong bank before a real interview is worse than not practising at
-    all. This tool will ask your filing date before it asks anything
-    else.</p>
-    <p class="source">Source:
-      <a href="https://www.uscis.gov/citizenship-resource-center/naturalization-test-and-study-resources/2025-civics-test" rel="noopener">USCIS — 2025 Civics Test</a>.
-      Questions published by USCIS are U.S. Government works.</p>
-  </div>
+  <section id="gate">
+    <div class="card">
+      <h3>First: which test applies to you?</h3>
+      <p>There are two civics tests in force, and which one you sit
+      depends on when your Form N-400 was filed. Practising the wrong
+      bank before a real interview is worse than not practising, so this
+      asks before it starts.</p>
+      <div id="gate-choice" class="gate-buttons">
+        <button type="button" class="btn" id="gate-2025">Filed on or after 20 Oct 2025</button>
+        <button type="button" class="btn ghost" id="gate-2008">Filed before 20 Oct 2025</button>
+        <button type="button" class="btn ghost" id="gate-curious">Just curious &mdash; not applying</button>
+      </div>
+      <div id="gate-2008-note" hidden>
+        <p><strong>You take the 2008 test</strong> &mdash; 100 questions,
+        10 asked, 6 correct to pass. This tool currently covers only the
+        2025 test (128 questions, 20 asked, 12 to pass), so studying here
+        would be the wrong material.</p>
+        <p>Go to
+        <a href="https://www.uscis.gov/citizenship/2008test" rel="noopener">the USCIS 2008 test page</a>
+        instead. The 2008 set is on the list to add here.</p>
+      </div>
+    </div>
+  </section>
 
-  <div class="card pending">
-    <h3>Why it is here, and not only for applicants</h3>
-    <p>It is a short, concrete, checkable map of how the federal
-    government is actually assembled — and unlike almost everything else
-    in civics, there is an official answer key. Most people born here
-    have never sat it.</p>
-    <p>If you are preparing for a real interview, treat this as practice
-    and USCIS as the authority. We will always link you back to the
-    source.</p>
-  </div>
+  <section id="play" hidden>
+    <div id="progress" class="bar">
+      <div class="bar-track"><div class="bar-fill"></div></div>
+      <p class="bar-text"></p>
+    </div>
 
+    <div id="quiz" class="card"></div>
+
+    <div class="card">
+      <h3>Eight questions are not asked here</h3>
+      <p>Their answers change with elections and appointments, or depend
+      on where you live. Storing a fixed answer would mean confidently
+      teaching the wrong one the day after an election, so these link to
+      the source instead:</p>
+      <ul id="lookup-list"></ul>
+      <p class="source">Current answers:
+        <a id="updates-link" href="https://www.uscis.gov/citizenship/testupdates" rel="noopener">USCIS test updates</a>.
+        Your own senators, representative, governor and state capital are
+        on your state and district's official sites.</p>
+    </div>
+  </section>
+
+  <p class="source">All 128 questions from
+    <a href="https://www.uscis.gov/citizenship/2025test" rel="noopener">USCIS, 2025 civics test</a>.
+    Published by USCIS, a work of the U.S. government. This is practice;
+    USCIS is the authority.</p>
   <footer>
     <p>
       Open source, MIT licensed.
@@ -147,6 +164,9 @@
   // covering anything.
 })();
 </script>
+
+<script src="civics-data.js"></script>
+<script src="civics-quiz.js"></script>
 
 </body>
 </html>
