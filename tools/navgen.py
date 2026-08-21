@@ -80,10 +80,10 @@ MASTHEAD = '''    <p class="subtitle">in the United States</p>
         <summary aria-label="The fuller statement of purpose">i</summary>
         <div class="info-body">
           <p class="info-mastery">Our mission is to educate citizens on how
-          democratic systems have been exploited &mdash; and to provide
-          specific, actionable, and cross-partisan ways to help repair them
-          using the &ldquo;tri-pronged&rdquo; power of verifiable knowledge,
-          strength in numbers and clarity of all of our teams&rsquo; purposes.</p>
+          democratic systems have been exploited. We provide specific,
+          actionable, cross-partisan ways to help repair them. That work
+          rests on three things: knowledge you can verify, strength in
+          numbers, and clarity about what each of our teams is for.</p>
         </div>
       </details>
     </div>
