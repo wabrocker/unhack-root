@@ -79,7 +79,7 @@ MASTHEAD = '''    <p class="subtitle">in the United States</p>
           democratic systems have been exploited &mdash; and to provide
           specific, actionable, and cross-partisan ways to help repair them
           using the &ldquo;tri-pronged&rdquo; power of verifiable knowledge,
-          strength in numbers and clarity of our teams&rsquo; purposes.</p>
+          strength in numbers and clarity of all of our teams&rsquo; purposes.</p>
         </div>
       </details>
     </div>
