@@ -22,12 +22,28 @@
 // defeats the lucky guess: luck does not survive being asked again.
 
 const MASTERY = 2;      // correct sightings before a question is retired
-// How often a question that COULD be multiple choice is asked by recall
-// instead. Recall is the better teacher and the format the real interview
-// uses, but seeing a question both ways is worth more than either alone —
-// and picking from a list is a fair way to meet a question you have never
-// seen. So it is a coin flip, and the same question can come back harder.
-const RECALL_CHANCE = 0.5;
+// Half the questions should arrive as recall. But 21 of them are recall
+// ALWAYS — they have no honest distractors — so a plain coin flip on the
+// rest overshoots. The flip has to be biased DOWN to compensate:
+//
+//   want:  RECALL_SHARE * N        of N questions
+//   have:  alwaysRecall            for free
+//   so:    p = (RECALL_SHARE*N - alwaysRecall) / (N - alwaysRecall)
+//
+// With 120 quizzable and 21 always-recall that is 39/99 ≈ 0.394, not the
+// 1/3 it looks like by eye — a flat third would land at 54:66. Computed
+// from the data rather than written down, so it stays balanced if the
+// always-recall count changes when the categories are next edited.
+const RECALL_SHARE = 0.5;
+
+function recallChance() {
+  const all = CIVICS.filter((c) => c.kind !== "lookup" && c.a.length);
+  const always = all.filter((c) => c.r).length;
+  const flexible = all.length - always;
+  if (flexible <= 0) return 0;
+  const p = (RECALL_SHARE * all.length - always) / flexible;
+  return Math.max(0, Math.min(1, p));
+}
 const DISTRACTORS = 4;  // wrong options offered, however many are wanted
 
 const state = {
@@ -119,8 +135,8 @@ function distractorsFor(q, want) {
 
   const take = (list) =>
     list.filter((c) => c.n !== q.n)
-        .flatMap((c) => c.a)
-        .filter((a) => !correct.has(norm(a)));
+        .flatMap((c) => c.a.map((a) => ({ a: a, from: c.n })))
+        .filter((x) => !correct.has(norm(x.a)));
 
   // A question that names its own wrong answers gets them, and nothing
   // else. See DISTRACTORS in tools/build-civics.py for why some must.
@@ -151,17 +167,38 @@ function distractorsFor(q, want) {
   const tiers = [
     both,
     sameCat,
-    near.filter((a) => answerShape(a) === shape),
-    far.filter((a) => answerShape(a) === shape),
+    near.filter((x) => answerShape(x.a) === shape),
+    far.filter((x) => answerShape(x.a) === shape),
     near,
     far,
   ];
 
+  // One answer per source question is a PREFERENCE, not a rule. Two answers
+  // to the same question are usually two phrasings of one idea, so taking
+  // both wastes an option slot — but a second answer from the right
+  // category still beats a first answer from the wrong one.
+  //
+  // Enforcing it absolutely made Q91 worse, not better: the war category has
+  // few source questions, so skipping repeats starved the tier and let an
+  // amendment through as a "war fought in the 1800s". Two Revolutionary War
+  // variants at least keep every option a war. So each tier is swept twice —
+  // distinct sources first, then repeats — before moving down.
   const out = [];
+  const usedSource = new Set();
+  const add = (x) => {
+    if (out.some((y) => norm(y) === norm(x.a))) return;
+    usedSource.add(x.from);
+    out.push(x.a);
+  };
   for (const tier of tiers) {
-    for (const a of shuffle(tier)) {
+    const shuffled = shuffle(tier);
+    for (const x of shuffled) {
       if (out.length >= want) return out;
-      if (!out.some((x) => norm(x) === norm(a))) out.push(a);
+      if (!usedSource.has(x.from)) add(x);
+    }
+    for (const x of shuffled) {
+      if (out.length >= want) return out;
+      add(x);
     }
   }
   return out;
@@ -178,7 +215,7 @@ function nextQuestion() {
   // ever teach its first one.
   // Questions with no honest distractors are ALWAYS recall. The rest are a
   // coin flip between the two formats.
-  if (q.r || Math.random() < RECALL_CHANCE) {
+  if (q.r || Math.random() < recallChance()) {
     state.current = { q, need, recall: true, shown: q.a.slice(),
                       options: [], picked: [], answered: false };
     return render();
