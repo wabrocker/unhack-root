@@ -485,6 +485,9 @@ footer a { color: var(--accent); }
   border-radius: 50%; font-size: .8em; font-style: italic; font-weight: 700;
   color: var(--ink-soft); vertical-align: middle;
 }
+/* Options off hides the DIALS, not just their explanations. Hiding an info
+   circle while leaving the control it explains is the worst of both: a
+   knob with no label. Both rows go — Typing and Test — and whatever
+   Typing was last set to still applies, silently. */
 body:not(.options-on) .bar-counts > .info,
-body:not(.options-on) .mix-row > .info,
-body:not(.options-on) .test-row { display: none; }
+body:not(.options-on) .mix-row { display: none; }
