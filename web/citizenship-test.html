@@ -85,8 +85,19 @@
         <div class="bar-learned"></div>
         <div class="bar-mark" title="Enough to expect a pass"></div>
       </div>
-      <p class="bar-counts"></p>
-      <p class="bar-verdict"></p>
+      <div class="bar-counts">
+        <span class="counts-text"></span><details class="info">
+          <summary aria-label="What these numbers mean">i</summary>
+          <div class="info-body">
+            <p class="bar-verdict"></p>
+            <p class="info-mastery">A question counts as <strong>learned</strong>
+            once you have answered it correctly <strong>twice</strong>, on
+            separate showings. One right answer could be luck, and luck does
+            not survive being asked again. Getting it wrong sets that
+            question back to zero.</p>
+          </div>
+        </details>
+      </div>
     </div>
 
     <div id="quiz" class="card"></div>

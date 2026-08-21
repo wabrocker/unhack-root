@@ -332,3 +332,27 @@ footer a { color: var(--accent); }
 .notice > p { margin: 0 0 .4rem; font-size: .92rem; }
 .fold.small > summary { font-size: .88rem; font-weight: 600; }
 .fold.small > *:not(summary) { margin-top: .5rem; font-size: .9rem; }
+
+/* The numbers, and an "i" that explains them without taking three lines
+   of the page to do it. <details> again rather than script: keyboard
+   operable for free, and it works with JavaScript off. */
+.bar-counts { display: flex; align-items: center; gap: .4rem;
+              margin: .5rem 0 0; font-size: .85rem; color: var(--ink-soft); }
+.info { position: relative; display: inline-flex; }
+.info > summary {
+  cursor: pointer; list-style: none;
+  width: 1.15rem; height: 1.15rem; border-radius: 50%;
+  border: 1px solid var(--line); color: var(--ink-soft);
+  font-size: .72rem; font-weight: 800; font-style: italic;
+  display: flex; align-items: center; justify-content: center;
+}
+.info > summary::-webkit-details-marker { display: none; }
+.info > summary:hover { border-color: var(--accent); color: var(--accent); }
+.info-body {
+  position: absolute; top: 1.6rem; left: -.5rem; z-index: 20;
+  width: min(24rem, 78vw); padding: .85rem 1rem;
+  background: var(--bg); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: 0 6px 20px rgba(0,0,0,.14);
+}
+.info-body .bar-verdict { margin: 0 0 .6rem; }
+.info-mastery { margin: 0; font-size: .85rem; color: var(--ink-soft); line-height: 1.5; }

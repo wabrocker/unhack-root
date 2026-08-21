@@ -106,6 +106,12 @@ function distractorsFor(q, want) {
         .flatMap((c) => c.a)
         .filter((a) => !correct.has(norm(a)));
 
+  // A question that names its own wrong answers gets them, and nothing
+  // else. See DISTRACTORS in tools/build-civics.py for why some must.
+  if (q.d && q.d.length) {
+    return shuffle(q.d).slice(0, want);
+  }
+
   const shape = answerShape(q.a[0]);
   // Category and subsection are COMPLEMENTARY, not alternatives — category
   // is the shape of the answer, subsection is its subject. Matching on
@@ -296,7 +302,7 @@ function progress() {
   bar.querySelector(".bar-started").style.width = (started / total * 100) + "%";
   bar.querySelector(".bar-mark").style.left = (READY_AT / total * 100) + "%";
 
-  bar.querySelector(".bar-counts").textContent =
+  bar.querySelector(".counts-text").textContent =
     `${done} learned · ${started} started · ${total - done - started} not seen yet`;
 
   const expect = Math.round(done / CIVICS.length * TEST_DRAW);
@@ -304,10 +310,12 @@ function progress() {
   const verdict = bar.querySelector(".bar-verdict");
   verdict.className = "bar-verdict " + (ready ? "ready" : "");
   verdict.textContent = ready
-    ? `On track to pass — a ${TEST_DRAW}-question test should give you about `
-      + `${expect}, and ${TEST_PASS} passes.`
-    : `The test asks ${TEST_DRAW} of the ${CIVICS.length} and needs ${TEST_PASS} right. `
-      + `Right now you would expect about ${expect}. Around ${READY_AT} learned is the mark.`;
+    ? `On track to pass. The actual citizenship test asks ${TEST_DRAW} of the `
+      + `${CIVICS.length} and needs ${TEST_PASS} right; at this rate you would `
+      + `expect about ${expect}.`
+    : `The actual citizenship test asks ${TEST_DRAW} of the ${CIVICS.length} and `
+      + `needs ${TEST_PASS} right. Right now you would expect about ${expect}. `
+      + `Around ${READY_AT} learned is the mark.`;
 }
 
 function finish() {
