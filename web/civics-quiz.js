@@ -480,7 +480,7 @@ function showFeedback(correct) {
   const fb = document.getElementById("quiz").querySelector(".q-feedback");
   fb.className = "q-feedback " + (correct ? "ok" : "no");
 
-  fb.appendChild(el("p", "fb-verdict", correct ? "Correct." : "Not quite."));
+  fb.appendChild(el("p", "fb-verdict", correct ? "Correct." : "Not correct."));
 
   // The others always show, right or wrong. A question with five accepted
   // answers is teaching that the idea has five legitimate framings, and
@@ -494,7 +494,7 @@ function showFeedback(correct) {
   }
   if (others.length) {
     fb.appendChild(el("p", "fb-also",
-      (others.length === 1 ? "Also accepted: " : "Also accepted: ") + others.join(" · ")));
+      "These answers also count: " + others.join(" · ")));
   }
 
   const next = el("button", "btn", "Next question");
@@ -539,12 +539,12 @@ function progress() {
   const verdict = bar.querySelector(".bar-verdict");
   verdict.className = "bar-verdict " + (ready ? "ready" : "");
   verdict.textContent = ready
-    ? `On track to pass. The actual citizenship test asks ${TEST_DRAW} of the `
-      + `${CIVICS.length} and needs ${TEST_PASS} right; at this rate you would `
-      + `expect about ${expect}.`
-    : `The actual citizenship test asks ${TEST_DRAW} of the ${CIVICS.length} and `
-      + `needs ${TEST_PASS} right. Right now you would expect about ${expect}. `
-      + `Around ${READY_AT} learned is the mark.`;
+    ? `You are ready. The real test asks ${TEST_DRAW} questions. You need `
+      + `${TEST_PASS} right. At this rate you would get about ${expect}.`
+      
+    : `The real test asks ${TEST_DRAW} questions. You need ${TEST_PASS} right. `
+      + `At this rate you would get about ${expect}. `
+      + `Learn about ${READY_AT} to be ready.`;
 }
 
 function finish() {
@@ -552,8 +552,8 @@ function finish() {
   box.innerHTML = "";
   box.appendChild(el("h3", "q-text", "That is all " + pool().length + " of them."));
   box.appendChild(el("p", null,
-    `You answered ${state.right} of ${state.asked} correctly along the way. `
-    + `Every question here has now been answered right ${MASTERY} times.`));
+    `You got ${state.right} of ${state.asked} right. `
+    + `You have now answered every question correctly ${MASTERY} times.`));
   const again = el("button", "btn", "Start again");
   again.type = "button";
   again.addEventListener("click", () => {

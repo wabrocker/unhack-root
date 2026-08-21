@@ -84,8 +84,8 @@ function interviewFacts() {
   const ul = el("ul", "exam-brief");
   [
     `${EXAM_DRAW} questions drawn from all 128. ${EXAM_PASS} correct to pass.`,
-    `A real officer stops at ${EXAM_PASS} correct or ${EXAM_FAIL} wrong, `
-      + `whichever comes first. Many applicants do not know this.`,
+    `The officer stops when you get ${EXAM_PASS} right, or ${EXAM_FAIL} `
+      + `wrong. Most people do not know this.`,
     "The officer asks aloud and you answer aloud. Any accepted answer "
       + "counts \u2014 most questions have several.",
   ].forEach((t) => ul.appendChild(el("li", null, t)));
@@ -212,7 +212,7 @@ function askExam() {
   // are in — see the note at the top about what watching yourself fail
   // does to your own marking.
   const out = el("p", "exam-note",
-    "No answers shown until the end. Leave it blank if you do not know.");
+    "You will not see any answers until the end. If you do not know, leave it empty.");
   box.appendChild(out);
 
   const quit = el("button", "btn ghost small", "Abandon this attempt");
@@ -230,9 +230,9 @@ function gradeExam() {
   box.innerHTML = "";
   box.appendChild(el("h3", "q-text", "Mark your own answers"));
   box.appendChild(el("p", "exam-note",
-    "Nothing here is graded for you — too many wordings are right for any "
-    + "checker to judge fairly. Be honest: the only person a generous mark "
-    + "fools is the one sitting the real interview."));
+    "We do not mark these for you. Many different words can be right. "
+    + "Be honest with yourself. If you mark a wrong answer as correct, "
+    + "the only person you fool is you."));
 
   exam.qs.forEach((q, i) => {
     const card = el("div", "exam-item");
@@ -311,8 +311,8 @@ function showResult() {
   // The stopping rule is the part people do not know about, so it is worth
   // stating rather than just applying.
   box.appendChild(el("p", "exam-note",
-    `A real officer would have stopped after question ${stop}: the test ends `
-    + `at ${EXAM_PASS} correct or ${EXAM_FAIL} wrong, whichever comes first.`));
+    `A real officer would have stopped after question ${stop}. The test ends `
+    + `when you get ${EXAM_PASS} right, or ${EXAM_FAIL} wrong.`));
 
   // The eight are NOT available during the test, and that is deliberate:
   // they are meant to be learned beforehand, and a sheet within reach would
@@ -331,8 +331,8 @@ function showResult() {
     card.appendChild(ul);
     const line = el("p", null, "");
     line.appendChild(document.createTextNode(
-      "Their answers change, or depend on where you live, so practice cannot "
-      + "teach them. Find them once and keep them: "));
+      "Their answers change, or they depend on where you live. Practice "
+      + "cannot teach them. Find them once and keep them: "));
     const a = el("a", null, "Your Eight Answers");
     a.href = "citizenship-answers.html";
     line.appendChild(a);
@@ -368,8 +368,8 @@ function showExamStatus() {
   el0.textContent = last
     ? `Last attempt ${last.on}: ${last.right}/${last.of}`
       + (last.passed ? " — a pass." : " — not a pass yet.")
-    : "Never sat it? Take it cold. A first score you did not study for is the "
-      + "only honest baseline you will ever get.";
+    : "Have you tried it yet? Try it before you study. That first score "
+      + "shows you what you already know.";
 
 }
 
