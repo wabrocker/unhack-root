@@ -164,8 +164,23 @@ function askExam() {
   input.value = exam.typed[exam.at] || "";
   const go = () => {
     exam.typed[exam.at] = input.value;
+    if (exam.at < EXAM_DRAW - 1) {
+      exam.at++;
+      return askExam();
+    }
+    // Asked ONCE, at the end. A blank counts as wrong, so it is worth
+    // knowing before the answers are revealed and it is too late.
+    const blank = exam.typed.filter((t) => !(t || "").trim()).length
+                + (EXAM_DRAW - exam.typed.length);
+    if (blank && !confirm(
+        blank === 1
+          ? "One answer is still blank. A blank counts as wrong. Finish anyway?"
+          : blank + " answers are still blank. A blank counts as wrong. "
+            + "Finish anyway?")) {
+      return;
+    }
     exam.at++;
-    if (exam.at >= EXAM_DRAW) gradeExam(); else askExam();
+    gradeExam();
   };
   input.addEventListener("keydown", (e) => { if (e.key === "Enter") go(); });
   row.appendChild(input);
@@ -175,6 +190,22 @@ function askExam() {
   next.type = "button";
   next.addEventListener("click", go);
   row.appendChild(next);
+
+  // Going BACK is the fix for a mis-tapped Next, and it is better than a
+  // confirmation on every blank. Somebody skipping a question they truly do
+  // not know should not be interrogated about it twenty times; somebody who
+  // fat-fingered past one they DID know needs a way to undo, and only that.
+  // Answers are already kept per question, so stepping back costs nothing.
+  if (exam.at > 0) {
+    const back = el("button", "btn ghost", "Back");
+    back.type = "button";
+    back.addEventListener("click", () => {
+      exam.typed[exam.at] = input.value;
+      exam.at--;
+      askExam();
+    });
+    row.appendChild(back);
+  }
   box.appendChild(row);
 
   // No feedback here, deliberately. Nothing is revealed until all twenty
