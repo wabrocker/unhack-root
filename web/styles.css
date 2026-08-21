@@ -491,3 +491,39 @@ footer a { color: var(--accent); }
    Typing was last set to still applies, silently. */
 body:not(.options-on) .bar-counts > .info,
 body:not(.options-on) .mix-row { display: none; }
+
+/* ---- Your Eight Answers --------------------------------------------
+   Roomier than the quiz. People arrive here to do a small amount of
+   careful work with another website open beside them, often on a phone,
+   often not reading in their first language. */
+.plain { font-size: 1rem; line-height: 1.65; margin: 0 0 .8rem; }
+.plain-small { font-size: .88rem; color: var(--ink-soft); margin: .6rem 0 0; }
+.step { margin-bottom: 1.1rem; }
+.step h3 { font-size: 1.05rem; margin-bottom: .5rem; }
+.step-note {
+  border-left: 3px solid var(--accent); background: var(--bg-soft);
+  padding: .6rem .8rem; margin: 0 0 .9rem; font-size: .95rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+#place { font: inherit; padding: .55rem .7rem; border-radius: var(--radius);
+         border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+         max-width: 100%; }
+.field { margin-top: .9rem; }
+.field label, .field-q { display: block; font-weight: 700; font-size: .95rem; margin-bottom: .35rem; }
+.field .recall-input { width: 100%; }
+.cap-answer { font-size: 1.15rem; font-weight: 800; color: var(--accent); margin: 0; }
+
+.sheet { border: 2px solid var(--accent); }
+.sheet-list { margin: 1rem 0; }
+.sheet-list dt { font-weight: 700; font-size: .92rem; margin-top: .8rem; }
+.sheet-list dd { margin: .15rem 0 0; font-size: 1.05rem; }
+.sheet-list dd.empty { color: var(--ink-soft); font-style: italic; font-size: .92rem; }
+
+/* Printing gives you the sheet and nothing else — the steps have been
+   done by then, and a printout of instructions is not what you carry. */
+@media print {
+  header, .page-nav, .site-menu, footer, .source,
+  #place-step, #steps, .card:not(.sheet), .sheet .btn { display: none; }
+  .sheet { border: 0; padding: 0; }
+  body { background: #fff; color: #000; }
+}

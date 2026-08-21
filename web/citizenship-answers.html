@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Citizen Primer — Unhacking Democracy</title>
-<meta name="description" content="A plain-language, nonpartisan walk through the issues that actually decide things — and where the levers are.">
+<title>Your Eight Answers — Unhacking Democracy</title>
+<meta name="description" content="Find the eight naturalization civics answers that change or depend on where you live, and keep them on one sheet.">
 <link rel="icon" href="logo.svg">
 <link rel="stylesheet" href="styles.css">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Unhacking Democracy">
-<meta property="og:title" content="Citizen Primer — Unhacking Democracy">
-<meta property="og:description" content="A plain-language, nonpartisan walk through the issues that actually decide things — and where the levers are.">
-<meta property="og:url" content="https://unhackdemocracy.us/citizen-primer.html">
+<meta property="og:title" content="Your Eight Answers — Unhacking Democracy">
+<meta property="og:description" content="Find the eight naturalization civics answers that change or depend on where you live, and keep them on one sheet.">
+<meta property="og:url" content="https://unhackdemocracy.us/citizenship-answers.html">
 <meta property="og:image" content="https://unhackdemocracy.us/social-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="1200">
 <meta property="og:image:alt" content="&quot;Far More Perilous Today&quot; (AI-generated, after Leutze 1851) — George Washington stands at the prow of a boat lettered DEMOCRACY, gazing toward the Statue of Liberty, while men in top hats fire a cannon down into the ship's own deck and ordinary workers cling to the hull pressing planks over the breaches.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Citizen Primer — Unhacking Democracy">
-<meta name="twitter:description" content="A plain-language, nonpartisan walk through the issues that actually decide things — and where the levers are.">
+<meta name="twitter:title" content="Your Eight Answers — Unhacking Democracy">
+<meta name="twitter:description" content="Find the eight naturalization civics answers that change or depend on where you live, and keep them on one sheet.">
 <meta name="twitter:image" content="https://unhackdemocracy.us/social-preview.jpg">
 </head>
 <body>
@@ -27,7 +27,7 @@
 <div class="wrap">
 
   <nav class="page-nav" aria-label="Breadcrumb">
-    <a href="resources.html">&larr; All Resources</a>
+    <a href="citizenship-test.html">&larr; The Practice Test</a>
   </nav>
 
   <header>
@@ -39,9 +39,9 @@
                 aria-expanded="false" aria-controls="resources-menu" data-section-current="">Resources</button>
         <div id="resources-menu" class="submenu" hidden>
           <a href="resources.html">All Resources</a>
-          <a href="citizen-primer.html" aria-current="page">Citizen Primer</a>
+          <a href="citizen-primer.html">Citizen Primer</a>
           <a href="citizenship-test.html">Citizenship Practice Test</a>
-          <a href="citizenship-answers.html">Your Eight Answers</a>
+          <a href="citizenship-answers.html" aria-current="page">Your Eight Answers</a>
         </div>
       </div>
     </nav>
@@ -72,36 +72,34 @@
     </div>
   </header>
 
+  <h2>Your Eight Answers</h2>
 
-  <h2>Citizen Primer</h2>
+  <p class="lede">Eight questions are not in the practice test. Their
+  answers change, or they depend on where you live. This page helps you
+  find all eight and keep them.</p>
 
-  <p class="lede">A plain-language walk through the issues that actually
-  decide things — and where the levers are.</p>
-
-  <div class="card pending">
-    <h3>What this will be <span class="badge soft">In progress</span></h3>
-    <p>Most civic explainers fail in one of two directions: they either
-    tell you what to think, or they bury the mechanism under so much
-    even-handedness that you finish no better equipped than you started.
-    This aims at the third thing — showing you how a piece of the system
-    actually works, well enough that you can form your own view and act
-    on it.</p>
-    <p>Each topic is meant to answer three questions in order: what is
-    genuinely settled underneath the argument, what the disagreement is
-    actually about once you strip the slogans off it, and what a citizen
-    can do about it this month.</p>
+  <div class="card">
+    <h3>Why these eight are different</h3>
+    <p class="plain">The other 120 questions have answers that stay the
+    same. These eight do not.</p>
+    <p class="plain">Four of them change when there is an election or a new
+    appointment. Three depend on your state or your district. One — your
+    state capital — never changes, so we can just tell you.</p>
+    <p class="plain">The interview can ask any of them. So it is worth
+    doing this once, writing the answers down, and keeping them.</p>
+    <p class="plain-small">Your answers stay in this browser. Nothing is
+    sent anywhere.</p>
   </div>
 
-  <div class="card pending">
-    <h3>How it will be built</h3>
-    <p>The same two rules as everything else here. Every factual claim
-    traces to a primary source you can open and check yourself — not a
-    summary of a summary. And the selection of topics leans deliberately
-    toward the places where people who disagree about nearly everything
-    still want the same procedural thing.</p>
-    <p>You will be able to pick what you want to learn and check yourself
-    as you go. No account, nothing stored anywhere but your own browser.</p>
-  </div>
+  <div id="place-step" class="card"></div>
+
+  <div id="steps"></div>
+
+  <div id="sheet" class="card sheet"></div>
+
+  <p class="source">The eight questions come from
+    <a href="https://www.uscis.gov/citizenship/2025test" rel="noopener">USCIS, 2025 civics test</a>.
+    USCIS is the authority. This page only helps you find the answers.</p>
 
   <footer>
     <p>
@@ -152,6 +150,8 @@
   // covering anything.
 })();
 </script>
+
+<script src="civics-answers.js"></script>
 
 </body>
 </html>

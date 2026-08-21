@@ -37,11 +37,14 @@ SITE = {
     "resources":        ("resources.html",        "index.html",     "Home"),
     "citizen-primer":   ("citizen-primer.html",   "resources.html", "All Resources"),
     "citizenship-test": ("citizenship-test.html", "resources.html", "All Resources"),
+    "citizenship-answers": ("citizenship-answers.html", "citizenship-test.html",
+                            "The Practice Test"),
 }
 
 # The pages that live under the Resources group. Listed once so the menu
 # and the section marker cannot disagree about what is in the section.
-RESOURCES = ("resources.html", "citizen-primer.html", "citizenship-test.html")
+RESOURCES = ("resources.html", "citizen-primer.html", "citizenship-test.html",
+             "citizenship-answers.html")
 
 
 def nav(current):
@@ -59,6 +62,7 @@ def nav(current):
           <a href="resources.html"{mark("resources.html")}>All Resources</a>
           <a href="citizen-primer.html"{mark("citizen-primer.html")}>Citizen Primer</a>
           <a href="citizenship-test.html"{mark("citizenship-test.html")}>Citizenship Practice Test</a>
+          <a href="citizenship-answers.html"{mark("citizenship-answers.html")}>Your Eight Answers</a>
         </div>
       </div>
     </nav>'''
