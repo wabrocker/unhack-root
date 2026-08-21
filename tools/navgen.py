@@ -75,15 +75,27 @@ MASTHEAD = '''    <p class="subtitle">in the United States</p>
       <details class="info">
         <summary aria-label="The fuller statement of purpose">i</summary>
         <div class="info-body">
-          <p class="info-mastery">Educating citizens on how democratic
-          systems have been exploited &mdash; and providing specific,
-          actionable, and cross-partisan ways to help repair them using the
-          &ldquo;tri-pronged&rdquo; power of verifiable knowledge, strength in
-          numbers and clarity of our teams&rsquo; purposes.</p>
+          <p class="info-mastery">Our mission is to educate citizens on how
+          democratic systems have been exploited &mdash; and to provide
+          specific, actionable, and cross-partisan ways to help repair them
+          using the &ldquo;tri-pronged&rdquo; power of verifiable knowledge,
+          strength in numbers and clarity of our teams&rsquo; purposes.</p>
         </div>
       </details>
     </div>
   </header>'''
+
+# The home page's description tags, owned here for one reason: they echo
+# the masthead above, and when the masthead changed they did not. The page
+# ended up telling visitors one thing and telling search engines and link
+# previews two OTHER things, one of them the superseded tagline.
+#
+# Only the home page. Every other page describes its own content, which is
+# what a description is for, and those are correct as they stand.
+HOME_DESCRIPTION = (
+    "Knowledgeable, cross-partisan citizens teaming up to save Democracy. "
+    "Florida is live now, with concrete ways to help repair the system."
+)
 
 FOOTER = '''  <footer>
     <p>
@@ -150,6 +162,15 @@ def render(slug, source):
     # Rebuilt from scratch rather than patched in place, so moving the
     # breadcrumb is one edit here instead of six by hand.
     s = re.sub(r'  <nav class="page-nav".*?</nav>\n\n?', "", s, flags=re.S)
+
+    # The home page's three description tags, from one string.
+    if slug == "index":
+        for attr in ('name="description"', 'property="og:description"',
+                     'name="twitter:description"'):
+            pat = r'(<meta ' + re.escape(attr) + r' content=")[^"]*(")'
+            s, n = re.subn(pat, r'\1' + HOME_DESCRIPTION + r'\2', s)
+            if n != 1:
+                raise SystemExit(f"FAIL: index.html has {n} of {attr}, expected 1")
 
     # Masthead and footer, from the single copies above.
     s, n = re.subn(r'    <p class="subtitle">.*?  </header>', MASTHEAD, s, flags=re.S)
