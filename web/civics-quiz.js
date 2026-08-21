@@ -676,4 +676,11 @@ document.addEventListener("DOMContentLoaded", function () {
     grp.appendChild(p);
     box.appendChild(grp);
   });
+
+  // One place that does all four stops, keeps what you find, and prints.
+  const go = el("p", "find-go");
+  const link = el("a", "btn", "Find all eight and keep them");
+  link.href = "citizenship-answers.html";
+  go.appendChild(link);
+  box.appendChild(go);
 });

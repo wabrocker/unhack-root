@@ -90,18 +90,19 @@ function interviewFacts() {
       + "counts \u2014 most questions have several.",
   ].forEach((t) => ul.appendChild(el("li", null, t)));
 
+  // Point at our own walkthrough, not at USCIS. USCIS answers seven of the
+  // eight; the state capital is not on that page, because a capital does
+  // not go out of date and an updates page is for answers that do.
   const li = el("li", null, "");
   li.appendChild(document.createTextNode(
-    "This includes the eight questions practice leaves out — the current "
-    + "officeholders, and the ones that depend on your state. Their answers "
-    + "change, so no answer key can hold them. Worth checking first at "));
-  const a = el("a", null, "USCIS test updates");
-  a.href = CIVICS_UPDATES;
-  a.rel = "noopener";
+    "This includes the eight questions practice does not ask. Their answers "
+    + "change, or they depend on where you live. Find them first: "));
+  const a = el("a", null, "Your Eight Answers");
+  a.href = "citizenship-answers.html";
   li.appendChild(a);
   li.appendChild(document.createTextNode(
-    " — the interview expects you to know them, so looking them up now is "
-    + "preparation rather than cheating."));
+    ". The interview expects you to know them, so looking them up now is "
+    + "preparation, not cheating."));
   ul.appendChild(li);
   return ul;
 }
