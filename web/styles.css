@@ -551,3 +551,4 @@ body:not(.options-on) .mix-row { display: none; }
 }
 .return-bar[hidden] { display: none; }
 @media print { .return-bar { display: none; } }
+.step-back { margin: .55rem 0 0; font-size: .9rem; color: var(--ink-soft); }

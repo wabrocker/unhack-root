@@ -111,8 +111,8 @@ const STEPS = [
     // back turns four trips between tabs into one. That is worth more than
     // any control we could add on this side.
     tip: "Read all four answers before you come back. They are in the same "
-       + "place, so you only need to go once. The page opens in a new tab, "
-       + "so this page stays where it is.",
+       + "place, so you only need to go once. To come back here, use the "
+       + "back button on your phone or browser. Your answers are saved.",
     fields: [
       { n: 38, q: "Who is the President of the United States now?" },
       { n: 39, q: "Who is the Vice President of the United States now?" },
@@ -231,13 +231,26 @@ function renderSteps() {
     const special = step.note ? step.note(place) : "";
     if (special) card.appendChild(ael("p", "step-note", special));
 
+    // SAME TAB, deliberately. These used to open a new tab so this page
+    // would "stay where it is" — but it saves every keystroke already, so
+    // the new tab bought nothing and cost the Back button, which is the one
+    // way back everyone knows on a phone. Reported: no easy way back.
     const a = ael("a", "btn", step.linkText);
     a.href = step.href;
-    a.target = "_blank";
-    a.rel = "noopener";
+    a.addEventListener("click", () => {
+      answers.wentOut = true;
+      saveAnswers(answers);
+    });
     card.appendChild(a);
 
     if (step.after) card.appendChild(ael("p", "step-how", step.after));
+    // Honest about depth. senate.gov makes you pick a state, house.gov
+    // takes a ZIP, usa.gov sends you on to a state site — so you are often
+    // two or three pages deep and one Back press is not enough.
+    card.appendChild(ael("p", "step-back",
+      "When you have the answer, press your back button until you are here "
+      + "again. If you clicked through more than one page, press it more "
+      + "than once. Nothing you have typed is lost."));
     if (step.tip) card.appendChild(ael("p", "step-tip", step.tip));
 
     // The instructions matter once, before you leave. The fields matter
@@ -339,6 +352,11 @@ function armReturnBar() {
   const bar = document.getElementById("return-bar");
   if (!bar) return;
   let target = null;
+
+  // Shown on RETURN, which means after a full page load — so whether we
+  // went out has to be remembered in storage, not in a variable that the
+  // navigation discards.
+  if (answers.wentOut) bar.hidden = false;
 
   document.addEventListener("click", (e) => {
     const a = e.target.closest && e.target.closest("#steps a.btn");
