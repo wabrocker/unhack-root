@@ -561,3 +561,12 @@ body:not(.options-on) .mix-row { display: none; }
               cursor: pointer; }
 .clear-link:hover { color: var(--bad); }
 @media (hover: none) { .clear-link:hover { color: var(--ink-soft); } }
+.missed-eight { border-left: 3px solid var(--warn); background: var(--bg-soft);
+                padding: .7rem .9rem; margin: 1rem 0; border-radius: 0 var(--radius) var(--radius) 0; }
+.missed-eight ul { margin: .4rem 0 .6rem; padding-left: 1.1rem; font-size: .95rem; }
+.missed-eight p { margin: 0; font-size: .95rem; }
+.missed-eight { border-left: 3px solid var(--warn); background: var(--bg-soft);
+                padding: .7rem .9rem; margin: 1rem 0;
+                border-radius: 0 var(--radius) var(--radius) 0; }
+.missed-eight ul { margin: .4rem 0 .6rem; padding-left: 1.1rem; font-size: .95rem; }
+.missed-eight p { margin: 0; font-size: .95rem; }

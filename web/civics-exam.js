@@ -283,6 +283,33 @@ function showResult() {
     `A real officer would have stopped after question ${stop}: the test ends `
     + `at ${EXAM_PASS} correct or ${EXAM_FAIL} wrong, whichever comes first.`));
 
+  // The eight are NOT available during the test, and that is deliberate:
+  // they are meant to be learned beforehand, and a sheet within reach would
+  // hide the very gap this measures — recognising a name but not being able
+  // to produce it cold. Afterwards is different. Missing one is specific and
+  // fixable, so name which and say where to go.
+  const missedEight = exam.qs.filter((q, i) => q.kind === "lookup" && !marks[i]);
+  if (missedEight.length) {
+    const card = el("div", "missed-eight");
+    card.appendChild(el("p", "fb-verdict",
+      missedEight.length === 1
+        ? "One of these came from the eight you look up:"
+        : `${missedEight.length} of these came from the eight you look up:`));
+    const ul = el("ul", null);
+    missedEight.forEach((q) => ul.appendChild(el("li", null, q.q)));
+    card.appendChild(ul);
+    const line = el("p", null, "");
+    line.appendChild(document.createTextNode(
+      "Their answers change, or depend on where you live, so practice cannot "
+      + "teach them. Find them once and keep them: "));
+    const a = el("a", null, "Your Eight Answers");
+    a.href = "citizenship-answers.html";
+    line.appendChild(a);
+    line.appendChild(document.createTextNode("."));
+    card.appendChild(line);
+    box.appendChild(card);
+  }
+
   const hist = examAttempts();
   if (hist.length > 1) {
     box.appendChild(el("h3", "q-text", "Your attempts"));
