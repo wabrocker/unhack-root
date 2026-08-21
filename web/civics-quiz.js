@@ -170,6 +170,10 @@ function nextQuestion() {
   // Any member of the answer set is correct, so the ones SHOWN are chosen
   // at random — otherwise a question with several right answers would only
   // ever teach its first one.
+  if (q.r) {
+    state.current = { q, need, shown: q.a.slice(), options: [], picked: [], answered: false };
+    return render();
+  }
   const shown = shuffle(q.a).slice(0, need);
   // Four distractors regardless of how many are wanted, so a "name five"
   // question is not accidentally easier than a "name one".
@@ -188,7 +192,76 @@ function el(tag, cls, text) {
   return e;
 }
 
+// Recall: the question, a moment to think, then every accepted answer and
+// your own honest verdict. Used where the accepted answers exhaust their
+// category and no valid distractor exists — see MIN_DISTRACTORS in
+// tools/build-civics.py. Self-assessment is the point rather than a
+// compromise: it is how flashcards have always worked, and it is closer to
+// an oral interview than picking from a list ever gets.
+function renderRecall() {
+  const { q } = state.current;
+  const box = document.getElementById("quiz");
+  box.innerHTML = "";
+  box.appendChild(el("p", "q-meta", q.sub));
+  box.appendChild(el("h3", "q-text", q.q));
+  box.appendChild(el("p", "q-need",
+    q.need > 1 ? "The interview asks for " + q.need + ". Answer in your head first."
+               : "Answer in your head first."));
+  const show = el("button", "btn recall-show", "Show the answer");
+  show.type = "button";
+  show.addEventListener("click", revealRecall);
+  box.appendChild(show);
+  box.appendChild(el("div", "q-feedback"));
+  progress();
+}
+
+function revealRecall() {
+  const { q } = state.current;
+  const box = document.getElementById("quiz");
+  const btn = box.querySelector(".recall-show");
+  if (btn) btn.hidden = true;
+
+  const fb = box.querySelector(".q-feedback");
+  fb.className = "q-feedback";
+  fb.appendChild(el("p", "fb-answer",
+    q.a.length === 1 ? "The answer:" : "Any of these counts (" + q.a.length + "):"));
+  const ul = el("ul", "recall-answers");
+  q.a.forEach((a) => ul.appendChild(el("li", null, a)));
+  fb.appendChild(ul);
+
+  const row = el("div", "recall-judge");
+  [["I knew it", true], ["I didn't", false]].forEach(([label, knew]) => {
+    const b = el("button", knew ? "btn" : "btn ghost", label);
+    b.type = "button";
+    b.addEventListener("click", () => judgeRecall(knew));
+    row.appendChild(b);
+  });
+  fb.appendChild(row);
+}
+
+function judgeRecall(knew) {
+  const cur = state.current;
+  if (cur.answered) return;
+  cur.answered = true;
+  state.asked++;
+  if (knew) {
+    state.right++;
+    state.seen[cur.q.n] = (state.seen[cur.q.n] || 0) + 1;
+  } else {
+    state.seen[cur.q.n] = 0;
+  }
+  const fb = document.getElementById("quiz").querySelector(".q-feedback");
+  fb.querySelector(".recall-judge").remove();
+  const next = el("button", "btn", "Next question");
+  next.type = "button";
+  next.addEventListener("click", nextQuestion);
+  fb.appendChild(next);
+  next.focus();
+  progress();
+}
+
 function render() {
+  if (state.current.q.r) return renderRecall();
   const { q, options } = state.current;
   const box = document.getElementById("quiz");
   box.innerHTML = "";

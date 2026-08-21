@@ -45,8 +45,10 @@ LOOKUP = {23, 29, 30, 38, 39, 57, 61, 62}
 # authoring something that is actually acceptable, and marking a correct
 # answer wrong is the one failure this tool must never commit.
 DISTRACTORS = {
-    17: ["Legislative", "Judicial"],          # answer: Executive
+    17: ["Legislative", "Judicial"],                       # answer: Executive
     18: ["The executive branch", "The judicial branch"],   # answer: Congress
+    66: ["(U.S.) Constitution", "The President (of the United States)",
+         "(U.S.) Congress", "The Star-Spangled Banner"],   # answer: the US / the flag
 }
 
 # How many items the question actually asks for. Stated only in the stem.
@@ -83,6 +85,7 @@ RULES = [
     ("reason",     r'^why\b|\bwhy\?|name one reason|reasons\.? name one'),
     ("when",       r'^when (did|was)\b'),
     ("count",      r'^how many\b|why does the flag'),
+    ("nation",     r'main rival'),
     ("person",     r'^who wrote|^who was|name one leader'),
     ("who",        r'^who\b|\bwho becomes\b'),
     ("famous",     r'is famous for many things'),
@@ -92,6 +95,11 @@ RULES = [
     ("amendname",  r'^what amendment'),
     ("amendment",  r'\bamendment'),
     ("event",      r'important events?\.? name one'),
+    # "During the Cold War, what was one main concern?" is a question about
+    # a war whose answer is a concern — the same form-beats-subject trap
+    # that put reasons among the wars, surviving in one last place. It was
+    # offering "Communism" as a war fought in the 1800s.
+    ("concern",    r'main concern'),
     ("war",        r'\bwar\b|military conflict'),
     ("document",   r'founding document|documents influenced|Federalist Papers|written in 1787'),
     ("state",      r'original states'),
@@ -101,9 +109,9 @@ RULES = [
     ("process",    r'how are changes made|how can people become'),
     ("group",      r'group of people|who lived in America'),
     ("place",      r'\bcapital\b|^where is|what territory'),
+    ("power",      r'\bpower\b|writes laws|what does .*\bdo\b'),
     ("posts",      r'Cabinet-level positions|part of the judicial|highest court'),
     ("branch",     r'branch|parts of the u\.s\. congress'),
-    ("power",      r'\bpower\b|writes laws|what does .*\bdo\b'),
     ("right",      r'\bright[s]?\b|\bvote\b|protect'),
     ("duty",       r'civic participation|serve their country|promises|citizens make'
                    r'|taxes|Selective Service'),
@@ -161,6 +169,42 @@ def parse(pdf):
     return items
 
 
+# RECALL QUESTIONS. Some questions cannot be multiple choice at all,
+# because their accepted answers exhaust their own category and the source
+# contains no valid wrong answer. Q117 accepts twenty-five tribes; Q99
+# accepts all six women named anywhere in the bank. Nineteen of the 120 are
+# like this, and inventing distractors for them would mean asserting from
+# outside the document that something is NOT a tribe or NOT a suffrage
+# leader — precisely the way to mark a correct answer wrong.
+#
+# So they are asked as recall instead: the question, a moment to think, then
+# every accepted answer, and you say whether you knew it. That is not a
+# consolation prize. Retrieval practice beats recognition for retention, and
+# the real interview is oral recall with no options at all — so the
+# questions that resist multiple choice get the format closest to the test.
+MIN_DISTRACTORS = 4
+
+
+def mark_recall(items):
+    def norm(s):
+        s = re.sub(r'\([^)]*\)', ' ', s.lower())
+        s = re.sub(r'[^a-z0-9 ]', ' ', s)
+        s = re.sub(r'\b(the|a|an|of|from|for|in|to|at|by|on|with|and)\b', ' ', s)
+        return re.sub(r'\s+', ' ', s).strip()
+
+    pool = [i for i in items if i["kind"] != "lookup" and i["answers"]]
+    for q in pool:
+        if q["d"]:
+            q["recall"] = False
+            continue
+        mine = {norm(a) for a in q["answers"]}
+        others = {norm(a) for c in pool if c["cat"] == q["cat"] and c["n"] != q["n"]
+                  for a in c["answers"]} - mine
+        q["recall"] = len(others) < MIN_DISTRACTORS
+    for i in items:
+        i.setdefault("recall", False)
+
+
 def check(items):
     """Fail loudly rather than emit a data file nobody has verified."""
     if len(items) != 128:
@@ -188,8 +232,9 @@ def emit(items):
         kind = "" if it["kind"] == "static" else ', kind: "lookup"'
         need = f', need: {it["need"]}' if it["need"] > 1 else ""
         dis = (", d: [" + ", ".join(f'"{esc(x)}"' for x in it["d"]) + "]") if it["d"] else ""
+        rec = ", r: true" if it.get("recall") else ""
         rows.append(f'  {{ n: {it["n"]}, sub: "{esc(it["sub"])}", cat: "{it["cat"]}"{need},\n'
-                    f'    q: "{esc(it["q"])}",\n    a: [{ans}]{dis}{star}{kind} }},')
+                    f'    q: "{esc(it["q"])}",\n    a: [{ans}]{dis}{rec}{star}{kind} }},')
     OUT.write_text(head + "const CIVICS = [\n" + "\n".join(rows) + "\n];\n")
 
 
@@ -197,12 +242,15 @@ def main():
     if len(sys.argv) < 2:
         sys.exit(__doc__)
     items = parse(pathlib.Path(sys.argv[1]).expanduser())
+    mark_recall(items)
     check(items)
     emit(items)
     c = Counter(i["cat"] for i in items if i["kind"] != "lookup")
     print(f"  {len(items)} questions, {sum(1 for i in items if i['star'])} asterisked, "
           f"{sum(1 for i in items if i['kind'] == 'lookup')} lookup")
     print(f"  {len(c)} categories, {c['general']} uncategorised")
+    print(f"  {sum(1 for i in items if i.get('recall'))} asked as recall, "
+          f"{sum(1 for i in items if i['d'])} with written distractors")
     print(f"  -> {OUT.relative_to(ROOT)}")
 
 
