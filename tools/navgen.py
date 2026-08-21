@@ -88,7 +88,7 @@ MASTHEAD = '''    <p class="subtitle">in the United States</p>
 FOOTER = '''  <footer>
     <p>
       Open source, MIT licensed.
-      <a href="https://github.com/wabrocker/unhack-fl" rel="noopener">Unhack US on Github</a>.
+      <a href="https://github.com/wabrocker/unhack-root" rel="noopener">Unhack US on Github</a>.
     </p>
   </footer>'''
 
