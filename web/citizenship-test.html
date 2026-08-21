@@ -160,6 +160,18 @@
 
     <div id="quiz" class="card"></div>
 
+    <div class="card exam-entry">
+      <h3>How would you do in the real interview?</h3>
+      <p id="exam-status"></p>
+      <button type="button" class="btn" id="exam-start">Sit the 20-question test</button>
+      <details class="fold small">
+        <summary>What the real interview is like</summary>
+        <div id="interview-facts"></div>
+      </details>
+    </div>
+
+    <div id="exam" class="card" hidden></div>
+
   </section>
 
   <footer>
@@ -214,6 +226,7 @@
 
 <script src="civics-data.js"></script>
 <script src="civics-quiz.js"></script>
+<script src="civics-exam.js"></script>
 
 </body>
 </html>

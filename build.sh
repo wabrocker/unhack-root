@@ -29,7 +29,7 @@ rm -rf dist unhack-root-deploy.zip
 mkdir -p dist
 
 cp web/logo.svg web/social-preview.jpg web/social-preview-hero.jpg dist/
-cp web/civics-data.js web/civics-quiz.js dist/
+cp web/civics-data.js web/civics-quiz.js web/civics-exam.js dist/
 cp web/.htaccess dist/.htaccess
 
 hash_of() { shasum -a 256 "$1" | cut -c1-8; }
@@ -39,7 +39,7 @@ hash_of() { shasum -a 256 "$1" | cut -c1-8; }
 # answers against last week's data is worse than a broken one, because it
 # looks like it is working. Both files share one hash — they always ship
 # together, so busting them together costs nothing.
-JS_HASH=$(hash_of web/civics-data.js)$(hash_of web/civics-quiz.js)
+JS_HASH=$(hash_of web/civics-data.js)$(hash_of web/civics-quiz.js)$(hash_of web/civics-exam.js)
 CSS_HASH=$(hash_of web/styles.css)
 for page in index about states resources citizen-primer citizenship-test; do
   sed -e "s|href=\"styles\.css\"|href=\"styles.css?v=${CSS_HASH}\"|" \
