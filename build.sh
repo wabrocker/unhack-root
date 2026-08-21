@@ -53,7 +53,44 @@ cp web/styles.css "dist/styles.css"
 
 echo "built dist/  css=${CSS_HASH}"
 
+# Is what we are about to publish reproducible from what is published?
+#
+# `--deploy` rsyncs to the web host. It has nothing to do with git, and its
+# verification proves the SITE is current while saying nothing about the
+# repo behind it. Those came apart for a whole day: seventeen commits sat
+# unpushed while every deploy reported HTTP 200, and the repo went public
+# in the middle of it — so anyone following the footer link found a project
+# missing the thing the site is about.
+#
+# A passing check tells you only about what it measures. This measures the
+# other half.
+#
+# It warns rather than blocks. Building and deploying from a dirty tree is
+# normal while iterating, and a deploy script that refuses to run is a
+# deploy script people work around.
+check_repo_matches() {
+  git rev-parse --is-inside-work-tree >/dev/null 2>&1 || return 0
+
+  local dirty ahead upstream
+  dirty=$(git status --porcelain 2>/dev/null | wc -l | tr -d ' ')
+  upstream=$(git rev-parse --abbrev-ref '@{u}' 2>/dev/null || true)
+  ahead=0
+  [[ -n "$upstream" ]] && ahead=$(git rev-list --count '@{u}..HEAD' 2>/dev/null || echo 0)
+
+  [[ "$dirty" == 0 && "$ahead" == 0 && -n "$upstream" ]] && return 0
+
+  echo
+  echo "  ⚠  what you are deploying is not fully published:"
+  [[ "$dirty" != 0 ]] && echo "       ${dirty} uncommitted change(s) in the working tree"
+  [[ "$ahead" != 0 ]] && echo "       ${ahead} commit(s) not pushed to ${upstream}"
+  [[ -z "$upstream" ]] && echo "       this branch has no upstream, so nothing is published at all"
+  echo "     The live site will not be reproducible from the repo."
+  [[ "$ahead" != 0 ]] && echo "     Fix: git push"
+  echo
+}
+
 if [[ "${1:-}" == "--deploy" ]]; then
+  check_repo_matches
   echo "deploying to ${REMOTE_HOST}:~/${REMOTE_DIR}/ (fl/ untouched — no --delete)"
   rsync -az --no-perms --omit-dir-times \
     -e "ssh -o BatchMode=yes" dist/ "${REMOTE_HOST}:~/${REMOTE_DIR}/"
@@ -62,4 +99,5 @@ if [[ "${1:-}" == "--deploy" ]]; then
   curl -s --max-time 20 "https://unhackdemocracy.us/styles.css?v=${CSS_HASH}" \
     | grep -c "unhackdemocracy.us on purpose" | sed 's/^/  styles.css served correctly: /'
   echo "  homepage title: $(curl -s --max-time 20 https://unhackdemocracy.us | grep -o '<title>[^<]*' | head -1)"
+  check_repo_matches
 fi
