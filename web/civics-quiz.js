@@ -327,25 +327,18 @@ function finish() {
   box.appendChild(again);
 }
 
-// ---------- which test applies ----------
+// ---------- start ----------
 
-// Asked before anything else, and it is not a formality. Somebody who
-// filed before 20 October 2025 sits the 2008 test, and drilling them on
-// this 128-question bank would be teaching the wrong material for a real
-// interview with real consequences.
-function start() {
-  document.getElementById("gate").hidden = true;
-  document.getElementById("play").hidden = false;
-  nextQuestion();
-}
-
+// This used to open with a blocking question: which test applies to you?
+// The intent was sound — somebody who filed before 20 October 2025 sits
+// the 2008 test, and drilling them here teaches the wrong material for a
+// real interview. But it put a form in front of EVERY visitor to protect
+// a small minority of them, and most people arriving are curious citizens
+// rather than applicants. So the warning stays and the barrier goes: the
+// page says plainly which test this is, and folds the other case beneath
+// it for whoever it applies to.
 document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("gate-2025").addEventListener("click", start);
-  document.getElementById("gate-2008").addEventListener("click", function () {
-    document.getElementById("gate-choice").hidden = true;
-    document.getElementById("gate-2008-note").hidden = false;
-  });
-  document.getElementById("gate-curious").addEventListener("click", start);
+  nextQuestion();
 
   // Where to actually FIND each of the eight, which is the part that makes
   // this section useful rather than merely honest. Kept here and not in
