@@ -60,21 +60,25 @@
       and giving concrete, cross-partisan ways to help repair them.
     </p>
   </header>
-  <h2>The Citizenship Test</h2>
-
-  <p class="lede">The civics questions asked at the naturalization
-  interview — all of them, from the government's own published list.</p>
-
-  <div class="notice">
-    <p><strong>This is the 2025 test</strong> &mdash; 128 questions, 20
-    asked at the interview, 12 correct to pass.</p>
-    <details class="fold small">
+  <div class="h2-row">
+    <h2>The Citizenship Test</h2>
+    <details class="info">
+      <summary aria-label="What this is">i</summary>
+      <div class="info-body">
+        <p class="info-mastery">The civics questions asked at the
+        naturalization interview &mdash; all of them, from the government's own
+        published list.</p>
+        <p class="info-mastery"><strong>This is the 2025 test</strong>: 128
+        questions, 20 asked at the interview, 12 correct to pass.</p>
+      <details class="fold small">
       <summary>Filed your N&#8209;400 before 20 October 2025?</summary>
       <p>Then you sit the <strong>2008 test</strong> instead: 100
       questions, 10 asked, 6 to pass. Studying here would be the wrong
       material, so go to
       <a href="https://www.uscis.gov/citizenship/2008test" rel="noopener">the USCIS 2008 test page</a>.
       Adding that set here is on the list.</p>
+      </details>
+      </div>
     </details>
   </div>
 
@@ -85,6 +89,7 @@
         <div class="bar-learned"></div>
         <div class="bar-mark" title="Enough to expect a pass"></div>
       </div>
+
       <div class="bar-counts">
         <span class="counts-text"></span><details class="info">
           <summary aria-label="What these numbers mean">i</summary>
@@ -93,35 +98,39 @@
             <p class="info-mastery">A question counts as <strong>learned</strong>
             once you have answered it correctly <strong>twice</strong>, on
             separate showings. One right answer could be luck, and luck does
-            not survive being asked again. Getting it wrong sets that
-            question back to zero.</p>
+            not survive being asked again. Getting it wrong sets that question
+            back to zero.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="mix-row">
+        <span class="mix-label">Recall</span>
+        <div class="seg">
+          <label><input type="radio" name="mix" value="choice"><span>Less</span></label>
+          <label><input type="radio" name="mix" value="even" checked><span>Medium</span></label>
+          <label><input type="radio" name="mix" value="recall"><span>More</span></label>
+        </div>
+        <details class="info">
+          <summary aria-label="What recall means">i</summary>
+          <div class="info-body">
             <p class="info-mastery">Questions come two ways. <strong>Multiple
-            choice</strong> gives you five options with one right answer.
+            choice</strong> gives five options with one right answer.
             <strong>Recall</strong> asks you to type the answer first, then
-            shows you every accepted one &mdash; closer to the real interview,
-            where nobody reads you a list. Which one you get is a coin flip,
-            so the same question can come back the harder way.</p>
-            <p class="info-mastery">Some questions are <strong>always</strong>
-            recall, because every acceptable answer is on the list and there
-            is no honest wrong option to offer beside it &mdash; naming an
-            American Indian tribe, for instance.</p>
-            <fieldset class="mix">
-              <legend>How much recall do you want?</legend>
-              <label><input type="radio" name="mix" value="choice"> More multiple choice</label>
-              <label><input type="radio" name="mix" value="even" checked> An even mix</label>
-              <label><input type="radio" name="mix" value="recall"> More recall</label>
-              <p id="mix-effect" class="mix-effect"></p>
-            </fieldset>
-            <p class="info-mastery">Recall is the harder way and the better
-            teacher, and it is what the interview actually does. Multiple
-            choice is the gentler way into a question you have never met.
-            Note that <strong>21 questions are recall whatever you pick</strong>,
-            so "more multiple choice" reduces recall rather than removing it.</p>
+            shows every accepted one &mdash; closer to the real interview,
+            where nobody reads you a list.</p>
+            <p class="info-mastery">This sets how often recall comes up.
+            <strong>21 questions are recall whatever you pick</strong>, because
+            every acceptable answer is on the list and there is no honest wrong
+            option to put beside it &mdash; naming an American Indian tribe,
+            for instance. So <em>Less</em> reduces recall rather than removing
+            it.</p>
+            <p id="mix-effect" class="mix-effect"></p>
             <p class="info-mastery">What you type is <strong>never
             graded</strong>. Too many wordings are right for any checker to
             judge fairly, and marking a correct answer wrong would be worse
-            than useless. Writing it down first is what makes your own
-            verdict honest &mdash; then you say whether you had it.</p>
+            than useless. Writing it down first is what makes your own verdict
+            honest &mdash; then you say whether you had it.</p>
           </div>
         </details>
       </div>

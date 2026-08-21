@@ -375,9 +375,53 @@ footer a { color: var(--accent); }
 .fb-typed { margin: 0 0 .7rem; font-size: .95rem; color: var(--ink-soft); }
 .fb-typed::before { content: ""; }
 
-.mix { border: 1px solid var(--line); border-radius: var(--radius);
-       padding: .7rem .85rem; margin: 0 0 .9rem; }
-.mix legend { font-size: .82rem; font-weight: 700; padding: 0 .35rem; }
-.mix label { display: flex; align-items: center; gap: .45rem;
-             font-size: .88rem; padding: .12rem 0; cursor: pointer; }
+/* The recall control sits with the progress numbers rather than buried in
+   an explainer — it is a dial people will want to move mid-session, and
+   three clicks to reach a preference is three too many. */
+.mix-row { display: flex; align-items: center; gap: .5rem; margin: .45rem 0 0; }
+.mix-label { font-size: .85rem; color: var(--ink-soft); font-weight: 600; }
+.seg { display: inline-flex; border: 1px solid var(--line);
+       border-radius: 999px; overflow: hidden; }
+.seg label { margin: 0; cursor: pointer; }
+.seg input { position: absolute; opacity: 0; width: 0; height: 0; }
+.seg span {
+  display: block; padding: .22rem .7rem; font-size: .8rem; font-weight: 600;
+  color: var(--ink-soft); border-left: 1px solid var(--line);
+}
+.seg label:first-child span { border-left: 0; }
+.seg label:hover span { background: var(--bg-soft); color: var(--accent); }
+.seg input:checked + span { background: var(--accent); color: var(--bg); }
+.seg input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: -2px; }
 .mix-effect { margin: .5rem 0 0; font-size: .8rem; color: var(--ink-soft); }
+
+/* ---- Touch devices have no hover, and pretending otherwise breaks them.
+   iOS applies :hover on tap and LEAVES IT THERE until you tap something
+   else. So the tap that dismissed one question paints a hover state onto
+   whatever lands under that spot next — and the first tap on an element
+   whose appearance changes on hover gets swallowed revealing that state
+   rather than activating it.
+   
+   Reported from an iPhone: the fifth option looked different from the rest
+   and would not take a tap, then "looked like the previous 3" once another
+   option was tapped. Not a rendering quirk — an unpickable answer.
+   
+   `hover: none` matches devices where hovering is not possible, so pointer
+   devices keep every one of these. */
+@media (hover: none) {
+  .site-menu a:hover { background: none; color: var(--ink); }
+  .site-menu a[aria-current="page"]:hover { color: var(--accent); }
+  .submenu-toggle:hover { background: none; color: var(--ink); }
+  .submenu-toggle[data-section-current]:hover { color: var(--accent); }
+  .site-menu .submenu a:hover { background: none; }
+  .btn:hover { filter: none; }
+  .btn.ghost:hover { background: none; }
+  .page-nav a:hover { background: none; border-color: var(--line); }
+  .fold > summary:hover { color: inherit; }
+  .info > summary:hover { border-color: var(--line); color: var(--ink-soft); }
+  .q-option:hover:not(:disabled) { border-color: var(--line); background: var(--bg); }
+  .seg label:hover span { background: none; color: var(--ink-soft); }
+  .seg input:checked + span { background: var(--accent); color: var(--bg); }
+}
+
+.h2-row { display: flex; align-items: baseline; gap: .5rem; }
+.h2-row h2 { margin-bottom: 0; }
