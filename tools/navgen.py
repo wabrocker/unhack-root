@@ -58,11 +58,31 @@ def nav(current):
         <div id="resources-menu" class="submenu" hidden>
           <a href="resources.html"{mark("resources.html")}>All Resources</a>
           <a href="citizen-primer.html"{mark("citizen-primer.html")}>Citizen Primer</a>
-          <a href="citizenship-test.html"{mark("citizenship-test.html")}>Citizenship Test</a>
+          <a href="citizenship-test.html"{mark("citizenship-test.html")}>Citizenship Practice Test</a>
         </div>
       </div>
     </nav>'''
 
+
+# The masthead line and the footer, repeated verbatim on all six pages for
+# the same reason the nav is: a page is a complete document. Owned here so
+# a wording change is one edit rather than six, and so five pages cannot
+# quietly disagree with the sixth about what the project is for.
+MASTHEAD = '''    <p class="subtitle">in the United States</p>
+    <p class="lede">
+      Educating citizens on how democratic systems have been exploited
+      &mdash; and providing specific, actionable, and cross-partisan ways to
+      help repair them using the &ldquo;tri-pronged&rdquo; power of verifiable
+      knowledge, strength in numbers and clarity of our teams&rsquo; purposes.
+    </p>
+  </header>'''
+
+FOOTER = '''  <footer>
+    <p>
+      Open source, MIT licensed.
+      <a href="https://github.com/wabrocker/unhack-fl" rel="noopener">Unhack US on Github</a>.
+    </p>
+  </footer>'''
 
 SCRIPT = '''<script>
 // Two disclosures, not one: the menu itself, and the Resources group
@@ -122,6 +142,14 @@ def render(slug, source):
     # Rebuilt from scratch rather than patched in place, so moving the
     # breadcrumb is one edit here instead of six by hand.
     s = re.sub(r'  <nav class="page-nav".*?</nav>\n\n?', "", s, flags=re.S)
+
+    # Masthead and footer, from the single copies above.
+    s, n = re.subn(r'    <p class="subtitle">.*?  </header>', MASTHEAD, s, flags=re.S)
+    if n != 1:
+        raise SystemExit(f"FAIL: {slug}.html has {n} mastheads, expected 1")
+    s, n = re.subn(r'  <footer>.*?  </footer>', FOOTER, s, flags=re.S)
+    if n != 1:
+        raise SystemExit(f"FAIL: {slug}.html has {n} footers, expected 1")
     if parent:
         crumb = (f'  <nav class="page-nav" aria-label="Breadcrumb">\n'
                  f'    <a href="{parent}">&larr; {plabel}</a>\n  </nav>\n\n')

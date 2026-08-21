@@ -122,6 +122,16 @@ function norm(s) {
     .replace(/\s+/g, " ").trim();
 }
 
+// A looser key, used ONLY to stop two distractors saying the same thing.
+// "Declare war" and "Declares war" are one idea in two conjugations, and
+// offering both spends two of five option slots on it. Crude stemming is
+// safe here and nowhere else: a false match merely drops a redundant
+// option, and this key never touches grading, where a false match would
+// mark a correct answer wrong.
+function distractorKey(s) {
+  return norm(s).split(" ").map((w) => w.replace(/s$/, "")).join(" ");
+}
+
 function isCorrect(q, picked) {
   return q.a.some((a) => norm(a) === norm(picked));
 }
@@ -154,6 +164,38 @@ function unmastered() {
 // alone, so the question can be answered correctly by someone who knows
 // no civics whatsoever — and a distractor nobody could pick teaches
 // nothing, which defeats the entire point of guessing wrong first.
+// Names the question itself puts on the table. A distractor that mentions
+// the question's own subject is nonsense a reader discards instantly —
+// "Aide to General George Washington" offered for "George Washington is
+// famous for many things. Name one." Washington was not his own aide.
+//
+// Common words are dropped so this rejects on the DISTINCTIVE name only:
+// nearly every question mentions the United States, and excluding every
+// answer that does would gut the pool for no benefit.
+const SUBJECT_STOP = new Set([
+  "the", "and", "for", "one", "two", "three", "five", "name", "what", "who",
+  "why", "when", "how", "many", "does", "did", "was", "were", "are", "his",
+  "united", "states", "state", "american", "america", "president", "first",
+  "constitution", "congress", "federal", "government", "u", "s", "us",
+  // NOTE "president" is deliberately NOT here, so a question that names the
+  // office in caps will not draw answers about it. That is worth having,
+  // but be clear about what it does NOT do: this extractor reads only
+  // CAPITALISED words, and "Name one power of the president" writes the
+  // office lowercase — so it contributes no subject name at all. The fix
+  // for that question was retagging the Cabinet question, not this list.
+]);
+
+function subjectNames(q) {
+  return (q.q.match(/\b[A-Z][a-zA-Z]+\b/g) || [])
+    .map((w) => w.toLowerCase())
+    .filter((w) => w.length > 2 && !SUBJECT_STOP.has(w));
+}
+
+function namesSubject(text, names) {
+  const t = text.toLowerCase();
+  return names.some((n) => t.includes(n));
+}
+
 // Surface shape, kept only as a tiebreaker BELOW category. On its own it
 // was not enough: "War of 1812" contains digits, so a shape-only rule
 // typed it as a number and offered it against amendments and years.
@@ -169,10 +211,11 @@ function answerShape(a) {
 function distractorsFor(q, want) {
   const correct = new Set(q.a.map(norm));
 
+  const subject = subjectNames(q);
   const take = (list) =>
     list.filter((c) => c.n !== q.n)
         .flatMap((c) => c.a.map((a) => ({ a: a, from: c.n })))
-        .filter((x) => !correct.has(norm(x.a)));
+        .filter((x) => !correct.has(norm(x.a)) && !namesSubject(x.a, subject));
 
   // A question that names its own wrong answers gets them, and nothing
   // else. See DISTRACTORS in tools/build-civics.py for why some must.

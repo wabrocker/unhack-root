@@ -86,7 +86,11 @@ RULES = [
     ("when",       r'^when (did|was)\b'),
     ("count",      r'^how many\b|why does the flag'),
     ("nation",     r'main rival'),
-    ("person",     r'^who wrote|^who was|name one leader'),
+    # "Name one of the writers" of the Federalist Papers asks for a PERSON,
+    # but the stem says "Federalist Papers" and so matched `document` — and
+    # drew document names, leaving the one human option obviously correct.
+    # Form beats subject, again.
+    ("person",     r'^who wrote|^who was|name one leader|name one of the writers'),
     ("who",        r'^who\b|\bwho becomes\b'),
     ("famous",     r'is famous for many things'),
     ("describes",  r'^what is (independence day|memorial day|veterans day)'
@@ -109,6 +113,12 @@ RULES = [
     ("process",    r'how are changes made|how can people become'),
     ("group",      r'group of people|who lived in America'),
     ("place",      r'\bcapital\b|^where is|what territory'),
+    # The Cabinet ADVISES the president — a thing done TO the office, not a
+    # power OF it. Left in `power` it offered "Advises the President" as a
+    # presidential power. Its own category, and since it has a single
+    # accepted answer it becomes a recall question, which is what a
+    # one-answer question should be anyway.
+    ("cabinet",    r"president.s cabinet do"),
     ("power",      r'\bpower\b|writes laws|what does .*\bdo\b'),
     ("posts",      r'Cabinet-level positions|part of the judicial|highest court'),
     ("branch",     r'branch|parts of the u\.s\. congress'),

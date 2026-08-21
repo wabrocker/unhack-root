@@ -429,5 +429,10 @@ footer a { color: var(--accent); }
   .seg input:checked + span { background: var(--accent); color: var(--bg); }
 }
 
-.h2-row { display: flex; align-items: baseline; gap: .5rem; }
-.h2-row h2 { margin-bottom: 0; }
+/* The heading's own top margin has to move to the ROW. Centring a flex
+   line centres each item's MARGIN box, so an h2 carrying 36px above it
+   sits 18px lower than the round badge beside it — measured, not guessed,
+   after `align-items: center` alone made the badge look dropped from the
+   other direction. */
+.h2-row { display: flex; align-items: center; gap: .5rem; margin: 2.25rem 0 .6rem; }
+.h2-row h2 { margin: 0; }
