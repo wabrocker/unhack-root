@@ -101,6 +101,18 @@ const STEPS = [
          + "The officer marks your answer against what USCIS says.",
     href: "https://www.uscis.gov/citizenship/testupdates",
     linkText: "Open the USCIS answers page",
+    // The answers are not on the front of that page. Without this, people
+    // open it, see nothing that looks like an answer, and give up.
+    after: "On that page, scroll down to near the bottom. Find the line that "
+         + "says \u201cCivics Test (2025 Naturalization Civics Test) "
+         + "Updates\u201d. Click the down arrow next to it. The four answers "
+         + "are inside.",
+    // All four are behind one accordion, so reading all four before coming
+    // back turns four trips between tabs into one. That is worth more than
+    // any control we could add on this side.
+    tip: "Read all four answers before you come back. They are in the same "
+       + "place, so you only need to go once. The page opens in a new tab, "
+       + "so this page stays where it is.",
     fields: [
       { n: 38, q: "Who is the President of the United States now?" },
       { n: 39, q: "Who is the Vice President of the United States now?" },
@@ -225,6 +237,18 @@ function renderSteps() {
     a.rel = "noopener";
     card.appendChild(a);
 
+    if (step.after) card.appendChild(ael("p", "step-how", step.after));
+    if (step.tip) card.appendChild(ael("p", "step-tip", step.tip));
+
+    // The instructions matter once, before you leave. The fields matter
+    // every time you come back. Measured: step 1 stands 993px tall on an
+    // 812px phone, but its four fields span only 351px — so a returning
+    // visitor scrolls past prose they have already read to reach the only
+    // part they still need. Grouping the fields lets them be jumped to.
+    const fieldBox = ael("div", "fields");
+    if (step.fields.length > 1) {
+      fieldBox.appendChild(ael("p", "fields-head", "Write the answers here"));
+    }
     step.fields.forEach((f) => {
       const wrap = ael("div", "field");
       const lab = ael("label", null, f.q);
@@ -238,8 +262,9 @@ function renderSteps() {
       inp.addEventListener("input", () => setAnswer("q" + f.n, inp.value));
       wrap.appendChild(lab);
       wrap.appendChild(inp);
-      card.appendChild(wrap);
+      fieldBox.appendChild(wrap);
     });
+    card.appendChild(fieldBox);
     box.appendChild(card);
   });
 
@@ -307,8 +332,33 @@ function renderSheet() {
   box.appendChild(clear);
 }
 
+// Once you have opened one of the other websites, coming back should not
+// mean hunting. This bar appears after the first outward click and jumps
+// straight to the boxes you are filling in.
+function armReturnBar() {
+  const bar = document.getElementById("return-bar");
+  if (!bar) return;
+  let target = null;
+
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("#steps a.btn");
+    if (!a) return;
+    target = a.closest(".step").querySelector(".fields");
+    bar.hidden = false;
+  });
+
+  bar.querySelector("button").addEventListener("click", () => {
+    const box = target || document.querySelector("#steps .fields");
+    if (!box) return;
+    box.scrollIntoView({ block: "center", behavior: "smooth" });
+    const first = box.querySelector("input");
+    if (first) first.focus();
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   renderPlacePicker();
   renderSteps();
   renderSheet();
+  armReturnBar();
 });

@@ -528,3 +528,26 @@ body:not(.options-on) .mix-row { display: none; }
   body { background: #fff; color: #000; }
 }
 .find-go { margin: 1rem 0 .2rem; }
+/* How to find the answer once the other site is open. It sits under the
+   button because that is the moment it is needed. */
+.step-how { margin: .8rem 0 0; font-size: .95rem; line-height: 1.6;
+            color: var(--ink-soft); }
+.step-tip { margin: .6rem 0 0; font-size: .95rem; line-height: 1.6;
+            border-left: 3px solid var(--ok); background: var(--bg-soft);
+            padding: .55rem .75rem; border-radius: 0 var(--radius) var(--radius) 0; }
+
+/* Grouped fields, so returning from another site lands on the boxes. */
+.fields { margin-top: 1rem; padding-top: .8rem; border-top: 1px solid var(--line); }
+.fields-head { margin: 0 0 .6rem; font-weight: 800; font-size: .95rem; }
+
+/* Appears only after you have gone out to another site. Fixed to the
+   bottom so it is reachable wherever the page happens to be scrolled. */
+.return-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+  padding: .6rem 1rem calc(.6rem + env(safe-area-inset-bottom, 0px));
+  background: var(--bg); border-top: 1px solid var(--line);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, .08);
+  display: flex; justify-content: center;
+}
+.return-bar[hidden] { display: none; }
+@media print { .return-bar { display: none; } }
