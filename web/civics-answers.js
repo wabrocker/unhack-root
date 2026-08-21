@@ -329,12 +329,31 @@ function renderSheet() {
   });
   box.appendChild(dl);
 
-  const print = ael("button", "btn", "Print this sheet");
+  // Doing NOTHING has to be an option, and the obvious one. The sheet used
+  // to end with Print and Clear and nothing else — two commitments and no
+  // way to simply be finished, which reads as though something is still
+  // required of you.
+  box.appendChild(ael("p", "sheet-safe",
+    "Your answers are saved on this device. You do not need to do anything "
+    + "else. You can close this page and come back any time."));
+
+  const row = ael("div", "sheet-actions");
+
+  // The natural next thing, not an afterthought: you looked these up in
+  // order to sit the test.
+  const next = ael("a", "btn", "Go to the practice test");
+  next.href = "citizenship-test.html";
+  row.appendChild(next);
+
+  const print = ael("button", "btn ghost", "Print this sheet");
   print.type = "button";
   print.addEventListener("click", () => window.print());
-  box.appendChild(print);
+  row.appendChild(print);
+  box.appendChild(row);
 
-  const clear = ael("button", "btn ghost", "Clear my answers");
+  // Quieter, and last. It destroys work, so it should not sit beside the
+  // buttons that do not.
+  const clear = ael("button", "clear-link", "Clear my answers");
   clear.type = "button";
   clear.addEventListener("click", () => {
     if (!confirm("Delete all eight answers from this browser?")) return;
