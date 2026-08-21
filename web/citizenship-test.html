@@ -111,6 +111,9 @@
       </details>
       </div>
 
+    </details>
+  </div>
+
   <div class="opt-row">
     <button type="button" class="btn small" id="get-started">Get started</button>
     <span class="mix-label">Options</span>
@@ -118,8 +121,6 @@
       <label><input type="radio" name="opts" value="off" checked><span>Off</span></label>
       <label><input type="radio" name="opts" value="on"><span>On</span></label>
     </div>
-  </div>
-    </details>
   </div>
 
   <section id="play">
@@ -152,23 +153,6 @@
           <label><input type="radio" name="mix" value="recall"><span>More</span></label>
         </div>
 
-      <div class="mix-row test-row">
-        <span class="mix-label">Test</span>
-        <div class="seg">
-          <label><input type="radio" name="mode" value="practice" checked><span>Practice</span></label>
-          <label><input type="radio" name="mode" value="exam"><span>Real simulation</span></label>
-        </div>
-        <details class="info">
-          <summary aria-label="What the real simulation is">i</summary>
-          <div class="info-body">
-            <p class="info-mastery"><strong>How would you do in the real
-            interview?</strong> Twenty questions, typed, no help and no second
-            chances — then you mark your own against the answer key.</p>
-            <p id="exam-status" class="info-mastery"></p>
-            <div id="interview-facts"></div>
-          </div>
-        </details>
-      </div>
         <details class="info">
           <summary aria-label="What typing means">i</summary>
           <div class="info-body">
@@ -189,6 +173,24 @@
             judge fairly, and marking a correct answer wrong would be worse
             than useless. Writing it down first is what makes your own verdict
             honest &mdash; then you say whether you had it.</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="mix-row test-row">
+        <span class="mix-label">Test</span>
+        <div class="seg">
+          <label><input type="radio" name="mode" value="practice" checked><span>Practice</span></label>
+          <label><input type="radio" name="mode" value="exam"><span>Real simulation</span></label>
+        </div>
+        <details class="info">
+          <summary aria-label="What the real simulation is">i</summary>
+          <div class="info-body">
+            <p class="info-mastery"><strong>How would you do in the real
+            interview?</strong> Twenty questions, typed, no help and no second
+            chances — then you mark your own against the answer key.</p>
+            <p id="exam-status" class="info-mastery"></p>
+            <div id="interview-facts"></div>
           </div>
         </details>
       </div>
