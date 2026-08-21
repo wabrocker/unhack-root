@@ -22,6 +22,12 @@
 // defeats the lucky guess: luck does not survive being asked again.
 
 const MASTERY = 2;      // correct sightings before a question is retired
+// How often a question that COULD be multiple choice is asked by recall
+// instead. Recall is the better teacher and the format the real interview
+// uses, but seeing a question both ways is worth more than either alone —
+// and picking from a list is a fair way to meet a question you have never
+// seen. So it is a coin flip, and the same question can come back harder.
+const RECALL_CHANCE = 0.5;
 const DISTRACTORS = 4;  // wrong options offered, however many are wanted
 
 const state = {
@@ -170,8 +176,11 @@ function nextQuestion() {
   // Any member of the answer set is correct, so the ones SHOWN are chosen
   // at random — otherwise a question with several right answers would only
   // ever teach its first one.
-  if (q.r) {
-    state.current = { q, need, shown: q.a.slice(), options: [], picked: [], answered: false };
+  // Questions with no honest distractors are ALWAYS recall. The rest are a
+  // coin flip between the two formats.
+  if (q.r || Math.random() < RECALL_CHANCE) {
+    state.current = { q, need, recall: true, shown: q.a.slice(),
+                      options: [], picked: [], answered: false };
     return render();
   }
   const shown = shuffle(q.a).slice(0, need);
@@ -179,7 +188,7 @@ function nextQuestion() {
   // question is not accidentally easier than a "name one".
   const options = shuffle(shown.concat(distractorsFor(q, DISTRACTORS)));
 
-  state.current = { q, need, shown, options, picked: [], answered: false };
+  state.current = { q, need, recall: false, shown, options, picked: [], answered: false };
   render();
 }
 
@@ -205,12 +214,31 @@ function renderRecall() {
   box.appendChild(el("p", "q-meta", q.sub));
   box.appendChild(el("h3", "q-text", q.q));
   box.appendChild(el("p", "q-need",
-    q.need > 1 ? "The interview asks for " + q.need + ". Answer in your head first."
-               : "Answer in your head first."));
+    q.need > 1 ? "The interview asks for " + q.need + "." : ""));
+
+  // Writing it down before looking is the whole mechanism. Committing to an
+  // answer is what makes the verdict afterwards honest — "I was thinking of
+  // that" does not survive having typed something else. It is deliberately
+  // NOT graded: "Federalist Papers", "the federalist papers" and
+  // "Federalist" are one answer, and no matcher gets every form right.
+  // Marking a correct answer wrong is the one failure to avoid, so the
+  // person who wrote it decides.
+  const entry = el("div", "recall-entry");
+  const input = el("input", "recall-input");
+  input.type = "text";
+  input.setAttribute("aria-label", "Your answer");
+  input.placeholder = q.need > 1 ? "Type your answers, separated by commas"
+                                 : "Type your answer";
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") revealRecall();
+  });
+  entry.appendChild(input);
   const show = el("button", "btn recall-show", "Show the answer");
   show.type = "button";
   show.addEventListener("click", revealRecall);
-  box.appendChild(show);
+  entry.appendChild(show);
+  box.appendChild(entry);
+  input.focus();
   box.appendChild(el("div", "q-feedback"));
   progress();
 }
@@ -218,11 +246,13 @@ function renderRecall() {
 function revealRecall() {
   const { q } = state.current;
   const box = document.getElementById("quiz");
-  const btn = box.querySelector(".recall-show");
-  if (btn) btn.hidden = true;
+  const typed = (box.querySelector(".recall-input") || {}).value || "";
+  const entry = box.querySelector(".recall-entry");
+  if (entry) entry.hidden = true;
 
   const fb = box.querySelector(".q-feedback");
   fb.className = "q-feedback";
+  if (typed.trim()) fb.appendChild(el("p", "fb-typed", "You wrote: " + typed.trim()));
   fb.appendChild(el("p", "fb-answer",
     q.a.length === 1 ? "The answer:" : "Any of these counts (" + q.a.length + "):"));
   const ul = el("ul", "recall-answers");
@@ -230,7 +260,7 @@ function revealRecall() {
   fb.appendChild(ul);
 
   const row = el("div", "recall-judge");
-  [["I knew it", true], ["I didn't", false]].forEach(([label, knew]) => {
+  [["I had it", true], ["I didn't", false]].forEach(([label, knew]) => {
     const b = el("button", knew ? "btn" : "btn ghost", label);
     b.type = "button";
     b.addEventListener("click", () => judgeRecall(knew));
@@ -261,7 +291,7 @@ function judgeRecall(knew) {
 }
 
 function render() {
-  if (state.current.q.r) return renderRecall();
+  if (state.current.recall) return renderRecall();
   const { q, options } = state.current;
   const box = document.getElementById("quiz");
   box.innerHTML = "";

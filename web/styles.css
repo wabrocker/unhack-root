@@ -364,3 +364,13 @@ footer a { color: var(--accent); }
 .recall-answers li { break-inside: avoid; margin-bottom: .2rem; }
 @media (max-width: 520px) { .recall-answers { columns: 1; } }
 .recall-judge { display: flex; gap: .6rem; flex-wrap: wrap; }
+
+.recall-entry { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+.recall-input {
+  font: inherit; flex: 1 1 16rem; min-width: 0;
+  padding: .6rem .8rem; border-radius: var(--radius);
+  border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+}
+.recall-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.fb-typed { margin: 0 0 .7rem; font-size: .95rem; color: var(--ink-soft); }
+.fb-typed::before { content: ""; }
