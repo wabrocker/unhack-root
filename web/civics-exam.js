@@ -138,6 +138,8 @@ function beginExam() {
 function leaveExam() {
   document.getElementById("exam").hidden = true;
   document.getElementById("play").hidden = false;
+  const practice = document.querySelector('input[name="mode"][value="practice"]');
+  if (practice) practice.checked = true;
   showExamStatus();
 }
 
@@ -309,13 +311,26 @@ function showExamStatus() {
       + (last.passed ? " — a pass." : " — not a pass yet.")
     : "Never sat it? Take it cold. A first score you did not study for is the "
       + "only honest baseline you will ever get.";
-  const btn = document.getElementById("exam-start");
-  if (btn) btn.textContent = last ? "Sit it again" : "Sit the 20-question test";
+
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  const b = document.getElementById("exam-start");
-  if (b) b.addEventListener("click", startExam);
+  // The Test switch is the way in now. Choosing the simulation runs the
+  // pre-flight; leaving it, however you leave it, puts the switch back.
+  // BOTH directions. Handling only the exam side left the switch able to
+  // flip to Practice while the exam stayed on screen — which is exactly
+  // how turning Options off mid-exam stranded you, since the rescue in
+  // applyOptions() works by clicking this radio. A guard that fires and
+  // changes nothing is worse than none: it reads as covered.
+  //
+  // No loop: leaveExam() sets .checked directly rather than clicking, so
+  // it raises no second change event.
+  document.querySelectorAll('input[name="mode"]').forEach((r) => {
+    r.addEventListener("change", () => {
+      if (!r.checked) return;
+      if (r.value === "exam") startExam(); else leaveExam();
+    });
+  });
   const facts = document.getElementById("interview-facts");
   if (facts) facts.appendChild(interviewFacts());
   showExamStatus();

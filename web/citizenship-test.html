@@ -78,6 +78,15 @@
         <p class="info-mastery">The civics questions asked at the
         naturalization interview &mdash; all of them, from the government's own
         published list.</p>
+        <p class="info-mastery"><strong>Just answer the questions.</strong>
+        Type or pick, and it keeps track. A question counts as learned once
+        you have answered it right twice.</p>
+        <p class="info-mastery"><strong>Turn Options on</strong> for two more
+        controls: <em>Typing</em>, which sets how often you write the answer
+        yourself instead of picking from a list, and <em>Test</em>, which
+        switches between practice and a full twenty-question simulation of
+        the real interview. Each gets its own <span class="info-ref">i</span>
+        button explaining it.</p>
         <p class="info-mastery"><strong>This is the 2025 test</strong>: 128
         questions, 20 asked at the interview, 12 correct to pass.</p>
       <details class="fold small">
@@ -101,6 +110,15 @@
         USCIS is the authority.</p>
       </details>
       </div>
+
+  <div class="opt-row">
+    <button type="button" class="btn small" id="get-started">Get started</button>
+    <span class="mix-label">Options</span>
+    <div class="seg">
+      <label><input type="radio" name="opts" value="off" checked><span>Off</span></label>
+      <label><input type="radio" name="opts" value="on"><span>On</span></label>
+    </div>
+  </div>
     </details>
   </div>
 
@@ -127,18 +145,36 @@
       </div>
 
       <div class="mix-row">
-        <span class="mix-label">Recall</span>
+        <span class="mix-label">Typing</span>
         <div class="seg">
           <label><input type="radio" name="mix" value="choice"><span>Less</span></label>
           <label><input type="radio" name="mix" value="even" checked><span>Medium</span></label>
           <label><input type="radio" name="mix" value="recall"><span>More</span></label>
         </div>
+
+      <div class="mix-row test-row">
+        <span class="mix-label">Test</span>
+        <div class="seg">
+          <label><input type="radio" name="mode" value="practice" checked><span>Practice</span></label>
+          <label><input type="radio" name="mode" value="exam"><span>Real simulation</span></label>
+        </div>
         <details class="info">
-          <summary aria-label="What recall means">i</summary>
+          <summary aria-label="What the real simulation is">i</summary>
+          <div class="info-body">
+            <p class="info-mastery"><strong>How would you do in the real
+            interview?</strong> Twenty questions, typed, no help and no second
+            chances — then you mark your own against the answer key.</p>
+            <p id="exam-status" class="info-mastery"></p>
+            <div id="interview-facts"></div>
+          </div>
+        </details>
+      </div>
+        <details class="info">
+          <summary aria-label="What typing means">i</summary>
           <div class="info-body">
             <p class="info-mastery">Questions come two ways. <strong>Multiple
             choice</strong> gives five options with one right answer.
-            <strong>Recall</strong> asks you to type the answer first, then
+            <strong>Typing</strong> asks you to write the answer first, then
             shows every accepted one &mdash; closer to the real interview,
             where nobody reads you a list.</p>
             <p class="info-mastery">This sets how often recall comes up.
@@ -159,16 +195,6 @@
     </div>
 
     <div id="quiz" class="card"></div>
-
-    <div class="card exam-entry">
-      <h3>How would you do in the real interview?</h3>
-      <p id="exam-status"></p>
-      <button type="button" class="btn" id="exam-start">Sit the 20-question test</button>
-      <details class="fold small">
-        <summary>What the real interview is like</summary>
-        <div id="interview-facts"></div>
-      </details>
-    </div>
 
     <div id="exam" class="card" hidden></div>
 

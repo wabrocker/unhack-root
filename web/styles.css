@@ -448,8 +448,6 @@ footer a { color: var(--accent); }
    Plainer than practice on purpose. Practice is a place to be helped;
    this is a place to be measured, and it should not feel like the same
    room. */
-.exam-entry h3 { margin-bottom: .35rem; }
-.exam-entry p { font-size: .92rem; color: var(--ink-soft); margin: 0 0 .9rem; }
 .exam-brief { margin: .5rem 0 1.2rem; padding-left: 1.1rem; font-size: .93rem; }
 .exam-brief li { margin-bottom: .5rem; }
 .exam-note { font-size: .85rem; color: var(--ink-soft); margin: .8rem 0; }
@@ -472,3 +470,21 @@ footer a { color: var(--accent); }
 .exam-history { list-style: none; padding: 0; font-size: .9rem; }
 .exam-history li { padding: .25rem 0; border-bottom: 1px solid var(--line); }
 .exam-history li.pass { color: var(--ok); font-weight: 700; }
+
+/* ---- The quiet default --------------------------------------------
+   Options off is the shipping state: answer questions, nothing else.
+   Three of the four info buttons hide with it. The fourth — beside the
+   heading — never hides, because it is the only thing on the page that
+   says WHICH test this is, and somebody who filed before 20 October 2025
+   sits a different one. A warning that can be switched off is not a
+   warning. */
+.opt-row { display: flex; align-items: center; gap: .5rem; margin: .1rem 0 .9rem; }
+.info-ref {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.05em; height: 1.05em; border: 1px solid var(--line);
+  border-radius: 50%; font-size: .8em; font-style: italic; font-weight: 700;
+  color: var(--ink-soft); vertical-align: middle;
+}
+body:not(.options-on) .bar-counts > .info,
+body:not(.options-on) .mix-row > .info,
+body:not(.options-on) .test-row { display: none; }

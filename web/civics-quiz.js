@@ -574,7 +574,49 @@ function finish() {
 // rather than applicants. So the warning stays and the barrier goes: the
 // page says plainly which test this is, and folds the other case beneath
 // it for whoever it applies to.
+// ---------- page chrome ----------
+
+// Options off is the default and the point: somebody arriving to answer
+// questions should not have to read a control panel first. The switch is
+// remembered, so anyone who wants the dials gets them every visit.
+const OPTS_KEY = "civics-options";
+
+function optionsOn() {
+  return localStorage.getItem(OPTS_KEY) === "on";
+}
+
+function applyOptions(on) {
+  localStorage.setItem(OPTS_KEY, on ? "on" : "off");
+  document.body.classList.toggle("options-on", on);
+  // Leaving the simulation switched on while hiding its control would strand
+  // somebody in exam mode with no way back, so turning Options off returns
+  // to practice.
+  if (!on) {
+    const practice = document.querySelector('input[name="mode"][value="practice"]');
+    if (practice && !practice.checked) practice.click();
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+  const on = optionsOn();
+  document.querySelectorAll('input[name="opts"]').forEach((r) => {
+    r.checked = (r.value === "on") === on;
+    r.addEventListener("change", () => applyOptions(r.value === "on"));
+  });
+  applyOptions(on);
+
+  // Get started opens the heading panel rather than duplicating it. One
+  // explanation, two ways in — a button for people who want telling, and a
+  // small circle for people who already know where to look.
+  const gs = document.getElementById("get-started");
+  const intro = document.querySelector(".h2-row details.info");
+  if (gs && intro) {
+    gs.addEventListener("click", () => {
+      intro.open = !intro.open;
+      if (intro.open) intro.scrollIntoView({ block: "nearest" });
+    });
+  }
+
   const chosen = mixKey();
   document.querySelectorAll('input[name="mix"]').forEach((r) => {
     r.checked = r.value === chosen;
