@@ -341,7 +341,7 @@ const CIVICS = [
     a: ["After the Civil War", "During Reconstruction", "(With the) 15th Amendment", "1870"] },
   { n: 99, sub: "1800s", cat: "person",
     q: "Name one leader of the women’s rights movement in the 1800s.",
-    a: ["Susan B. Anthony", "Elizabeth Cady Stanton", "Sojourner Truth", "Harriet Tubman", "Lucretia Mott", "Lucy Stone"] },
+    a: ["Susan B. Anthony", "Elizabeth Cady Stanton", "Sojourner Truth", "Harriet Tubman", "Lucretia Mott", "Lucy Stone"], r: true },
   { n: 100, sub: "Recent American History and Other Important Historical Information", cat: "war",
     q: "Name one war fought by the United States in the 1900s.",
     a: ["World War I", "World War II", "Korean War", "Vietnam War", "(Persian) Gulf War"] },

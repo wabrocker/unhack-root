@@ -344,7 +344,7 @@ footer a { color: var(--accent); }
    below are the content column, so left:0/right:0 makes the panel exactly
    as wide as the text it explains, at any screen size. */
 .info { display: inline-flex; }
-.h2-row, .bar-counts, .mix-row { position: relative; }
+.h2-row, .bar-counts, .mix-row, .lede-row { position: relative; }
 .info > summary {
   cursor: pointer; list-style: none;
   width: 1.15rem; height: 1.15rem; border-radius: 50%;
@@ -436,3 +436,10 @@ footer a { color: var(--accent); }
    other direction. */
 .h2-row { display: flex; align-items: center; gap: .5rem; margin: 2.25rem 0 .6rem; }
 .h2-row h2 { margin: 0; }
+
+/* The masthead keeps one short sentence; the fuller statement of purpose
+   sits behind the icon beside it. Same bargain as everywhere else on this
+   page — say the thing in a breath, and let anyone who wants the whole
+   argument ask for it. */
+.lede-row { display: flex; align-items: baseline; gap: .5rem; }
+.lede-row .lede { margin-bottom: 1.25rem; }

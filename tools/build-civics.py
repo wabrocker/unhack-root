@@ -51,6 +51,21 @@ DISTRACTORS = {
          "(U.S.) Congress", "The Star-Spangled Banner"],   # answer: the US / the flag
 }
 
+# Questions that must be RECALL no matter what the distractor count says.
+#
+# The automatic test counts how many same-category distractors exist. It
+# cannot see whether those distractors are separable from the answer by
+# something irrelevant. Q99 asks for a leader of the women's rights
+# movement, and its six accepted answers are every woman named anywhere in
+# the bank — so every available distractor is a man, and the question is
+# answerable by noticing which name is female.
+#
+# It was correctly recall until "name one of the writers" moved Q83 into
+# `person`, which pushed the count over the threshold and silently flipped
+# it back to multiple choice. Caught by looking at the screen, not by the
+# counter, which is the point: the counter measures supply, not quality.
+RECALL_ALWAYS = {99}
+
 # How many items the question actually asks for. Stated only in the stem.
 WORDNUM = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5}
 
@@ -204,13 +219,13 @@ def mark_recall(items):
 
     pool = [i for i in items if i["kind"] != "lookup" and i["answers"]]
     for q in pool:
-        if q["d"]:
+        if q["d"] and q["n"] not in RECALL_ALWAYS:
             q["recall"] = False
             continue
         mine = {norm(a) for a in q["answers"]}
         others = {norm(a) for c in pool if c["cat"] == q["cat"] and c["n"] != q["n"]
                   for a in c["answers"]} - mine
-        q["recall"] = len(others) < MIN_DISTRACTORS
+        q["recall"] = q["n"] in RECALL_ALWAYS or len(others) < MIN_DISTRACTORS
     for i in items:
         i.setdefault("recall", False)
 
