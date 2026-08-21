@@ -50,7 +50,17 @@ function norm(s) {
     .replace(/\([^)]*\)/g, " ")      // (of the United States)
     .replace(/\[[^\]]*\]/g, " ")     // [editorial notes]
     .replace(/[^a-z0-9 ]/g, " ")
-    .replace(/\b(the|a|an)\b/g, " ")
+    // Articles AND prepositions. "Citizens from their state" answers Q32
+    // while "Citizens of their state" answers Q31, and they mean the same
+    // thing — so offering one against the other marked a correct answer
+    // wrong. Stripping only articles caught "President"/"The President"
+    // and missed this entire family.
+    //
+    // Checked before loosening rather than after: normalising every answer
+    // in the bank this way produces 26 cross-question collisions, and all
+    // 26 are genuine synonym pairs. No two answers that differ in meaning
+    // collapse together, so this cannot make a wrong answer count as right.
+    .replace(/\b(the|a|an|of|from|for|in|to|at|by|on|with|and)\b/g, " ")
     .replace(/\s+/g, " ").trim();
 }
 
