@@ -334,7 +334,7 @@ const CIVICS = [
     q: "What U.S. war ended slavery?",
     a: ["The Civil War"] },
   { n: 97, sub: "1800s", cat: "amendname",
-    q: "What amendment says all persons born or naturalized in the United States,",
+    q: "What amendment says all persons born or naturalized in the United States, and subject to the jurisdiction thereof, are U.S. citizens?",
     a: ["14th Amendment"], r: true },
   { n: 98, sub: "1800s", cat: "when",
     q: "When did all men get the right to vote?",

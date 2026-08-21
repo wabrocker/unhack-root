@@ -180,9 +180,17 @@ def parse(pdf):
             items.append(cur); continue
         if cur is not None and s.startswith("•"):
             cur["answers"].append(s.lstrip("• ").strip())
-        elif (cur is not None and s and cur["answers"] and not s[0].isdigit()
+        elif (cur is not None and s and not s[0].isdigit()
               and len(s) < 90 and not re.match(r'^(\d+ of \d+|uscis\.gov)', s)):
-            cur["answers"][-1] += " " + s
+            if cur["answers"]:
+                cur["answers"][-1] += " " + s
+            else:
+                # A QUESTION that wrapped to a second line. This branch used
+                # to require an existing answer, so wrapped question text was
+                # dropped in silence — which cut Q97 down to "What amendment
+                # says all persons born or naturalized in the United States,"
+                # and threw away the clause that identifies the amendment.
+                cur["q"] = (cur["q"] + " " + s).replace("*", "").strip()
 
     for it in items:
         it["need"] = required(it["q"])
@@ -245,6 +253,13 @@ def check(items):
     blank = [i["n"] for i in items if i["kind"] == "static" and not i["answers"]]
     if blank:
         sys.exit(f"FAIL: static questions with no answer: {blank}")
+
+    # Every question is a sentence, so every question ends like one. A
+    # truncated stem is invisible in the data and obvious on screen, which
+    # is the worst place to discover it — Q97 reached a real user that way.
+    cut = [i["n"] for i in items if not re.search(r'[?.]\s*$', i["q"])]
+    if cut:
+        sys.exit(f"FAIL: question text looks truncated: {cut}")
 
 
 def emit(items):
