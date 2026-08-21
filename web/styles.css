@@ -374,3 +374,10 @@ footer a { color: var(--accent); }
 .recall-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
 .fb-typed { margin: 0 0 .7rem; font-size: .95rem; color: var(--ink-soft); }
 .fb-typed::before { content: ""; }
+
+.mix { border: 1px solid var(--line); border-radius: var(--radius);
+       padding: .7rem .85rem; margin: 0 0 .9rem; }
+.mix legend { font-size: .82rem; font-weight: 700; padding: 0 .35rem; }
+.mix label { display: flex; align-items: center; gap: .45rem;
+             font-size: .88rem; padding: .12rem 0; cursor: pointer; }
+.mix-effect { margin: .5rem 0 0; font-size: .8rem; color: var(--ink-soft); }

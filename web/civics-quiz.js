@@ -34,14 +34,50 @@ const MASTERY = 2;      // correct sightings before a question is retired
 // 1/3 it looks like by eye — a flat third would land at 54:66. Computed
 // from the data rather than written down, so it stays balanced if the
 // always-recall count changes when the categories are next edited.
-const RECALL_SHARE = 0.5;
+// Three mixes, because people learn differently and the right balance is a
+// preference rather than a fact. The number is the share of questions that
+// should arrive as RECALL.
+//
+// "More multiple choice" cannot reach zero recall: 21 questions have no
+// honest distractors and are recall whatever this says. That floor is 17.5%
+// of the bank, which is why the low setting is 25% rather than something
+// smaller — it leaves the flip doing visible work instead of pinning at 0.
+const MIX = {
+  choice: { share: 0.25, label: "More multiple choice" },
+  even:   { share: 0.50, label: "An even mix" },
+  recall: { share: 0.75, label: "More recall" },
+};
+const MIX_KEY = "civics-mix";
+
+function mixKey() {
+  const k = localStorage.getItem(MIX_KEY);
+  return MIX[k] ? k : "even";
+}
+
+function setMix(k) {
+  if (MIX[k]) localStorage.setItem(MIX_KEY, k);
+  showMixEffect();
+}
+
+// The actual numbers for the chosen mix, because "more" and "less" mean
+// nothing without them — and the always-recall floor makes the low setting
+// behave differently from what the label implies.
+function showMixEffect() {
+  const el = document.getElementById("mix-effect");
+  if (!el) return;
+  const all = CIVICS.filter((c) => c.kind !== "lookup" && c.a.length);
+  const always = all.filter((c) => c.r).length;
+  const rec = Math.round(always + recallChance() * (all.length - always));
+  el.textContent = `About ${rec} of the ${all.length} would be recall, `
+                 + `${all.length - rec} multiple choice.`;
+}
 
 function recallChance() {
   const all = CIVICS.filter((c) => c.kind !== "lookup" && c.a.length);
   const always = all.filter((c) => c.r).length;
   const flexible = all.length - always;
   if (flexible <= 0) return 0;
-  const p = (RECALL_SHARE * all.length - always) / flexible;
+  const p = (MIX[mixKey()].share * all.length - always) / flexible;
   return Math.max(0, Math.min(1, p));
 }
 const DISTRACTORS = 4;  // wrong options offered, however many are wanted
@@ -496,6 +532,13 @@ function finish() {
 // page says plainly which test this is, and folds the other case beneath
 // it for whoever it applies to.
 document.addEventListener("DOMContentLoaded", function () {
+  const chosen = mixKey();
+  document.querySelectorAll('input[name="mix"]').forEach((r) => {
+    r.checked = r.value === chosen;
+    r.addEventListener("change", () => setMix(r.value));
+  });
+  showMixEffect();
+
   nextQuestion();
 
   // Where to actually FIND each of the eight, which is the part that makes
