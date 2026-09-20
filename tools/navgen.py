@@ -98,7 +98,7 @@ MASTHEAD = '''    <p class="subtitle">in the United States</p>
 # what a description is for, and those are correct as they stand.
 HOME_DESCRIPTION = (
     "Knowledgeable, cross-partisan citizens teaming up to save Democracy. "
-    "Florida is live now, with concrete ways to help repair the system."
+    "Concrete ways to understand the system and help repair it."
 )
 
 FOOTER = '''  <footer>

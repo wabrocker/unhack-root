@@ -118,6 +118,27 @@ h3 { font-size: 1.05rem; margin: 0 0 .4rem; }
 
 .lede { color: var(--ink-soft); margin: 0 0 1.25rem; font-size: 1.1rem; }
 
+/* Epigraph — the why, above the hero. Added 2026-09-20. */
+.epigraph {
+  margin: 0 0 1.5rem;
+  padding: 1.25rem 1.25rem 1.1rem;
+  background: var(--bg-soft);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+}
+.epigraph blockquote { margin: 0; }
+.epigraph p { margin: 0 0 .6rem; font-size: 1.06rem; line-height: 1.6; }
+.epigraph p:last-of-type { margin-bottom: 0; }
+.epigraph .turn { color: var(--ink-soft); }
+.epigraph .decide { color: var(--ink); font-weight: 600; }
+.epigraph figcaption {
+  margin-top: .85rem; font-size: .9rem; color: var(--ink-soft);
+}
+@media (max-width: 480px) {
+  .epigraph { padding: 1rem; }
+  .epigraph p { font-size: 1rem; }
+}
+
 .hero-art { margin: 0 0 1.5rem; }
 .hero-art img {
   display: block; width: 100%; height: auto;

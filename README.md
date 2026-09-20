@@ -4,10 +4,15 @@ The root site for **[unhackdemocracy.us](https://unhackdemocracy.us)** —
 the mission, the state apps index, and the resources that teach how the
 system actually works.
 
-The per-state tools live in their own repos. Florida is
-[unhack-fl](https://github.com/wabrocker/unhack-fl), and deploys into
-`fl/` inside this same document root, which is why the rsync here must
-never use `--delete`. See [DEPLOY.md](DEPLOY.md).
+The per-state tools live in their own repos. **State tools are ON HOLD as of
+2026-09-19** (Bill's call: too much effort for too little immediate benefit,
+and too much of it unfinished). The root site no longer links to any of them.
+
+**The files are still on the server, so the deploy hazard is unchanged.**
+Florida is [unhack-fl](https://github.com/wabrocker/unhack-fl) and deploys into
+`fl/` inside this same document root, which is why the rsync here **must never
+use `--delete`** — it would take the Florida app down as a side effect. See
+[DEPLOY.md](DEPLOY.md).
 
 ## What's here
 
