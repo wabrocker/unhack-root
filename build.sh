@@ -52,7 +52,10 @@ JS_HASH=$(hash_of web/civics-data.js)$(hash_of web/civics-quiz.js)$(hash_of web/
 # the silent-failure shape again — it renders fine and recommends nothing.
 NEXT_HASH=$(hash_of web/shelf-data.js)$(hash_of web/next.js)$(hash_of web/shelf.js)
 CSS_HASH=$(hash_of web/styles.css)
-for page in index about next shelf states resources citizen-primer citizenship-test citizenship-answers; do
+# The page list comes from navgen, which is already the site map. Keeping
+# a second copy here is how howto-town.html got a nav, a breadcrumb, a
+# passing check and a 404 all at the same time.
+for page in $(python3 tools/navgen.py --list); do
   sed -e "s|href=\"styles\.css\"|href=\"styles.css?v=${CSS_HASH}\"|" \
       -e "s|src=\"civics-\([a-z]*\)\.js\"|src=\"civics-\1.js?v=${JS_HASH}\"|g" \
       -e "s|src=\"shelf-data\.js\"|src=\"shelf-data.js?v=${NEXT_HASH}\"|" \

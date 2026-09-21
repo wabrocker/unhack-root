@@ -84,8 +84,7 @@
       const link = document.createElement("a");
       link.className = "shelf-link";
       link.href = i.url;
-      link.rel = "noopener";
-      link.target = "_blank";
+      if (/^https?:/i.test(i.url)) { link.rel = "noopener"; link.target = "_blank"; }
       link.textContent = i.button + " →";
       card.appendChild(link);
 

@@ -936,3 +936,26 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
   border: 1px solid var(--line);
 }
 .btn-quiet:hover, .btn-quiet:focus-visible { border-color: var(--accent); }
+
+/* Our own how-to pages: long-form prose, so they get reading measures and
+   headings that separate sections rather than decorate them. */
+.howto h2 { margin: .3rem 0 .6rem; font-size: 1.7rem; line-height: 1.22; }
+.howto h3 {
+  margin: 2rem 0 .6rem; font-size: 1.2rem; line-height: 1.3;
+  padding-top: .9rem; border-top: 1px solid var(--line);
+}
+.howto .lede { font-size: 1.1rem; }
+.howto p { margin: .8rem 0; }
+.howto ol, .howto ul { margin: .8rem 0; padding-left: 1.3rem; }
+.howto li { margin: .5rem 0; }
+.howto code {
+  background: var(--bg-soft); padding: .12rem .35rem;
+  border-radius: 5px; font-size: .92em;
+}
+.bodies li { margin: .7rem 0; }
+.aside {
+  padding: .8rem 1rem; background: var(--bg-soft);
+  border-radius: var(--radius); color: var(--ink-soft); font-size: .96rem;
+}
+.checklist li { margin: .45rem 0; }
+.howto-back { margin-top: 2.2rem; font-size: .95rem; }

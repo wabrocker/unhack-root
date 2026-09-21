@@ -362,11 +362,11 @@
 
     const link = document.createElement("a");
     link.className = "btn-primary";
-    link.href = SHELF_SOURCE.href;
-    link.rel = "noopener";
-    link.target = "_blank";
     link.className = "btn-primary btn-guide";
     link.href = pick.url;
+    // Ours is a page on this site: same tab, no rel. Theirs is somebody
+    // else's, so it opens away and carries noopener.
+    if (/^https?:/i.test(pick.url)) { link.rel = "noopener"; link.target = "_blank"; }
     link.textContent = pick.button + " →";
 
     // The second button is the follow-through rhythm in embryo: the loop

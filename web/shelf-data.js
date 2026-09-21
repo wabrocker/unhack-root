@@ -246,17 +246,42 @@ const SHELF = [
       "Nonviolent collective action, and what it asks of you",
       "Personal and community resilience for a long stretch"
     ]
+  },
+  {
+    "id": "own-town",
+    "action": "Find out what your town actually decides, and when it next meets.",
+    "blurb": "You are governed by four or five local bodies right now. Twenty minutes names them, permanently.",
+    "title": "What your town decides, and when it meets",
+    "where": "Our guide",
+    "url": "howto-town.html",
+    "button": "Our guide · What your town decides",
+    "mode": "understand",
+    "capacity": "hour",
+    "reach": "solo",
+    "disposition": [
+      "learn",
+      "dig",
+      "showup"
+    ],
+    "outline": [
+      "Why “local government” is four or five separate bodies, and what each one decides",
+      "How to work out which of them decides the thing that actually annoys you",
+      "Read the agenda, not the minutes — one is history, the other is the part you can still change",
+      "What a consent agenda is, and why most business passes inside it without discussion",
+      "Watching is a right; speaking usually is not — and how to find your body’s own rules",
+      "The twenty-minute version, in order"
+    ]
   }
 ];
 
 /* Counts for the shelf page, generated so they cannot drift from the data.
  * "considered" is everything we looked at in this collection. */
 const SHELF_STATS = {
-  "considered": 25,
-  "carried": 10,
+  "considered": 26,
+  "carried": 11,
   "held": 3,
   "outOfScope": 12,
-  "read": 12,
+  "read": 13,
   "source": "Ordinary People, Extraordinary Times",
   "sourceHref": "https://ordinarypeopleaction.com/resources/"
 };

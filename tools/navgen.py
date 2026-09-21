@@ -39,6 +39,10 @@ SITE = {
     # result and from next.html's own footer link, which is the point at
     # which someone has earned the right to want it.
     "shelf":            ("shelf.html",            "next.html",      "Find Your Next Step"),
+    # Our own how-to, written because the best first action in civic life
+    # has no neutral guide anywhere. Not in the menu: it is reached from a
+    # recommendation, the same as any other guide on the shelf.
+    "howto-town":       ("howto-town.html",       "next.html",      "Find Your Next Step"),
     "states":           ("states.html",           "index.html",     "Home"),
     "resources":        ("resources.html",        "index.html",     "Home"),
     "citizen-primer":   ("citizen-primer.html",   "resources.html", "All Resources"),
@@ -201,6 +205,14 @@ def render(slug, source):
 
 
 def main():
+    # build.sh asks for the page list rather than keeping its own copy.
+    # The duplicate cost us a 404: a page can be registered here, get its
+    # nav and its breadcrumb, pass every check, and still never be copied
+    # into dist/ because a second list was not updated.
+    if "--list" in sys.argv[1:]:
+        print(" ".join(SITE))
+        return
+
     check = "--check" in sys.argv[1:]
     stale = []
 

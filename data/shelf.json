@@ -9,6 +9,14 @@
       "hosting": "link-only",
       "hosting_note": "Their documents. We link, never mirror. A partnership conversation is the better long game.",
       "inventoried": "2026-09-21"
+    },
+    "us": {
+      "name": "Unhacking Democracy",
+      "publisher": "us",
+      "index": "shelf.html",
+      "hosting": "ours",
+      "hosting_note": "Written here, because the capability had no neutral guide anywhere. Neutral by construction rather than by sorting.",
+      "inventoried": "2026-09-21"
     }
   },
   "items": [
@@ -365,6 +373,35 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "own-town",
+      "source": "us",
+      "action": "Find out what your town actually decides, and when it next meets.",
+      "blurb": "You are governed by four or five local bodies right now. Twenty minutes names them, permanently.",
+      "title": "What your town decides, and when it meets",
+      "where": "Our guide",
+      "url": "howto-town.html",
+      "button": "Our guide · What your town decides",
+      "mode": "understand",
+      "capacity": "hour",
+      "reach": "solo",
+      "disposition": [
+        "learn",
+        "dig",
+        "showup"
+      ],
+      "outline": [
+        "Why “local government” is four or five separate bodies, and what each one decides",
+        "How to work out which of them decides the thing that actually annoys you",
+        "Read the agenda, not the minutes — one is history, the other is the part you can still change",
+        "What a consent agenda is, and why most business passes inside it without discussion",
+        "Watching is a right; speaking usually is not — and how to find your body’s own rules",
+        "The twenty-minute version, in order"
+      ],
+      "outline_read": "2026-09-21",
+      "verified": "2026-09-21",
       "reviewed_by_bill": false
     }
   ],
