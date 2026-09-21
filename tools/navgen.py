@@ -77,6 +77,7 @@ def nav(current):
           <a href="citizen-primer.html"{mark("citizen-primer.html")}>Citizen Primer</a>
           <a href="citizenship-test.html"{mark("citizenship-test.html")}>Citizenship Practice Test</a>
           <a href="citizenship-answers.html"{mark("citizenship-answers.html")}>Your 8 Local Answers</a>
+          <a href="https://billbrocker.com/unhackyourmind/" rel="noopener">UnHack Your Mind &#8599;</a>
         </div>
       </div>
     </nav>'''
@@ -115,10 +116,15 @@ HOME_DESCRIPTION = (
     "Concrete ways to understand the system and help repair it."
 )
 
+# The footer carries the author credit as well as the licence. One edit
+# here rather than one per page, same as everything else in this file.
 FOOTER = '''  <footer>
     <p>
       Open source, MIT licensed.
       <a href="https://github.com/wabrocker/unhack-root" rel="noopener">Unhack US on Github</a>.
+    </p>
+    <p>
+      Built by <a href="https://billbrocker.com" rel="noopener">Bill Brocker</a>.
     </p>
   </footer>'''
 
