@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>State apps — Unhacking Democracy</title>
-<meta name="description" content="State-by-state civic tools are paused. Nothing half-finished ships — a state goes live only once it actually works.">
+<title>Find Your Next Step — Unhacking Democracy</title>
+<meta name="description" content="Too many problems and no idea where to start? Five questions, then one thing to do — chosen for the time you have, the people you know, and what actually feels like you.">
 <link rel="icon" href="logo.svg">
 <link rel="stylesheet" href="styles.css">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Unhacking Democracy">
-<meta property="og:title" content="State apps — Unhacking Democracy">
-<meta property="og:description" content="State-by-state civic tools are paused. Nothing half-finished ships — a state goes live only once it actually works.">
-<meta property="og:url" content="https://unhackdemocracy.us/states.html">
+<meta property="og:title" content="Find Your Next Step — Unhacking Democracy">
+<meta property="og:description" content="Too many problems and no idea where to start? Five questions, then one thing to do — chosen for the time you have, the people you know, and what actually feels like you.">
+<meta property="og:url" content="https://unhackdemocracy.us/next.html">
 <meta property="og:image" content="https://unhackdemocracy.us/social-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="1200">
 <meta property="og:image:alt" content="&quot;Far More Perilous Today&quot; (AI-generated, after Leutze 1851) — George Washington stands at the prow of a boat lettered DEMOCRACY, gazing toward the Statue of Liberty, while men in top hats fire a cannon down into the ship's own deck and ordinary workers cling to the hull pressing planks over the breaches.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="State apps — Unhacking Democracy">
-<meta name="twitter:description" content="State-by-state civic tools are paused. Nothing half-finished ships — a state goes live only once it actually works.">
+<meta name="twitter:title" content="Find Your Next Step — Unhacking Democracy">
+<meta name="twitter:description" content="Too many problems and no idea where to start? Five questions, then one thing to do — chosen for the time you have, the people you know, and what actually feels like you.">
 <meta name="twitter:image" content="https://unhackdemocracy.us/social-preview.jpg">
 </head>
 <body>
@@ -32,9 +32,9 @@
 
   <header>
     <nav id="site-menu" class="site-menu" hidden>
-      <a href="next.html">Find Your Next Step</a>
+      <a href="next.html" aria-current="page">Find Your Next Step</a>
       <a href="about.html">About Us</a>
-      <a href="states.html" aria-current="page">State Apps</a>
+      <a href="states.html">State Apps</a>
       <div class="menu-group">
         <button type="button" class="submenu-toggle" id="resources-toggle"
                 aria-expanded="false" aria-controls="resources-menu">Resources</button>
@@ -73,20 +73,62 @@
     </div>
   </header>
 
+  <main>
 
-  <h2>State tools</h2>
+    <section class="diagnosis">
+      <h2>You can&rsquo;t choose because you&rsquo;re not supposed to be able&nbsp;to.</h2>
+      <p>The feed that shows you the problems is built to hold your
+      attention, it never ends, and it stops just short of anything you
+      could actually do. The overwhelm is its output. It isn&rsquo;t your
+      failing.</p>
+      <p>So this page does one thing: it asks you five questions and gives
+      you <strong>one</strong> next step. Not a list. One.</p>
+    </section>
 
-  <div class="state-card pending">
-    <h3>None yet</h3>
-    <p>State-by-state tools are paused while the project concentrates on
-    the parts that help more people sooner. Nothing is live right now.</p>
-    <p>Records law, poll-worker eligibility, and registration rules are
-    state- and county-specific, so covering a state means building it
-    properly rather than relabelling one state's tools for another.
-    That is real work, and a half-finished version of it is worth less
-    than none. If state tools come back, they will come back one at a
-    time, and only once each one actually works.</p>
-  </div>
+    <div class="help-row">
+      <label for="help-mode-toggle">
+        <input type="checkbox" id="help-mode-toggle">
+        Show me why each question is being asked
+      </label>
+    </div>
+
+    <p class="progress" id="progress" aria-live="polite"></p>
+
+    <section id="stage" class="stage">
+      <noscript>
+        <h2 class="q">This page needs JavaScript.</h2>
+        <p>Everything it does happens in your browser &mdash; there is no
+        account and no server &mdash; which unfortunately means there is
+        nothing to show you without it. The
+        <a href="resources.html">resources page</a> works without.</p>
+      </noscript>
+    </section>
+
+    <section class="smallprint">
+      <h2>What this does and doesn&rsquo;t do</h2>
+      <ul>
+        <li><strong>Nothing you type leaves this browser.</strong> No
+        account, no sign-up, no analytics on your answers, nothing stored
+        on a server. Reload the page and it is all gone.</li>
+        <li><strong>The resources aren&rsquo;t ours.</strong> They come from
+        <a href="https://ordinarypeopleaction.com/resources/" rel="noopener">Ordinary
+        People, Extraordinary Times</a>. We didn&rsquo;t write them and we
+        don&rsquo;t host them &mdash; we sorted them and decided which one to
+        hand you.</li>
+        <li><strong>We left things off that shelf.</strong> Anything that
+        recruits you for a position rather than teaching you something you
+        keep. A campaign push expires in November; knowing how to check a
+        claim doesn&rsquo;t.</li>
+        <li><strong>It doesn&rsquo;t know where you live yet.</strong> Most
+        civic work is local and this first version is not, which is a real
+        limit rather than an oversight.</li>
+        <li><strong>It doesn&rsquo;t read what you typed.</strong> The last
+        question is for you, not for us &mdash; naming the thing that brought
+        you is worth doing, but this version doesn&rsquo;t route on it.</li>
+      </ul>
+    </section>
+
+  </main>
 
   <footer>
     <p>
@@ -97,6 +139,8 @@
 
 </div>
 
+<script src="shelf-data.js"></script>
+<script src="next.js"></script>
 <script>
 // Two disclosures, not one: the menu itself, and the Resources group
 // inside it. Closing the menu closes the group too, so reopening it

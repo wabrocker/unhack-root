@@ -591,3 +591,146 @@ body:not(.options-on) .mix-row { display: none; }
                 border-radius: 0 var(--radius) var(--radius) 0; }
 .missed-eight ul { margin: .4rem 0 .6rem; padding-left: 1.1rem; font-size: .95rem; }
 .missed-eight p { margin: 0; font-size: .95rem; }
+
+/* --- Find Your Next Step ------------------------------------------- */
+
+/* Help mode: one flag governs every explainer on the page, so it reads
+   clean for someone returning without losing the scaffolding for someone
+   new. Ported from fl.unhackdemocracy.us, where it earned its place.
+   Hidden by default and revealed by the attribute rather than the other
+   way round — off is the common case, so the default render is already
+   correct and nothing has to disappear after paint. */
+.help { display: none; }
+[data-help-mode="on"] .help {
+  display: block;
+  margin: -.35rem 0 1.1rem;
+  padding: .7rem .85rem;
+  border-left: 3px solid var(--accent);
+  background: var(--bg-soft);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--ink-soft);
+  font-size: .94rem;
+}
+
+.help-row {
+  margin: 1.5rem 0 .5rem;
+  font-size: .93rem;
+  color: var(--ink-soft);
+}
+.help-row label { display: flex; align-items: center; gap: .5rem; cursor: pointer; }
+
+.diagnosis {
+  margin-top: 1.75rem;
+  padding: 1.1rem 1.2rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.diagnosis h2 { margin: 0 0 .6rem; font-size: 1.28rem; line-height: 1.3; }
+.diagnosis p { margin: .6rem 0 0; }
+
+.progress {
+  margin: 1.4rem 0 .3rem;
+  font-size: .85rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.stage { min-height: 16rem; }
+.stage .q { margin: .2rem 0 .9rem; font-size: 1.32rem; line-height: 1.32; }
+
+.options { display: flex; flex-direction: column; gap: .55rem; margin-bottom: 1rem; }
+.option {
+  text-align: left;
+  padding: .85rem 1rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.option:hover, .option:focus-visible {
+  border-color: var(--accent);
+  background: var(--bg-soft);
+}
+
+.stage textarea {
+  width: 100%;
+  padding: .75rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  resize: vertical;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: .8rem 1.15rem;
+  font: inherit;
+  font-weight: 600;
+  color: var(--bg);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-primary:hover, .btn-primary:focus-visible { filter: brightness(1.1); }
+
+.btn-link {
+  display: inline-block;
+  margin: .9rem .9rem 0 0;
+  padding: 0;
+  font: inherit;
+  font-size: .93rem;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.echo {
+  margin: .2rem 0 1.2rem;
+  padding-left: .85rem;
+  border-left: 3px solid var(--line);
+  color: var(--ink-soft);
+}
+
+.eyebrow {
+  margin: 0 0 .25rem;
+  font-size: .82rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.pick-title { margin: 0 0 .5rem; font-size: 1.5rem; line-height: 1.25; }
+.pick-blurb { margin: 0 0 1.1rem; font-size: 1.05rem; }
+
+.why {
+  margin: 0 0 1.3rem;
+  padding: .85rem 1rem;
+  background: var(--bg-soft);
+  border-radius: var(--radius);
+}
+.why-lead { margin: 0 0 .4rem; font-weight: 600; font-size: .95rem; }
+.why ul { margin: 0; padding-left: 1.15rem; color: var(--ink-soft); }
+.why li { margin: .2rem 0; }
+
+.source { margin: 1rem 0 0; font-size: .9rem; color: var(--ink-soft); }
+
+.smallprint {
+  margin-top: 3rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+  font-size: .92rem;
+  color: var(--ink-soft);
+}
+.smallprint h2 { font-size: 1rem; margin: 0 0 .6rem; color: var(--ink); }
+.smallprint ul { margin: 0; padding-left: 1.15rem; }
+.smallprint li { margin: .4rem 0; }

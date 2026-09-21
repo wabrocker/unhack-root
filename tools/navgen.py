@@ -33,6 +33,7 @@ WEB = ROOT / "web"
 SITE = {
     "index":            (None,                    None,             None),
     "about":            ("about.html",            "index.html",     "Home"),
+    "next":             ("next.html",             "index.html",     "Home"),
     "states":           ("states.html",           "index.html",     "Home"),
     "resources":        ("resources.html",        "index.html",     "Home"),
     "citizen-primer":   ("citizen-primer.html",   "resources.html", "All Resources"),
@@ -53,6 +54,7 @@ def nav(current):
 
     here = ' data-section-current=""' if current in RESOURCES else ""
     return f'''    <nav id="site-menu" class="site-menu" hidden>
+      <a href="next.html"{mark("next.html")}>Find Your Next Step</a>
       <a href="about.html"{mark("about.html")}>About Us</a>
       <a href="states.html"{mark("states.html")}>State Apps</a>
       <div class="menu-group">
