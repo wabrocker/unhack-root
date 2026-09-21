@@ -393,6 +393,34 @@
     else finish();
   }
 
+  /* --- the opener ---------------------------------------------------
+   * Open the first time somebody sees it, because that is the one visit
+   * where it is doing a job. After that it is a heading they already
+   * read, so it collapses — and if they deliberately open it again, that
+   * choice is what gets remembered rather than being overridden on the
+   * next visit.
+   *
+   * It stays `open` in the markup so a first-time reader never sees it
+   * flash shut: the common case renders right and only a returning
+   * visitor pays for the correction.
+   */
+  (function () {
+    const KEY = "unhack-opener";
+    const box = document.getElementById("opener");
+    if (!box) return;
+    let saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) { saved = null; }
+    if (saved === null) {
+      // First visit: leave it open, and arrange for the next one to be shut.
+      try { localStorage.setItem(KEY, "closed"); } catch (e) { /* private mode */ }
+    } else {
+      box.open = saved === "open";
+    }
+    box.addEventListener("toggle", function () {
+      try { localStorage.setItem(KEY, box.open ? "open" : "closed"); } catch (e) { /* ignore */ }
+    });
+  })();
+
   /* --- help mode ----------------------------------------------------
    * Ported from fl.unhackdemocracy.us, where it earned its place: one
    * flag governs every explainer, so the page reads clean for someone

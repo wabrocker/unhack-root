@@ -873,3 +873,22 @@ body:not(.options-on) .mix-row { display: none; }
 }
 .shelf-outline-body ul { margin: .4rem 0 0; padding-left: 1.1rem; }
 .shelf-outline-body li { margin: .3rem 0; }
+
+/* The opener collapses after the first visit. It is a disclosure rather
+   than a static banner because on a second visit it is a heading someone
+   has already read, and the questions are what they came back for. */
+details.opener > summary {
+  display: flex; align-items: baseline; gap: .55rem;
+  cursor: pointer; list-style: none;
+}
+details.opener > summary::-webkit-details-marker { display: none; }
+details.opener > summary::before {
+  content: "\203A";
+  display: inline-block;
+  font-size: 1.5rem; line-height: 1; color: var(--accent);
+  transition: transform .15s ease;
+  transform: translateY(.1rem);
+}
+details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1rem); }
+.opener-title { font-size: 1.6rem; font-weight: 700; line-height: 1.2; }
+.opener-body > p:first-child { margin-top: .7rem; }
