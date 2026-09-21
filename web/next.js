@@ -50,7 +50,9 @@
     },
     {
       id: "disposition",
+      multi: true,
       q: "What kind of doing feels like you?",
+      sub: "Pick whichever ones apply.",
       help: "Not what you ought to care about — what you are drawn to. This " +
             "is the difference between a next step you take and one you " +
             "agree with and never do.",
@@ -106,7 +108,10 @@
 
     if (item.mode === answers.mode || item.mode === "both") s += 3;
 
-    if (item.disposition.includes(answers.disposition)) s += 4;
+    const hits = item.disposition.filter(function (d) {
+      return answers.disposition.indexOf(d) !== -1;
+    }).length;
+    if (hits) s += 4 + (hits - 1);
 
     return s;
   }
@@ -120,9 +125,15 @@
     if (item.reach === "group" && answers.reach === "group") {
       bits.push("you already have people who listen to you");
     }
-    const disp = QUESTIONS[3].options.find(o => o.v === answers.disposition);
-    if (disp && item.disposition.includes(answers.disposition)) {
-      bits.push("you said " + disp.label.toLowerCase() + " is what feels like you");
+    const matched = QUESTIONS[3].options.filter(function (o) {
+      return answers.disposition.indexOf(o.v) !== -1 &&
+             item.disposition.indexOf(o.v) !== -1;
+    }).map(function (o) { return o.label.toLowerCase(); });
+    if (matched.length === 1) {
+      bits.push("you said " + matched[0] + " is what feels like you");
+    } else if (matched.length > 1) {
+      bits.push("it fits " + matched.slice(0, -1).join(", ") + " and " +
+                matched[matched.length - 1]);
     }
     if (item.mode === answers.mode) {
       bits.push(answers.mode === "understand"
@@ -133,6 +144,44 @@
   }
 
   /* --- rendering ---------------------------------------------------- */
+
+  // The site's own disclosure affordance: a small round i that opens a
+  // panel. Used here so the result page stays short — the action, why it
+  // was chosen, and two buttons — with everything else one tap away.
+  function info(label, build) {
+    const d = document.createElement("details");
+    d.className = "info info-block";
+    const sum = document.createElement("summary");
+    sum.setAttribute("aria-label", label);
+    sum.textContent = "i";
+    d.appendChild(sum);
+    const body = h("div", "info-body");
+    build(body);
+    d.appendChild(body);
+    const row = h("div", "info-row");
+    row.appendChild(d);
+    row.appendChild(h("span", "info-label", label));
+    return row;
+  }
+
+  function guideInfo(pick) {
+    return info("What this guide covers", function (body) {
+      body.appendChild(h("p", "guide-name", pick.title));
+      if (pick.outline) {
+        const ul = document.createElement("ul");
+        pick.outline.forEach(function (o) { ul.appendChild(h("li", null, o)); });
+        body.appendChild(ul);
+      } else {
+        body.appendChild(h("p", null,
+          "We have not written up what is in this one yet, so rather than " +
+          "guess at it: open it and see."));
+      }
+      body.appendChild(h("p", "source",
+        pick.where + " on " + SHELF_SOURCE.name + "’s resource page. It " +
+        "is their document, not ours — we only decided it was the one to " +
+        "hand you."));
+    });
+  }
 
   function h(tag, cls, text) {
     const n = document.createElement(tag);
@@ -153,8 +202,8 @@
 
     el.stage.appendChild(h("h2", "q", q.q));
 
-    const help = h("p", "help", q.help);
-    el.stage.appendChild(help);
+    if (q.sub) el.stage.appendChild(h("p", "q-sub", q.sub));
+    el.stage.appendChild(h("p", "help", q.help));
 
     if (q.free) {
       const ta = document.createElement("textarea");
@@ -172,13 +221,39 @@
       });
       el.stage.appendChild(go);
 
-      const skip = h("button", "btn-link", "Skip this");
+      const skip = h("button", "btn-link btn-link-spaced", "Skip this");
       skip.addEventListener("click", function () {
         answers[q.id] = "";
         step++;
         finish();
       });
       el.stage.appendChild(skip);
+    } else if (q.multi) {
+      // Several can be true at once, so this one cannot auto-advance —
+      // it needs a deliberate "that's me" to move on.
+      const chosen = Array.isArray(answers[q.id]) ? answers[q.id].slice() : [];
+      const list = h("div", "options");
+      q.options.forEach(function (o) {
+        const b = h("button", "option option-multi", o.label);
+        b.setAttribute("aria-pressed", String(chosen.indexOf(o.v) !== -1));
+        b.addEventListener("click", function () {
+          const at = chosen.indexOf(o.v);
+          if (at === -1) chosen.push(o.v); else chosen.splice(at, 1);
+          b.setAttribute("aria-pressed", String(at === -1));
+          go.disabled = chosen.length === 0;
+        });
+        list.appendChild(b);
+      });
+      el.stage.appendChild(list);
+
+      var go = h("button", "btn-primary", "That’s me — show me one action");
+      go.disabled = chosen.length === 0;
+      go.addEventListener("click", function () {
+        answers[q.id] = chosen;
+        step++;
+        render();
+      });
+      el.stage.appendChild(go);
     } else {
       const list = h("div", "options");
       q.options.forEach(function (o) {
@@ -263,7 +338,9 @@
     link.href = SHELF_SOURCE.href;
     link.rel = "noopener";
     link.target = "_blank";
-    link.textContent = "Open the guide →";
+    link.className = "btn-primary btn-guide";
+    link.href = pick.url;
+    link.textContent = pick.button + " →";
 
     // The second button is the follow-through rhythm in embryo: the loop
     // is do-it / come-back / next, and without somewhere to say "done"
@@ -283,13 +360,7 @@
     row.appendChild(done);
     el.stage.appendChild(row);
 
-    const src = h("p", "source");
-    src.append("The guide behind it: ");
-    src.appendChild(h("strong", null, pick.where));
-    src.append(" on " + SHELF_SOURCE.name + "’s resource page. It is " +
-               "their document, not ours — we only decided it was the " +
-               "one to hand you.");
-    el.stage.appendChild(src);
+    el.stage.appendChild(guideInfo(pick));
 
     const more = h("button", "btn-link", "Suggest another");
     more.addEventListener("click", function () { shown++; renderResult(); });
