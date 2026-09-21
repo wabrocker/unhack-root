@@ -191,9 +191,14 @@
         "learn",
         "support"
       ],
-      "outline": null,
+      "outline": [
+        "Why inaction costs more than action — “courage is the new currency”",
+        "A short essay framing the shift from watching to doing",
+        "A curated list of ways in, for general civic engagement",
+        "A second list aimed at young people and students"
+      ],
       "verified": "2026-09-21",
-      "outline_read": null,
+      "outline_read": "2026-09-21",
       "reviewed_by_bill": false
     },
     {
@@ -215,7 +220,8 @@
       "outline": null,
       "verified": "2026-09-21",
       "outline_read": null,
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "unread_reason": "democracyforward.org returns 403 to our reader; not yet read by a human either"
     },
     {
       "id": "empty-chair",
@@ -233,10 +239,19 @@
         "showup",
         "make"
       ],
-      "outline": null,
+      "outline": [
+        "What an empty chair town hall is",
+        "Why people hold them",
+        "Step by step: contact the official, book a venue, promote it",
+        "On the night: record the speakers, collect contacts",
+        "Afterwards: publish the recording, follow up, register voters"
+      ],
       "verified": "2026-09-21",
-      "outline_read": null,
-      "reviewed_by_bill": false
+      "outline_read": "2026-09-21",
+      "reviewed_by_bill": false,
+      "framing_note": "Names the Republican National Committee and DOGE specifically as the reason the format is needed, though the steps themselves are party-neutral.",
+      "framing_flag": true,
+      "framing_cleared": false
     },
     {
       "id": "canvassing",
@@ -254,10 +269,19 @@
         "talk",
         "showup"
       ],
-      "outline": null,
+      "outline": [
+        "Why turnout is where the leverage is",
+        "In-person canvassing, and where to sign up",
+        "Phone banking",
+        "Text banking",
+        "Postcards and letters"
+      ],
       "verified": "2026-09-21",
-      "outline_read": null,
-      "reviewed_by_bill": false
+      "outline_read": "2026-09-21",
+      "reviewed_by_bill": false,
+      "framing_note": "Routes to Volunteer Blue, an explicitly Democratic volunteering programme, and names President Trump. This is party recruitment rather than the craft of canvassing.",
+      "framing_flag": true,
+      "framing_cleared": false
     },
     {
       "id": "community-protection",
@@ -275,10 +299,20 @@
         "make",
         "showup"
       ],
-      "outline": null,
+      "outline": [
+        "Know your rights",
+        "Make a plan before anything happens",
+        "Offer help, and work in partnership rather than alone",
+        "Understand what local law enforcement’s role actually is",
+        "Communicate and document",
+        "Ways to donate, advocate, and organise"
+      ],
       "verified": "2026-09-21",
-      "outline_read": null,
-      "reviewed_by_bill": false
+      "outline_read": "2026-09-21",
+      "reviewed_by_bill": false,
+      "framing_note": "Takes an explicit position on immigration enforcement (“mass detentions and mass deportations are not normal”) and links a set of advocacy organisations.",
+      "framing_flag": true,
+      "framing_cleared": false
     },
     {
       "id": "voting-rights",
@@ -296,10 +330,19 @@
         "support",
         "dig"
       ],
-      "outline": null,
+      "outline": [
+        "The People’s Guide to Voting Rights as the starting document",
+        "Actions that take under an hour",
+        "Actions that take longer",
+        "Actions for a day or a weekend",
+        "A downloadable checklist to work through"
+      ],
       "verified": "2026-09-21",
-      "outline_read": null,
-      "reviewed_by_bill": false
+      "outline_read": "2026-09-21",
+      "reviewed_by_bill": false,
+      "framing_note": "Names the John R. Lewis Voting Rights Advancement Act, and characterises some state curricula on the 2020 election. Democracy Forward is named as a participant.",
+      "framing_flag": true,
+      "framing_cleared": false
     },
     {
       "id": "front-door",
@@ -317,10 +360,19 @@
         "learn",
         "showup"
       ],
-      "outline": null,
+      "outline": [
+        "Explore what your local government actually does",
+        "Get to know your local leaders",
+        "Get smart on local schools and school boards",
+        "Don’t forget your local courts",
+        "Vote in local elections"
+      ],
       "verified": "2026-09-21",
-      "outline_read": null,
-      "reviewed_by_bill": false
+      "outline_read": "2026-09-21",
+      "reviewed_by_bill": false,
+      "framing_note": "The school-board section characterises “far right” and “antidemocratic” groups and names Moms for Liberty and the State Policy Network.",
+      "framing_flag": true,
+      "framing_cleared": false
     },
     {
       "id": "courage-films",
@@ -338,9 +390,15 @@
         "learn",
         "support"
       ],
-      "outline": null,
+      "outline": [
+        "Films from 1976 to 2019, each with director, year and what it is about",
+        "Civil rights and voting rights: Selma, and the march at Edmund Pettus Bridge",
+        "Press and accountability: All the President’s Men",
+        "People who were not supposed to be there: Hidden Figures",
+        "Lives that changed something: King, Milk, Ginsburg, Robinson"
+      ],
       "verified": "2026-09-21",
-      "outline_read": null,
+      "outline_read": "2026-09-21",
       "reviewed_by_bill": false
     },
     {
@@ -359,9 +417,15 @@
         "support",
         "learn"
       ],
-      "outline": null,
+      "outline": [
+        "Seven things to do when the first burst of energy has gone",
+        "Start at your own front door rather than nationally",
+        "Information sobriety — what you let in, and how often",
+        "Nonviolent collective action, and what it asks of you",
+        "Personal and community resilience for a long stretch"
+      ],
       "verified": "2026-09-21",
-      "outline_read": null,
+      "outline_read": "2026-09-21",
       "reviewed_by_bill": false
     }
   ],
@@ -437,5 +501,6 @@
       "reason": "Not yet read, so not yet placed. Not a rejection."
     }
   ],
-  "excluded_note": "These are SCOPE decisions about this project, not judgements about the documents or their publisher. Everything listed here is a real resource that helps somebody; it is simply not what this shelf carries. The shelf holds capabilities a reader keeps. It carries no policy asks, no pledges and no campaign activity — from any source, including ours. Recorded rather than silently dropped so the sorting is auditable and reversible."
+  "excluded_note": "These are SCOPE decisions about this project, not judgements about the documents or their publisher. Everything listed here is a real resource that helps somebody; it is simply not what this shelf carries. The shelf holds capabilities a reader keeps. It carries no policy asks, no pledges and no campaign activity — from any source, including ours. Recorded rather than silently dropped so the sorting is auditable and reversible.",
+  "framing_note": "framing_flag marks an entry whose CONTENTS name a party, a figure or a contested position, even where its title and format are a capability. Flagged entries are held out of the shipped shelf until framing_cleared is true — not deleted, and not a judgement on the document. The page's welcome is explicitly cross-partisan, so serving these by default would contradict it before anyone had read a word. Clearing one is a one-word edit and Bill's call. Found by reading the guides on 2026-09-21; the listing page showed none of it."
 }

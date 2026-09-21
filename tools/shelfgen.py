@@ -70,9 +70,25 @@ def validate(db):
     return problems
 
 
+def shippable(db):
+    """Entries the page may serve.
+
+    A flagged entry is one whose CONTENTS name a party, a figure or a
+    contested position, even where its title and format are a capability
+    — something only reading the guide reveals, which is why this exists
+    at all. Held back rather than deleted, because the page's welcome is
+    explicitly cross-partisan and serving these by default would
+    contradict it before the reader got to the first question.
+
+    Clearing one is a one-word edit in data/shelf.json, and Bill's call.
+    """
+    return [i for i in db["items"]
+            if not i.get("framing_flag") or i.get("framing_cleared")]
+
+
 def render(db):
     items = []
-    for it in db["items"]:
+    for it in shippable(db):
         items.append({k: it[k] for k in (
             "id", "action", "blurb", "title", "where", "url", "button",
             "mode", "capacity", "reach", "disposition") if k in it})
@@ -124,11 +140,18 @@ def main():
             raise SystemExit(
                 "FAIL: web/shelf-data.js is out of date.\n"
                 "      Edit data/shelf.json, then run: python3 tools/shelfgen.py")
-        print(f"shelf: up to date ({len(db['items'])} items, "
-              f"{sum(1 for i in db['items'] if i.get('outline'))} with outlines)")
+        ship = shippable(db)
+        held = len(db["items"]) - len(ship)
+        msg = (f"shelf: up to date ({len(ship)} shipping, "
+               f"{sum(1 for i in ship if i.get('outline'))} with outlines")
+        print(msg + (f", {held} held for framing review)" if held else ")"))
         return
     OUT.write_text(want)
-    print(f"wrote web/shelf-data.js ({len(db['items'])} items)")
+    ship = shippable(db)
+    held = [i["id"] for i in db["items"] if i not in ship]
+    print(f"wrote web/shelf-data.js ({len(ship)} items)")
+    if held:
+        print(f"  held for framing review: {', '.join(held)}")
 
 
 if __name__ == "__main__":

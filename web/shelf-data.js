@@ -177,7 +177,12 @@ const SHELF = [
       "learn",
       "support"
     ],
-    "outline": null
+    "outline": [
+      "Why inaction costs more than action — “courage is the new currency”",
+      "A short essay framing the shift from watching to doing",
+      "A curated list of ways in, for general civic engagement",
+      "A second list aimed at young people and students"
+    ]
   },
   {
     "id": "dinners",
@@ -197,91 +202,6 @@ const SHELF = [
     "outline": null
   },
   {
-    "id": "empty-chair",
-    "action": "Book a room and hold the town hall your representative is not holding.",
-    "blurb": "A real format, run by ordinary people, when the meeting will not happen otherwise.",
-    "title": "How to Host an “Empty Chair” Town Hall",
-    "where": "Action 01",
-    "url": "https://ordinarypeopleaction.com/2026/08/25/how-to-host-an-empty-chair-town-hall/",
-    "button": "Action 01 · Empty Chair Town Hall",
-    "mode": "do",
-    "capacity": "day",
-    "reach": "group",
-    "disposition": [
-      "showup",
-      "make"
-    ],
-    "outline": null
-  },
-  {
-    "id": "canvassing",
-    "action": "Practise the first thirty seconds at a door, before you ever stand at one.",
-    "blurb": "The craft of knocking on a stranger’s door and having it go well.",
-    "title": "How to Canvass and Canvassing Opportunities",
-    "where": "Action 01",
-    "url": "https://ordinarypeopleaction.com/2026/08/24/how-to-canvass-and-canvassing-opportunities/",
-    "button": "Action 01 · How to Canvass",
-    "mode": "do",
-    "capacity": "day",
-    "reach": "either",
-    "disposition": [
-      "talk",
-      "showup"
-    ],
-    "outline": null
-  },
-  {
-    "id": "community-protection",
-    "action": "Pick one thing your street could organise for itself, and ask three neighbours.",
-    "blurb": "Concrete things a neighbourhood can organise for itself, at neighbourhood scale.",
-    "title": "Act Now, Prepare Now: Protecting Your Neighbors and Community Members",
-    "where": "Action 03",
-    "url": "https://ordinarypeopleaction.com/2026/08/24/act-now-prepare-now-protecting-your-neighbors-and-community-members/",
-    "button": "Action 03 · Protecting Your Neighbors",
-    "mode": "do",
-    "capacity": "day",
-    "reach": "group",
-    "disposition": [
-      "make",
-      "showup"
-    ],
-    "outline": null
-  },
-  {
-    "id": "voting-rights",
-    "action": "Run the checklist on your own registration, then send it to five people.",
-    "blurb": "A checklist, which is the right shape when you have twenty minutes.",
-    "title": "Ways to Support Voting Rights",
-    "where": "Action 01",
-    "url": "https://ordinarypeopleaction.com/2026/08/04/ways-to-support-voting-rights/",
-    "button": "Action 01 · Supporting Voting Rights",
-    "mode": "do",
-    "capacity": "minutes",
-    "reach": "solo",
-    "disposition": [
-      "support",
-      "dig"
-    ],
-    "outline": null
-  },
-  {
-    "id": "front-door",
-    "action": "Find out what your town actually decides, and when it next meets.",
-    "blurb": "What local actually means, in practice, where you live.",
-    "title": "Find Ways to Be More Civically Active",
-    "where": "Action 03",
-    "url": "https://ordinarypeopleaction.com/2026/08/24/find-ways-to-be-more-civically-active/",
-    "button": "Action 03 · Be More Civically Active",
-    "mode": "understand",
-    "capacity": "hour",
-    "reach": "solo",
-    "disposition": [
-      "learn",
-      "showup"
-    ],
-    "outline": null
-  },
-  {
     "id": "courage-films",
     "action": "Watch one film about somebody who did it anyway.",
     "blurb": "For an evening when you do not have another chapter in you.",
@@ -296,7 +216,13 @@ const SHELF = [
       "learn",
       "support"
     ],
-    "outline": null
+    "outline": [
+      "Films from 1976 to 2019, each with director, year and what it is about",
+      "Civil rights and voting rights: Selma, and the march at Edmund Pettus Bridge",
+      "Press and accountability: All the President’s Men",
+      "People who were not supposed to be there: Hidden Figures",
+      "Lives that changed something: King, Milk, Ginsburg, Robinson"
+    ]
   },
   {
     "id": "keep-going",
@@ -313,6 +239,12 @@ const SHELF = [
       "support",
       "learn"
     ],
-    "outline": null
+    "outline": [
+      "Seven things to do when the first burst of energy has gone",
+      "Start at your own front door rather than nationally",
+      "Information sobriety — what you let in, and how often",
+      "Nonviolent collective action, and what it asks of you",
+      "Personal and community resilience for a long stretch"
+    ]
   }
 ];
