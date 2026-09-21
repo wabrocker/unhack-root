@@ -959,3 +959,13 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
 }
 .checklist li { margin: .45rem 0; }
 .howto-back { margin-top: 2.2rem; font-size: .95rem; }
+
+/* The home page's one call to action. Above the hero art on purpose: the
+   art is a 1:1 image and on a phone it is a long scroll, so anything
+   below it is effectively a second page. */
+.card-lead {
+  margin-top: 2rem;
+  border-color: var(--accent);
+  background: var(--bg-soft);
+}
+.card-lead h3 { margin-top: 0; font-size: 1.3rem; }
