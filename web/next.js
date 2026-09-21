@@ -78,9 +78,30 @@
 
   const CAP_RANK = { minutes: 1, hour: 2, day: 3, many: 4 };
 
-  const DONE_KEY = "unhack-done-count";
-  let completed = 0;
-  try { completed = parseInt(localStorage.getItem(DONE_KEY), 10) || 0; } catch (e) { completed = 0; }
+  // What you finished, kept in this browser and nowhere else. Which ones,
+  // not just how many, so the page can show you your own record rather
+  // than a bare number. Nobody verifies it and nobody is told.
+  const DONE_KEY = "unhack-done";
+  const LEGACY_COUNT = "unhack-done-count";
+  let done = [];
+  try {
+    done = JSON.parse(localStorage.getItem(DONE_KEY)) || [];
+    if (!Array.isArray(done)) done = [];
+    const old = parseInt(localStorage.getItem(LEGACY_COUNT), 10);
+    if (!done.length && old > 0) {          // totals from the counter-only version
+      for (let i = 0; i < old; i++) done.push({ id: null, at: null });
+      localStorage.removeItem(LEGACY_COUNT);
+    }
+  } catch (e) { done = []; }
+
+  function saveDone() {
+    try { localStorage.setItem(DONE_KEY, JSON.stringify(done)); } catch (e) { /* private mode */ }
+  }
+
+  // True only on the render immediately after someone marks one done. A
+  // lifetime total announced as "here is the next" every time you answer
+  // the questions is a different, and wrong, sentence.
+  let justFinished = false;
 
   const answers = {};
   let step = 0;
@@ -295,12 +316,12 @@
     renderProgress();
 
     if (!ranked.length || shown >= ranked.length) {
-      el.stage.appendChild(h("h2", "q", completed > 0
-        ? "That\u2019s everything we have for you right now."
+      el.stage.appendChild(h("h2", "q", done.length > 0
+        ? "That’s everything we have for you right now."
         : "Nothing on this shelf fits that."));
-      el.stage.appendChild(h("p", null, completed > 0
-        ? "You did " + completed + ". The shelf is small on purpose and it " +
-          "will grow \u2014 come back, or start again and answer differently " +
+      el.stage.appendChild(h("p", null, done.length > 0
+        ? "You did " + done.length + ". The shelf is small on purpose and it " +
+          "will grow — come back, or start again and answer differently " +
           "to see what else is here."
         : "That is a real answer rather than a failure. This shelf is small " +
           "and deliberately sorted, and saying so beats inventing something " +
@@ -313,11 +334,12 @@
 
     const pick = ranked[shown].item;
 
-    if (completed > 0) {
+    if (justFinished) {
       el.stage.appendChild(h("p", "tally",
-        completed === 1
-          ? "That\u2019s one done. Here\u2019s the next."
-          : "That\u2019s " + completed + " done. Here\u2019s the next."));
+        done.length === 1
+          ? "That’s one done. Here’s the next."
+          : "That’s " + done.length + " done. Here’s the next."));
+      justFinished = false;
     }
 
     if (answers.why) {
@@ -352,17 +374,19 @@
     // the page is a recommender rather than something you return to.
     // Nobody verifies this and nobody is told — it is the user's own
     // count of their own claim, and the page says so.
-    const done = h("button", "btn-primary btn-done", "Finished it — what’s next?");
-    done.addEventListener("click", function () {
-      completed++;
-      try { localStorage.setItem(DONE_KEY, String(completed)); } catch (e) { /* private mode */ }
+    const doneBtn = h("button", "btn-primary btn-done", "Finished it — what’s next?");
+    doneBtn.addEventListener("click", function () {
+      done.push({ id: pick.id, at: new Date().toISOString().slice(0, 10) });
+      saveDone();
+      justFinished = true;
       shown++;
       renderResult();
+      renderRecord();
     });
 
     const row = h("div", "action-row");
     row.appendChild(link);
-    row.appendChild(done);
+    row.appendChild(doneBtn);
     el.stage.appendChild(row);
 
     el.stage.appendChild(guideInfo(pick));
@@ -370,6 +394,13 @@
     const more = h("button", "btn-link", "Suggest another");
     more.addEventListener("click", function () { shown++; renderResult(); });
     el.stage.appendChild(more);
+
+    const back = h("button", "btn-link", "← Back");
+    back.addEventListener("click", function () {
+      step = QUESTIONS.length - 1;   // back to the last question answered
+      render();
+    });
+    el.stage.appendChild(back);
 
     const again = h("button", "btn-link", "Start over");
     again.addEventListener("click", reset);
@@ -442,5 +473,58 @@
     });
   })();
 
+  /* --- your own record ----------------------------------------------
+   * What you said you finished, shown back to you. Deliberately not a
+   * streak: a list of what you did is a record, and a chain you are
+   * warned not to break is retention wearing a record's clothes. No
+   * pressure, no target, nothing to lose by stopping.
+   */
+  function renderRecord() {
+    const box = document.getElementById("record");
+    if (!box) return;
+    if (!done.length) { box.hidden = true; return; }
+    box.hidden = false;
+    box.replaceChildren();
+
+    const d = document.createElement("details");
+    d.className = "record-panel";
+    const sum = document.createElement("summary");
+    sum.textContent = done.length === 1
+      ? "You’ve finished one so far"
+      : "You’ve finished " + done.length + " so far";
+    d.appendChild(sum);
+
+    const body = h("div", "record-body");
+    const ul = document.createElement("ul");
+    done.slice().reverse().forEach(function (r) {
+      const t = r.id ? titleFor(r.id) : null;
+      const li = h("li", null, t || "An earlier one, before this page kept track");
+      if (r.at) li.appendChild(h("span", "record-date", r.at));
+      ul.appendChild(li);
+    });
+    body.appendChild(ul);
+    body.appendChild(h("p", "record-note",
+      "Your own record, in this browser only. Nobody checks it and nobody " +
+      "is told — it is here because it is worth seeing what you have " +
+      "actually done."));
+
+    const clear = h("button", "btn-link", "Clear this");
+    clear.addEventListener("click", function () {
+      done = [];
+      saveDone();
+      renderRecord();
+    });
+    body.appendChild(clear);
+
+    d.appendChild(body);
+    box.appendChild(d);
+  }
+
+  function titleFor(id) {
+    const m = SHELF.filter(function (i) { return i.id === id; })[0];
+    return m ? m.action : null;
+  }
+
   render();
+  renderRecord();
 })();

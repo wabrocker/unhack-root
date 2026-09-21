@@ -892,3 +892,47 @@ details.opener > summary::before {
 details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1rem); }
 .opener-title { font-size: 1.6rem; font-weight: 700; line-height: 1.2; }
 .opener-body > p:first-child { margin-top: .7rem; }
+
+/* The flow, drawn once. It does two jobs: it tells a newcomer what is
+   about to happen to them, which is what makes the opener a hook rather
+   than a claim, and it shows that the last two steps are a loop rather
+   than an ending. Inline SVG on currentColor so it themes for free. */
+.flow { margin: 1.1rem 0 0; }
+.flow-g rect { fill: var(--bg); stroke: var(--line); stroke-width: 1.5; }
+.flow-g text {
+  fill: var(--ink); font: 600 15px/1 system-ui, -apple-system, sans-serif;
+  text-anchor: middle; dominant-baseline: middle;
+}
+.flow-g .flow-note {
+  fill: var(--ink-soft); font: 400 12px/1 system-ui, -apple-system, sans-serif;
+}
+.flow-arrow, .flow-loop {
+  fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: round;
+}
+.flow-arrow, .flow-loop { color: var(--accent); }  /* marker fill follows currentColor */
+.flow-loop { stroke-dasharray: 4 3; opacity: .85; }
+
+.record { margin: 1.4rem 0 0; }
+.record-panel > summary {
+  cursor: pointer; font-weight: 600; color: var(--ok); font-size: .96rem;
+}
+.record-body {
+  margin-top: .6rem; padding: .85rem 1rem;
+  background: var(--bg-soft); border-radius: var(--radius);
+}
+.record-body ul { margin: 0; padding-left: 1.1rem; }
+.record-body li { margin: .35rem 0; font-size: .94rem; }
+.record-date { display: block; font-size: .82rem; color: var(--ink-soft); }
+.record-note { margin: .8rem 0 .2rem; font-size: .87rem; color: var(--ink-soft); }
+
+/* A wrapped menu label should read as one entry, not two. Hanging indent
+   so the second line sits under the first word rather than under the
+   bullet position, which made it look like a separate item. */
+.submenu a { padding-left: 2.1rem; text-indent: -0.9rem; }
+
+.btn-quiet {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--line);
+}
+.btn-quiet:hover, .btn-quiet:focus-visible { border-color: var(--accent); }

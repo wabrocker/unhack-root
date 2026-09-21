@@ -254,9 +254,9 @@ const SHELF = [
 const SHELF_STATS = {
   "considered": 25,
   "carried": 10,
-  "held": 5,
-  "outOfScope": 10,
-  "read": 14,
+  "held": 3,
+  "outOfScope": 12,
+  "read": 12,
   "source": "Ordinary People, Extraordinary Times",
   "sourceHref": "https://ordinarypeopleaction.com/resources/"
 };

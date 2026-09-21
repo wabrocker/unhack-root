@@ -248,69 +248,8 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
-      "framing_note": "Names the Republican National Committee and DOGE specifically as the reason the format is needed, though the steps themselves are party-neutral.",
-      "framing_flag": true,
-      "framing_cleared": false
-    },
-    {
-      "id": "canvassing",
-      "source": "opet",
-      "action": "Practise the first thirty seconds at a door, before you ever stand at one.",
-      "blurb": "The craft of knocking on a stranger’s door and having it go well.",
-      "title": "How to Canvass and Canvassing Opportunities",
-      "where": "Action 01",
-      "url": "https://ordinarypeopleaction.com/2026/08/24/how-to-canvass-and-canvassing-opportunities/",
-      "button": "Action 01 · How to Canvass",
-      "mode": "do",
-      "capacity": "day",
-      "reach": "either",
-      "disposition": [
-        "talk",
-        "showup"
-      ],
-      "outline": [
-        "Why turnout is where the leverage is",
-        "In-person canvassing, and where to sign up",
-        "Phone banking",
-        "Text banking",
-        "Postcards and letters"
-      ],
-      "verified": "2026-09-21",
-      "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
-      "framing_note": "Routes to Volunteer Blue, an explicitly Democratic volunteering programme, and names President Trump. This is party recruitment rather than the craft of canvassing.",
-      "framing_flag": true,
-      "framing_cleared": false
-    },
-    {
-      "id": "community-protection",
-      "source": "opet",
-      "action": "Pick one thing your street could organise for itself, and ask three neighbours.",
-      "blurb": "Concrete things a neighbourhood can organise for itself, at neighbourhood scale.",
-      "title": "Act Now, Prepare Now: Protecting Your Neighbors and Community Members",
-      "where": "Action 03",
-      "url": "https://ordinarypeopleaction.com/2026/08/24/act-now-prepare-now-protecting-your-neighbors-and-community-members/",
-      "button": "Action 03 · Protecting Your Neighbors",
-      "mode": "do",
-      "capacity": "day",
-      "reach": "group",
-      "disposition": [
-        "make",
-        "showup"
-      ],
-      "outline": [
-        "Know your rights",
-        "Make a plan before anything happens",
-        "Offer help, and work in partnership rather than alone",
-        "Understand what local law enforcement’s role actually is",
-        "Communicate and document",
-        "Ways to donate, advocate, and organise"
-      ],
-      "verified": "2026-09-21",
-      "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
-      "framing_note": "Takes an explicit position on immigration enforcement (“mass detentions and mass deportations are not normal”) and links a set of advocacy organisations.",
+      "reviewed_by_bill": true,
+      "framing_note": "HELD after review 2026-09-21. The steps are genuinely party-neutral — any constituency whose representative will not meet them can run this — but the guide names the RNC and DOGE as the reason it exists. Held because we cannot caveat a page we do not control. A neutral how-to for the same format would clear it.",
       "framing_flag": true,
       "framing_cleared": false
     },
@@ -339,8 +278,8 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
-      "framing_note": "Names the John R. Lewis Voting Rights Advancement Act, and characterises some state curricula on the 2020 election. Democracy Forward is named as a participant.",
+      "reviewed_by_bill": true,
+      "framing_note": "HELD after review 2026-09-21. The checklist structure is good and election administration is close to a consensus floor. The problem is narrow: it endorses a specific bill, which is a policy ask sitting inside an otherwise neutral action.",
       "framing_flag": true,
       "framing_cleared": false
     },
@@ -369,8 +308,8 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
-      "framing_note": "The school-board section characterises “far right” and “antidemocratic” groups and names Moms for Liberty and the State Policy Network.",
+      "reviewed_by_bill": true,
+      "framing_note": "HELD after review 2026-09-21. The most frustrating of the five — finding out what your town decides is arguably the best first action there is — and the school-board section names political adversaries. Strongest candidate for a how-to of our own.",
       "framing_flag": true,
       "framing_cleared": false
     },
@@ -499,8 +438,26 @@
       "where": "Action 06",
       "url": "https://ordinarypeopleaction.com/2026/08/24/how-do-i-participate-in-collective-action-today/",
       "reason": "Not yet read, so not yet placed. Not a rejection."
+    },
+    {
+      "source": "opet",
+      "title": "How to Canvass and Canvassing Opportunities",
+      "where": "Action 01",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/how-to-canvass-and-canvassing-opportunities/",
+      "reason": "Out of scope: campaign activity. The guide routes to Volunteer Blue, a party volunteering programme — the routing is the content, not framing around a capability. Reviewed by Bill 2026-09-21."
+    },
+    {
+      "source": "opet",
+      "title": "Act Now, Prepare Now: Protecting Your Neighbors and Community Members",
+      "where": "Action 03",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/act-now-prepare-now-protecting-your-neighbors-and-community-members/",
+      "reason": "Out of scope: policy. Takes an explicit position on immigration enforcement and directories advocacy organisations. This shelf carries no policy asks from any source, including our own. Reviewed by Bill 2026-09-21."
     }
   ],
   "excluded_note": "These are SCOPE decisions about this project, not judgements about the documents or their publisher. Everything listed here is a real resource that helps somebody; it is simply not what this shelf carries. The shelf holds capabilities a reader keeps. It carries no policy asks, no pledges and no campaign activity — from any source, including ours. Recorded rather than silently dropped so the sorting is auditable and reversible.",
-  "framing_note": "framing_flag marks an entry whose CONTENTS name a party, a figure or a contested position, even where its title and format are a capability. Flagged entries are held out of the shipped shelf until framing_cleared is true — not deleted, and not a judgement on the document. The page's welcome is explicitly cross-partisan, so serving these by default would contradict it before anyone had read a word. Clearing one is a one-word edit and Bill's call. Found by reading the guides on 2026-09-21; the listing page showed none of it."
+  "framing_note": "framing_flag marks an entry whose CONTENTS name a party, a figure or a contested position, even where its title and format are a capability. Flagged entries are held out of the shipped shelf until framing_cleared is true — not deleted, and not a judgement on the document. The page's welcome is explicitly cross-partisan, so serving these by default would contradict it before anyone had read a word. Clearing one is a one-word edit and Bill's call. Found by reading the guides on 2026-09-21; the listing page showed none of it.",
+  "own_howtos": {
+    "decided": "2026-09-21",
+    "note": "Writing our own how-tos is IN SCOPE (Bill, 2026-09-21). The pivot said the app stops inventing solutions and guides people through other people's material — this does not reverse that. Attending a town meeting is not our idea. The distinction is between inventing a solution and writing a neutral how-to for a mechanic that already exists, where nobody publishes one without a side attached. Three candidates, all held items whose structure we want and whose framing we cannot use: what your town decides and when it meets; how to run an empty-chair town hall; a registration and voting-rights checklist."
+  }
 }

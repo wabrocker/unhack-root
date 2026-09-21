@@ -69,7 +69,7 @@ def nav(current):
           <a href="resources.html"{mark("resources.html")}>All Resources</a>
           <a href="citizen-primer.html"{mark("citizen-primer.html")}>Citizen Primer</a>
           <a href="citizenship-test.html"{mark("citizenship-test.html")}>Citizenship Practice Test</a>
-          <a href="citizenship-answers.html"{mark("citizenship-answers.html")}>Your Eight Answers</a>
+          <a href="citizenship-answers.html"{mark("citizenship-answers.html")}>Your 8 Local Answers</a>
         </div>
       </div>
     </nav>'''
