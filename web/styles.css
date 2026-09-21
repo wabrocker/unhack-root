@@ -734,3 +734,41 @@ body:not(.options-on) .mix-row { display: none; }
 .smallprint h2 { font-size: 1rem; margin: 0 0 .6rem; color: var(--ink); }
 .smallprint ul { margin: 0; padding-left: 1.15rem; }
 .smallprint li { margin: .4rem 0; }
+
+/* The opener is a hook, and the shape of it is deliberate: what you are
+   about to do, not what is wrong. Leading with the problem was the first
+   draft and it argued against the project's own thesis — the job is to
+   attack helplessness, and a paragraph about how overwhelming it all is
+   supplies more of the thing it was trying to cure. */
+.opener {
+  margin-top: 1.75rem;
+  padding: 1.25rem 1.3rem;
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.opener h2 { margin: 0 0 .55rem; font-size: 1.6rem; line-height: 1.2; }
+.opener p { margin: .55rem 0 0; }
+.opener-lead { font-size: 1.08rem; }
+.opener-door {
+  margin-top: .9rem !important;
+  padding-top: .75rem;
+  border-top: 1px solid var(--line);
+  font-size: .95rem;
+  color: var(--ink-soft);
+}
+
+.action-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: stretch; }
+.action-row .btn-primary { flex: 0 1 auto; }
+.btn-done {
+  color: var(--accent) !important;
+  background: transparent !important;
+  border-color: var(--accent) !important;
+}
+.btn-done:hover, .btn-done:focus-visible { background: var(--bg-soft) !important; filter: none; }
+
+.tally {
+  margin: 0 0 1rem;
+  font-weight: 600;
+  color: var(--ok);
+}

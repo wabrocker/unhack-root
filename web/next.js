@@ -33,6 +33,7 @@
         { v: "minutes", label: "Twenty minutes, once" },
         { v: "hour",    label: "An hour a week" },
         { v: "day",     label: "A weekend day, sometimes" },
+        { v: "many",    label: "Several hours a week, sometimes more" },
       ],
     },
     {
@@ -73,7 +74,11 @@
     },
   ];
 
-  const CAP_RANK = { minutes: 1, hour: 2, day: 3 };
+  const CAP_RANK = { minutes: 1, hour: 2, day: 3, many: 4 };
+
+  const DONE_KEY = "unhack-done-count";
+  let completed = 0;
+  try { completed = parseInt(localStorage.getItem(DONE_KEY), 10) || 0; } catch (e) { completed = 0; }
 
   const answers = {};
   let step = 0;
@@ -111,6 +116,7 @@
     if (answers.capacity === "minutes") bits.push("you have twenty minutes");
     if (answers.capacity === "hour") bits.push("you have about an hour a week");
     if (answers.capacity === "day") bits.push("you have a day now and then");
+    if (answers.capacity === "many") bits.push("you have real time to give this");
     if (item.reach === "group" && answers.reach === "group") {
       bits.push("you already have people who listen to you");
     }
@@ -209,11 +215,16 @@
     renderProgress();
 
     if (!ranked.length || shown >= ranked.length) {
-      el.stage.appendChild(h("h2", "q", "Nothing on the shelf fits that."));
-      el.stage.appendChild(h("p", null,
-        "That is a real answer rather than a failure. This shelf is small " +
-        "and deliberately sorted, and saying so beats inventing something " +
-        "that half fits."));
+      el.stage.appendChild(h("h2", "q", completed > 0
+        ? "That\u2019s everything we have for you right now."
+        : "Nothing on this shelf fits that."));
+      el.stage.appendChild(h("p", null, completed > 0
+        ? "You did " + completed + ". The shelf is small on purpose and it " +
+          "will grow \u2014 come back, or start again and answer differently " +
+          "to see what else is here."
+        : "That is a real answer rather than a failure. This shelf is small " +
+          "and deliberately sorted, and saying so beats inventing something " +
+          "that half fits."));
       const again = h("button", "btn-primary", "Start over");
       again.addEventListener("click", reset);
       el.stage.appendChild(again);
@@ -221,6 +232,13 @@
     }
 
     const pick = ranked[shown].item;
+
+    if (completed > 0) {
+      el.stage.appendChild(h("p", "tally",
+        completed === 1
+          ? "That\u2019s one done. Here\u2019s the next."
+          : "That\u2019s " + completed + " done. Here\u2019s the next."));
+    }
 
     if (answers.why) {
       const echo = h("p", "echo");
@@ -230,7 +248,7 @@
     }
 
     el.stage.appendChild(h("p", "eyebrow", "Your next step"));
-    el.stage.appendChild(h("h2", "pick-title", pick.title));
+    el.stage.appendChild(h("h2", "pick-title", pick.action));
     el.stage.appendChild(h("p", "pick-blurb", pick.blurb));
 
     const why = h("div", "why");
@@ -245,18 +263,35 @@
     link.href = SHELF_SOURCE.href;
     link.rel = "noopener";
     link.target = "_blank";
-    link.textContent = "Open it →";
-    el.stage.appendChild(link);
+    link.textContent = "Open the guide →";
+
+    // The second button is the follow-through rhythm in embryo: the loop
+    // is do-it / come-back / next, and without somewhere to say "done"
+    // the page is a recommender rather than something you return to.
+    // Nobody verifies this and nobody is told — it is the user's own
+    // count of their own claim, and the page says so.
+    const done = h("button", "btn-primary btn-done", "Finished it — what’s next?");
+    done.addEventListener("click", function () {
+      completed++;
+      try { localStorage.setItem(DONE_KEY, String(completed)); } catch (e) { /* private mode */ }
+      shown++;
+      renderResult();
+    });
+
+    const row = h("div", "action-row");
+    row.appendChild(link);
+    row.appendChild(done);
+    el.stage.appendChild(row);
 
     const src = h("p", "source");
-    src.append("Find it under ");
+    src.append("The guide behind it: ");
     src.appendChild(h("strong", null, pick.where));
     src.append(" on " + SHELF_SOURCE.name + "’s resource page. It is " +
                "their document, not ours — we only decided it was the " +
                "one to hand you.");
     el.stage.appendChild(src);
 
-    const more = h("button", "btn-link", "Not this one?");
+    const more = h("button", "btn-link", "Suggest another");
     more.addEventListener("click", function () { shown++; renderResult(); });
     el.stage.appendChild(more);
 
