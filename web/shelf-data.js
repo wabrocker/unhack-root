@@ -248,3 +248,15 @@ const SHELF = [
     ]
   }
 ];
+
+/* Counts for the shelf page, generated so they cannot drift from the data.
+ * "considered" is everything we looked at in this collection. */
+const SHELF_STATS = {
+  "considered": 25,
+  "carried": 10,
+  "held": 5,
+  "outOfScope": 10,
+  "read": 14,
+  "source": "Ordinary People, Extraordinary Times",
+  "sourceHref": "https://ordinarypeopleaction.com/resources/"
+};

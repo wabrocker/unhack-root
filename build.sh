@@ -36,7 +36,7 @@ mkdir -p dist
 
 cp web/logo.svg web/social-preview.jpg web/social-preview-hero.jpg dist/
 cp web/civics-data.js web/civics-quiz.js web/civics-exam.js web/civics-answers.js dist/
-cp web/shelf-data.js web/next.js dist/
+cp web/shelf-data.js web/next.js web/shelf.js dist/
 cp web/.htaccess dist/.htaccess
 
 hash_of() { shasum -a 256 "$1" | cut -c1-8; }
@@ -50,13 +50,14 @@ JS_HASH=$(hash_of web/civics-data.js)$(hash_of web/civics-quiz.js)$(hash_of web/
 # The next-step page ships two files that must always bust together: the
 # shelf and the logic that reads it. A stale shelf against fresh logic is
 # the silent-failure shape again — it renders fine and recommends nothing.
-NEXT_HASH=$(hash_of web/shelf-data.js)$(hash_of web/next.js)
+NEXT_HASH=$(hash_of web/shelf-data.js)$(hash_of web/next.js)$(hash_of web/shelf.js)
 CSS_HASH=$(hash_of web/styles.css)
-for page in index about next states resources citizen-primer citizenship-test citizenship-answers; do
+for page in index about next shelf states resources citizen-primer citizenship-test citizenship-answers; do
   sed -e "s|href=\"styles\.css\"|href=\"styles.css?v=${CSS_HASH}\"|" \
       -e "s|src=\"civics-\([a-z]*\)\.js\"|src=\"civics-\1.js?v=${JS_HASH}\"|g" \
       -e "s|src=\"shelf-data\.js\"|src=\"shelf-data.js?v=${NEXT_HASH}\"|" \
       -e "s|src=\"next\.js\"|src=\"next.js?v=${NEXT_HASH}\"|" \
+      -e "s|src=\"shelf\.js\"|src=\"shelf.js?v=${NEXT_HASH}\"|" \
     "web/${page}.html" > "dist/${page}.html"
   grep -q "styles.css?v=${CSS_HASH}" "dist/${page}.html" || { echo "FAIL: css not stamped in ${page}.html"; exit 1; }
 done

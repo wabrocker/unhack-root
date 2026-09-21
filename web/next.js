@@ -246,7 +246,7 @@
       });
       el.stage.appendChild(list);
 
-      var go = h("button", "btn-primary", "That’s me — show me one action");
+      var go = h("button", "btn-primary", "That’s me — next question");
       go.disabled = chosen.length === 0;
       go.addEventListener("click", function () {
         answers[q.id] = chosen;
@@ -269,7 +269,12 @@
     }
 
     if (step > 0) {
-      const back = h("button", "btn-link", "← Back");
+      // Spaced away from a primary button, which questions with one of
+      // those sit directly beside; on plain option questions there is
+      // nothing to its left and the indent would just look like a typo.
+      const back = h("button",
+        (q.multi || q.free) ? "btn-link btn-link-spaced" : "btn-link",
+        "← Back");
       back.addEventListener("click", function () { step--; render(); });
       el.stage.appendChild(back);
     }
@@ -369,6 +374,12 @@
     const again = h("button", "btn-link", "Start over");
     again.addEventListener("click", reset);
     el.stage.appendChild(again);
+
+    const all = document.createElement("a");
+    all.className = "btn-link btn-link-spaced";
+    all.href = "shelf.html";
+    all.textContent = "See the whole shelf";
+    el.stage.appendChild(all);
   }
 
   function reset() {

@@ -34,6 +34,11 @@ SITE = {
     "index":            (None,                    None,             None),
     "about":            ("about.html",            "index.html",     "Home"),
     "next":             ("next.html",             "index.html",     "Home"),
+    # Deliberately NOT in the menu: a browsable catalogue is the menu, and
+    # the menu is what next.html exists to replace. Reachable from the
+    # result and from next.html's own footer link, which is the point at
+    # which someone has earned the right to want it.
+    "shelf":            ("shelf.html",            "next.html",      "Find Your Next Step"),
     "states":           ("states.html",           "index.html",     "Home"),
     "resources":        ("resources.html",        "index.html",     "Home"),
     "citizen-primer":   ("citizen-primer.html",   "resources.html", "All Resources"),
