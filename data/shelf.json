@@ -1,0 +1,440 @@
+{
+  "schema": 1,
+  "note": "Source of truth for the Find Your Next Step shelf. web/shelf-data.js is GENERATED from this by tools/shelfgen.py — edit here, never there.",
+  "sources": {
+    "opet": {
+      "name": "Ordinary People, Extraordinary Times",
+      "publisher": "Democracy Forward / Skye Perryman",
+      "index": "https://ordinarypeopleaction.com/resources/",
+      "hosting": "link-only",
+      "hosting_note": "Their documents. We link, never mirror. A partnership conversation is the better long game.",
+      "inventoried": "2026-09-21"
+    }
+  },
+  "items": [
+    {
+      "id": "fact-check",
+      "source": "opet",
+      "action": "Take one claim you nearly shared, and check it before you do.",
+      "blurb": "Where to check something before you pass it on.",
+      "title": "How to Check Facts and Become “News Literate”",
+      "where": "Action 02",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/how-to-check-facts-and-become-news-literate/",
+      "button": "Action 02 · News Literacy Guide",
+      "mode": "both",
+      "capacity": "minutes",
+      "reach": "solo",
+      "disposition": [
+        "dig",
+        "learn"
+      ],
+      "outline": [
+        "What today’s media environment does to a story — sensationalism, algorithms, consolidation",
+        "Bias and literacy tools: AdFontes Media Bias Chart, AllSides, the News Literacy Project",
+        "Fact-checking services: PolitiFact and FactCheck.org",
+        "Who owns what, via the Future Media Project at Harvard",
+        "Disinformation resources, and a list of independent and nonprofit newsrooms"
+      ],
+      "verified": "2026-09-21",
+      "outline_read": "2026-09-21",
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "media-literacy",
+      "source": "opet",
+      "action": "Pick one post that made you angry this week, and work out why it was shown to you.",
+      "blurb": "Where your news actually comes from, and what that changes.",
+      "title": "Media Literacy Starter Kit",
+      "where": "Action 02",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/media-literacy-starter-kit/",
+      "button": "Action 02 · Media Literacy Kit",
+      "mode": "understand",
+      "capacity": "minutes",
+      "reach": "solo",
+      "disposition": [
+        "learn",
+        "dig"
+      ],
+      "outline": [
+        "Local media — why community papers and public radio see things national outlets miss",
+        "Public and independent media, and how each is funded",
+        "Fact checking — FactCheck.org and PolitiFact",
+        "Newsletters and new media — the newer shapes news arrives in"
+      ],
+      "verified": "2026-09-21",
+      "outline_read": "2026-09-21",
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "talk-to-children",
+      "source": "opet",
+      "action": "Answer the question a kid in your life has already asked you.",
+      "blurb": "For when someone small has been asking you things you did not have an answer for.",
+      "title": "How to Talk With Children About What is Happening in the United States",
+      "where": "Action 01",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/how-to-talk-with-children-about-what-is-happening-in-the-united-states/",
+      "button": "Action 01 · Talking With Children",
+      "mode": "do",
+      "capacity": "minutes",
+      "reach": "solo",
+      "disposition": [
+        "talk",
+        "support"
+      ],
+      "outline": [
+        "Multimedia and educational resources — PBS LearningMedia, KidCitizen",
+        "Reading lists for children and teenagers",
+        "How to talk about politics and the news, from mental-health and education groups",
+        "Ways to get young people into civic life in their own community"
+      ],
+      "verified": "2026-09-21",
+      "outline_read": "2026-09-21",
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "discussion-guide",
+      "source": "opet",
+      "action": "Ask four people to read one chapter, and set a date to talk about it.",
+      "blurb": "Ready-made questions, so nobody has to invent them on the night.",
+      "title": "Chapter 1 Discussion Guide",
+      "where": "Action 01 (one per chapter, 01–07)",
+      "url": "https://ordinarypeopleaction.com/2026/08/25/chapter-1-discussion-guide/",
+      "button": "Action 01 · Chapter Discussion Guide",
+      "mode": "both",
+      "capacity": "hour",
+      "reach": "group",
+      "disposition": [
+        "talk",
+        "learn"
+      ],
+      "outline": [
+        "What a democracy is made of, and the signs it is coming apart",
+        "People-powered action — the “pick up a shovel” half",
+        "Spectator mindset against agent mindset, side by side",
+        "A reflection exercise turning a worry into something you could do",
+        "Discussion questions for a group to work through together"
+      ],
+      "verified": "2026-09-21",
+      "outline_read": "2026-09-21",
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "civic-desert",
+      "source": "opet",
+      "action": "Find out who actually covers local news where you live, and what nobody is covering.",
+      "blurb": "For places with no local paper and no obvious way in.",
+      "title": "How To Engage If You’re In A Civic Desert",
+      "where": "Action 03",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/how-to-engage-if-youre-in-a-civic-desert/",
+      "button": "Action 03 · Civic Desert Guide",
+      "mode": "both",
+      "capacity": "hour",
+      "reach": "either",
+      "disposition": [
+        "dig",
+        "showup"
+      ],
+      "outline": [
+        "Use what is already there — the library as the community hub it already is",
+        "Invest in your news ecosystem: public radio, local journalism",
+        "Meet the people who actually decide things, at meetings that are already public",
+        "Third spaces — holding something in the coffee shop rather than waiting for a venue",
+        "National organisations that work in small places: AmeriCorps Seniors, Weave, Idealist, Mutual Aid Hub",
+        "A list of concrete starting points, from nature clubs to serving as an election official"
+      ],
+      "verified": "2026-09-21",
+      "outline_read": "2026-09-21",
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "joy-pathways",
+      "source": "opet",
+      "action": "Put one thing on this week’s calendar that has nothing to do with the news.",
+      "blurb": "The people who keep going are not the ones who are angriest.",
+      "title": "Pathways to Joy",
+      "where": "Action 05",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/pathways-to-joy/",
+      "button": "Action 05 · Pathways to Joy",
+      "mode": "do",
+      "capacity": "minutes",
+      "reach": "solo",
+      "disposition": [
+        "support",
+        "make"
+      ],
+      "outline": [
+        "Daily routines — small practices that actually bring you joy",
+        "Regular rituals, weekly or monthly, that you keep",
+        "Gratitude, and how to make it a habit rather than a mood",
+        "Embodiment — laughter, movement, eating like you noticed",
+        "Community: film nights, volunteering, classes",
+        "Mindfulness, and putting your attention where you meant to",
+        "Sharing it — telling the story so somebody else starts"
+      ],
+      "verified": "2026-09-21",
+      "outline_read": "2026-09-21",
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "spectator-to-agent",
+      "source": "opet",
+      "action": "Write down one thing you have been watching happen — and one thing you could do about it.",
+      "blurb": "For the specific feeling of watching it all happen and not knowing where to stand.",
+      "title": "Moving from a Spectator Mindset to an Agent Mindset through Civic Engagement",
+      "where": "Action 01",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/moving-from-a-spectator-mindset-to-an-agent-mindset-through-civic-engagement/",
+      "button": "Action 01 · Spectator to Agent",
+      "mode": "understand",
+      "capacity": "minutes",
+      "reach": "solo",
+      "disposition": [
+        "learn",
+        "support"
+      ],
+      "outline": null,
+      "verified": "2026-09-21",
+      "outline_read": null,
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "dinners",
+      "source": "opet",
+      "action": "Invite five people to dinner and let their questions start it.",
+      "blurb": "A format for having the conversation over a meal, with people you already eat with.",
+      "title": "Dinners for Democracy",
+      "where": "Act Today",
+      "url": "https://democracyforward.org/dinnersfordemocracy/",
+      "button": "Act Today · Dinners for Democracy",
+      "mode": "do",
+      "capacity": "hour",
+      "reach": "group",
+      "disposition": [
+        "talk",
+        "make"
+      ],
+      "outline": null,
+      "verified": "2026-09-21",
+      "outline_read": null,
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "empty-chair",
+      "source": "opet",
+      "action": "Book a room and hold the town hall your representative is not holding.",
+      "blurb": "A real format, run by ordinary people, when the meeting will not happen otherwise.",
+      "title": "How to Host an “Empty Chair” Town Hall",
+      "where": "Action 01",
+      "url": "https://ordinarypeopleaction.com/2026/08/25/how-to-host-an-empty-chair-town-hall/",
+      "button": "Action 01 · Empty Chair Town Hall",
+      "mode": "do",
+      "capacity": "day",
+      "reach": "group",
+      "disposition": [
+        "showup",
+        "make"
+      ],
+      "outline": null,
+      "verified": "2026-09-21",
+      "outline_read": null,
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "canvassing",
+      "source": "opet",
+      "action": "Practise the first thirty seconds at a door, before you ever stand at one.",
+      "blurb": "The craft of knocking on a stranger’s door and having it go well.",
+      "title": "How to Canvass and Canvassing Opportunities",
+      "where": "Action 01",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/how-to-canvass-and-canvassing-opportunities/",
+      "button": "Action 01 · How to Canvass",
+      "mode": "do",
+      "capacity": "day",
+      "reach": "either",
+      "disposition": [
+        "talk",
+        "showup"
+      ],
+      "outline": null,
+      "verified": "2026-09-21",
+      "outline_read": null,
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "community-protection",
+      "source": "opet",
+      "action": "Pick one thing your street could organise for itself, and ask three neighbours.",
+      "blurb": "Concrete things a neighbourhood can organise for itself, at neighbourhood scale.",
+      "title": "Act Now, Prepare Now: Protecting Your Neighbors and Community Members",
+      "where": "Action 03",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/act-now-prepare-now-protecting-your-neighbors-and-community-members/",
+      "button": "Action 03 · Protecting Your Neighbors",
+      "mode": "do",
+      "capacity": "day",
+      "reach": "group",
+      "disposition": [
+        "make",
+        "showup"
+      ],
+      "outline": null,
+      "verified": "2026-09-21",
+      "outline_read": null,
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "voting-rights",
+      "source": "opet",
+      "action": "Run the checklist on your own registration, then send it to five people.",
+      "blurb": "A checklist, which is the right shape when you have twenty minutes.",
+      "title": "Ways to Support Voting Rights",
+      "where": "Action 01",
+      "url": "https://ordinarypeopleaction.com/2026/08/04/ways-to-support-voting-rights/",
+      "button": "Action 01 · Supporting Voting Rights",
+      "mode": "do",
+      "capacity": "minutes",
+      "reach": "solo",
+      "disposition": [
+        "support",
+        "dig"
+      ],
+      "outline": null,
+      "verified": "2026-09-21",
+      "outline_read": null,
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "front-door",
+      "source": "opet",
+      "action": "Find out what your town actually decides, and when it next meets.",
+      "blurb": "What local actually means, in practice, where you live.",
+      "title": "Find Ways to Be More Civically Active",
+      "where": "Action 03",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/find-ways-to-be-more-civically-active/",
+      "button": "Action 03 · Be More Civically Active",
+      "mode": "understand",
+      "capacity": "hour",
+      "reach": "solo",
+      "disposition": [
+        "learn",
+        "showup"
+      ],
+      "outline": null,
+      "verified": "2026-09-21",
+      "outline_read": null,
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "courage-films",
+      "source": "opet",
+      "action": "Watch one film about somebody who did it anyway.",
+      "blurb": "For an evening when you do not have another chapter in you.",
+      "title": "Movies About Courageous and Inspiring People",
+      "where": "Action 05",
+      "url": "https://ordinarypeopleaction.com/2026/08/25/movies-about-courageous-and-inspiring-people/",
+      "button": "Action 05 · Films Worth Watching",
+      "mode": "understand",
+      "capacity": "hour",
+      "reach": "either",
+      "disposition": [
+        "learn",
+        "support"
+      ],
+      "outline": null,
+      "verified": "2026-09-21",
+      "outline_read": null,
+      "reviewed_by_bill": false
+    },
+    {
+      "id": "keep-going",
+      "source": "opet",
+      "action": "Decide now what you will do on the week you stop feeling like it.",
+      "blurb": "For the second month, which is when most of this stops.",
+      "title": "More Tools for the Journey Ahead",
+      "where": "Action 07",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/more-tools-for-the-journey-ahead/",
+      "button": "Action 07 · Tools for the Journey",
+      "mode": "both",
+      "capacity": "minutes",
+      "reach": "solo",
+      "disposition": [
+        "support",
+        "learn"
+      ],
+      "outline": null,
+      "verified": "2026-09-21",
+      "outline_read": null,
+      "reviewed_by_bill": false
+    }
+  ],
+  "excluded": [
+    {
+      "source": "opet",
+      "title": "100 Days of Action",
+      "where": "Act Today",
+      "url": "https://democracyforward.org/act/100-days-of-action/",
+      "reason": "recruitment, and dated — expires at the 2026 election"
+    },
+    {
+      "source": "opet",
+      "title": "We Hold These Truths",
+      "where": "Action 04 / Act Today",
+      "url": "https://weholdtruths.org/",
+      "reason": "a pledge; asks for commitment to a position rather than teaching a capability"
+    },
+    {
+      "source": "opet",
+      "title": "Learn More About Organizations Supporting Court Reform",
+      "where": "Action 06",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/learn-more-about-organizations-supporting-court-reform/",
+      "reason": "advocacy directory for a contested position"
+    },
+    {
+      "source": "opet",
+      "title": "How to Support the Equal Rights Amendment and Gender Justice",
+      "where": "Action 06",
+      "url": "https://ordinarypeopleaction.com/2026/08/25/how-to-support-the-equal-rights-amendment-and-gender-justice/",
+      "reason": "specific policy position"
+    },
+    {
+      "source": "opet",
+      "title": "How to Support Fair Courts",
+      "where": "Action 06",
+      "url": "https://ordinarypeopleaction.com/2026/08/25/how-to-support-fair-courts/",
+      "reason": "specific policy position"
+    },
+    {
+      "source": "opet",
+      "title": "How to Take Action to Address the Wealth Gap",
+      "where": "Action 01",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/how-to-take-action-to-address-the-wealth-gap/",
+      "reason": "specific policy position"
+    },
+    {
+      "source": "opet",
+      "title": "The Difference Between Patriotism and Nationalism",
+      "where": "Action 01",
+      "url": "https://ordinarypeopleaction.com/2026/08/04/the-difference-between-patriotism-and-nationalism/",
+      "reason": "a framing argument rather than a capability; borderline, worth Bill reconsidering"
+    },
+    {
+      "source": "opet",
+      "title": "The History of Joy and Beauty as a Form of Resistance",
+      "where": "Action 05",
+      "url": "https://ordinarypeopleaction.com/2026/08/25/the-history-of-joy-and-beauty-as-a-form-of-resistance/",
+      "reason": "historical essay framed as resistance; borderline"
+    },
+    {
+      "source": "opet",
+      "title": "The Importance of Interfaith Alliances for Democracy",
+      "where": "Action 02",
+      "url": "https://ordinarypeopleaction.com/2026/08/04/the-importance-of-interfaith-alliances-for-democracy/",
+      "reason": "unread; not yet classified either way"
+    },
+    {
+      "source": "opet",
+      "title": "How Do I Participate in Collective Action Today?",
+      "where": "Action 06",
+      "url": "https://ordinarypeopleaction.com/2026/08/24/how-do-i-participate-in-collective-action-today/",
+      "reason": "unread; not yet classified either way"
+    }
+  ]
+}

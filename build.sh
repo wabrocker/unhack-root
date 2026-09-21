@@ -25,6 +25,12 @@ REMOTE_DIR="domains/unhackdemocracy.us/public_html"
 # before anything is built or uploaded.
 python3 tools/navgen.py --check
 
+# The shelf ships generated too, from data/shelf.json. Offline checks only
+# — whether a URL still resolves is tools/shelf_verify.py's job, run
+# deliberately, because a build that makes HTTP calls fails on bad wifi and
+# teaches people to work around it.
+python3 tools/shelfgen.py --check
+
 rm -rf dist unhack-root-deploy.zip
 mkdir -p dist
 
