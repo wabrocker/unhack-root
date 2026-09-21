@@ -66,6 +66,18 @@ def check(entry, stale):
     if not url:
         out["flags"].append(("ERROR", "no url"))
         return out
+
+    # Our own guides are pages in this repo, not somebody else's website.
+    # Fetching them over the network would test the deployed site rather
+    # than what is about to be deployed, so check the file instead.
+    if not url.lower().startswith(("http://", "https://")):
+        local = ROOT / "web" / url.split("#")[0].split("?")[0]
+        if not local.exists():
+            out["flags"].append(("ERROR", f"no such page: web/{url}"))
+        else:
+            out["flags"].append(("OURS", "ours, in this repo"))
+        return out
+
     try:
         status, body = fetch(url)
     except urllib.error.HTTPError as e:
