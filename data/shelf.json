@@ -371,70 +371,71 @@
       "title": "100 Days of Action",
       "where": "Act Today",
       "url": "https://democracyforward.org/act/100-days-of-action/",
-      "reason": "recruitment, and dated — expires at the 2026 election"
+      "reason": "Out of scope: time-bound campaign activity. The shelf carries things that are still useful next year."
     },
     {
       "source": "opet",
       "title": "We Hold These Truths",
       "where": "Action 04 / Act Today",
       "url": "https://weholdtruths.org/",
-      "reason": "a pledge; asks for commitment to a position rather than teaching a capability"
+      "reason": "Out of scope: pledges. The shelf teaches capabilities rather than asking anyone to sign up to something."
     },
     {
       "source": "opet",
       "title": "Learn More About Organizations Supporting Court Reform",
       "where": "Action 06",
       "url": "https://ordinarypeopleaction.com/2026/08/24/learn-more-about-organizations-supporting-court-reform/",
-      "reason": "advocacy directory for a contested position"
+      "reason": "Out of scope: policy. This shelf carries no policy asks from any source, including our own. Not a comment on the position."
     },
     {
       "source": "opet",
       "title": "How to Support the Equal Rights Amendment and Gender Justice",
       "where": "Action 06",
       "url": "https://ordinarypeopleaction.com/2026/08/25/how-to-support-the-equal-rights-amendment-and-gender-justice/",
-      "reason": "specific policy position"
+      "reason": "Out of scope: policy. This shelf carries no policy asks from any source, including our own. Not a comment on the position."
     },
     {
       "source": "opet",
       "title": "How to Support Fair Courts",
       "where": "Action 06",
       "url": "https://ordinarypeopleaction.com/2026/08/25/how-to-support-fair-courts/",
-      "reason": "specific policy position"
+      "reason": "Out of scope: policy. This shelf carries no policy asks from any source, including our own. Not a comment on the position."
     },
     {
       "source": "opet",
       "title": "How to Take Action to Address the Wealth Gap",
       "where": "Action 01",
       "url": "https://ordinarypeopleaction.com/2026/08/24/how-to-take-action-to-address-the-wealth-gap/",
-      "reason": "specific policy position"
+      "reason": "Out of scope: policy. This shelf carries no policy asks from any source, including our own. Not a comment on the position."
     },
     {
       "source": "opet",
       "title": "The Difference Between Patriotism and Nationalism",
       "where": "Action 01",
       "url": "https://ordinarypeopleaction.com/2026/08/04/the-difference-between-patriotism-and-nationalism/",
-      "reason": "a framing argument rather than a capability; borderline, worth Bill reconsidering"
+      "reason": "Out of scope for now: an essay arguing a frame rather than something to do. Worth revisiting — it may belong with the understand-first material."
     },
     {
       "source": "opet",
       "title": "The History of Joy and Beauty as a Form of Resistance",
       "where": "Action 05",
       "url": "https://ordinarypeopleaction.com/2026/08/25/the-history-of-joy-and-beauty-as-a-form-of-resistance/",
-      "reason": "historical essay framed as resistance; borderline"
+      "reason": "Out of scope for now: a history essay rather than something to do. Worth revisiting alongside Pathways to Joy, which is in."
     },
     {
       "source": "opet",
       "title": "The Importance of Interfaith Alliances for Democracy",
       "where": "Action 02",
       "url": "https://ordinarypeopleaction.com/2026/08/04/the-importance-of-interfaith-alliances-for-democracy/",
-      "reason": "unread; not yet classified either way"
+      "reason": "Not yet read, so not yet placed. Not a rejection."
     },
     {
       "source": "opet",
       "title": "How Do I Participate in Collective Action Today?",
       "where": "Action 06",
       "url": "https://ordinarypeopleaction.com/2026/08/24/how-do-i-participate-in-collective-action-today/",
-      "reason": "unread; not yet classified either way"
+      "reason": "Not yet read, so not yet placed. Not a rejection."
     }
-  ]
+  ],
+  "excluded_note": "These are SCOPE decisions about this project, not judgements about the documents or their publisher. Everything listed here is a real resource that helps somebody; it is simply not what this shelf carries. The shelf holds capabilities a reader keeps. It carries no policy asks, no pledges and no campaign activity — from any source, including ours. Recorded rather than silently dropped so the sorting is auditable and reversible."
 }
