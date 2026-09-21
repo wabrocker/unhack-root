@@ -38,11 +38,12 @@ SITE = {
     # the menu is what next.html exists to replace. Reachable from the
     # result and from next.html's own footer link, which is the point at
     # which someone has earned the right to want it.
-    "shelf":            ("shelf.html",            "next.html",      "Find Your Next Step"),
+    "shelf":            ("shelf.html",            "resources.html", "All Resources"),
     # Our own how-to, written because the best first action in civic life
     # has no neutral guide anywhere. Not in the menu: it is reached from a
     # recommendation, the same as any other guide on the shelf.
     "howto-town":       ("howto-town.html",       "next.html",      "Find Your Next Step"),
+    "howto-townhall":   ("howto-townhall.html",   "next.html",      "Find Your Next Step"),
     "states":           ("states.html",           "index.html",     "Home"),
     "resources":        ("resources.html",        "index.html",     "Home"),
     "citizen-primer":   ("citizen-primer.html",   "resources.html", "All Resources"),
@@ -53,8 +54,8 @@ SITE = {
 
 # The pages that live under the Resources group. Listed once so the menu
 # and the section marker cannot disagree about what is in the section.
-RESOURCES = ("resources.html", "citizen-primer.html", "citizenship-test.html",
-             "citizenship-answers.html")
+RESOURCES = ("resources.html", "shelf.html", "citizen-primer.html",
+             "citizenship-test.html", "citizenship-answers.html")
 
 
 def nav(current):
@@ -71,6 +72,7 @@ def nav(current):
                 aria-expanded="false" aria-controls="resources-menu"{here}>Resources</button>
         <div id="resources-menu" class="submenu" hidden>
           <a href="resources.html"{mark("resources.html")}>All Resources</a>
+          <a href="shelf.html"{mark("shelf.html")}>The Whole Shelf</a>
           <a href="citizen-primer.html"{mark("citizen-primer.html")}>Citizen Primer</a>
           <a href="citizenship-test.html"{mark("citizenship-test.html")}>Citizenship Practice Test</a>
           <a href="citizenship-answers.html"{mark("citizenship-answers.html")}>Your 8 Local Answers</a>

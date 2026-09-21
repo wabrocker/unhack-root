@@ -271,17 +271,63 @@ const SHELF = [
       "Watching is a right; speaking usually is not — and how to find your body’s own rules",
       "The twenty-minute version, in order"
     ]
+  },
+  {
+    "id": "own-townhall",
+    "action": "Hold the meeting your representative is not holding, and leave them a chair.",
+    "blurb": "An old, simple format that belongs to no party. A day's work, spread over a few weeks.",
+    "title": "Hold the meeting yourself",
+    "where": "Our guide",
+    "url": "howto-townhall.html",
+    "button": "Our guide · Hold the meeting yourself",
+    "mode": "do",
+    "capacity": "day",
+    "reach": "group",
+    "disposition": [
+      "showup",
+      "make",
+      "talk"
+    ],
+    "outline": [
+      "Check this is the right tool — if they do hold meetings, go to those instead",
+      "Invite them, and mean it: the step people skip, and the one that makes it a meeting",
+      "The practical part — room, date, notice, and telling the office again a week out",
+      "Running it: who chairs, the rules, the notes, and leaving the chair alone",
+      "Afterwards, which is where it works or doesn’t — the record, sent and published",
+      "The four things that separate a meeting from a stunt"
+    ]
+  },
+  {
+    "id": "own-civics",
+    "action": "Find out which civics basics you actually know, and which you only think you know.",
+    "blurb": "The naturalization test, asked properly. Most people who were born here do worse than they expect.",
+    "title": "The Citizenship Practice Test",
+    "where": "Our resource",
+    "url": "citizenship-test.html",
+    "button": "Ours · The Citizenship Practice Test",
+    "mode": "understand",
+    "capacity": "minutes",
+    "reach": "solo",
+    "disposition": [
+      "learn"
+    ],
+    "outline": [
+      "All 128 questions from the current USCIS naturalization civics test",
+      "Asked as multiple choice, and sometimes by recall, which is harder and teaches more",
+      "Wrong answers are corrected on the spot — guessing wrong first is what makes it stick",
+      "Eight questions depend on where you live; Your 8 Local Answers covers those"
+    ]
   }
 ];
 
 /* Counts for the shelf page, generated so they cannot drift from the data.
  * "considered" is everything we looked at in this collection. */
 const SHELF_STATS = {
-  "considered": 26,
-  "carried": 11,
+  "considered": 28,
+  "carried": 13,
   "held": 3,
   "outOfScope": 12,
-  "read": 13,
+  "read": 15,
   "source": "Ordinary People, Extraordinary Times",
   "sourceHref": "https://ordinarypeopleaction.com/resources/"
 };
