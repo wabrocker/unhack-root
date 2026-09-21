@@ -317,17 +317,42 @@ const SHELF = [
       "Wrong answers are corrected on the spot — guessing wrong first is what makes it stick",
       "Eight questions depend on where you live; Your 8 Local Answers covers those"
     ]
+  },
+  {
+    "id": "own-voting",
+    "action": "Check your own registration, then send it to five people who trust you.",
+    "blurb": "Registrations get cancelled and polling places move. Almost nobody checks until the day.",
+    "title": "Check your own vote, then five other people’s",
+    "where": "Our guide",
+    "url": "howto-voting.html",
+    "button": "Our guide · Check your own vote",
+    "mode": "do",
+    "capacity": "minutes",
+    "reach": "either",
+    "disposition": [
+      "support",
+      "dig",
+      "talk"
+    ],
+    "outline": [
+      "Check you are registered — at vote.gov, which hands you to your own state",
+      "Your three dates, and the one that catches people: the registration deadline",
+      "What your state asks for, and where your polling place is now",
+      "If your name is not on the list: ask for a provisional ballot and do not leave",
+      "Then do it for five people individually, which is where the twenty minutes turns into something",
+      "If you want more: poll working, which both parties ask people to do"
+    ]
   }
 ];
 
 /* Counts for the shelf page, generated so they cannot drift from the data.
  * "considered" is everything we looked at in this collection. */
 const SHELF_STATS = {
-  "considered": 28,
-  "carried": 13,
+  "considered": 29,
+  "carried": 14,
   "held": 3,
   "outOfScope": 12,
-  "read": 15,
+  "read": 16,
   "source": "Ordinary People, Extraordinary Times",
   "sourceHref": "https://ordinarypeopleaction.com/resources/"
 };

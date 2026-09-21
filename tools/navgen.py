@@ -44,6 +44,7 @@ SITE = {
     # recommendation, the same as any other guide on the shelf.
     "howto-town":       ("howto-town.html",       "next.html",      "Find Your Next Step"),
     "howto-townhall":   ("howto-townhall.html",   "next.html",      "Find Your Next Step"),
+    "howto-voting":     ("howto-voting.html",     "next.html",      "Find Your Next Step"),
     "states":           ("states.html",           "index.html",     "Home"),
     "resources":        ("resources.html",        "index.html",     "Home"),
     "citizen-primer":   ("citizen-primer.html",   "resources.html", "All Resources"),
