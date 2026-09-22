@@ -303,10 +303,25 @@
   }
 
   function finish() {
-    ranked = SHELF
+    const scored = SHELF
       .map(function (i) { return { item: i, s: score(i) }; })
-      .filter(function (r) { return r.s >= 0; })
-      .sort(function (a, b) { return b.s - a.s; });
+      .filter(function (r) { return r.s >= 0; });
+
+    // Ties were being broken by position in the data file, which meant
+    // that for 44% of answers the same item won every time, permanently,
+    // and four equally good matches were never offered at all. Equal
+    // scores mean equally good, so shuffle within each band: the choice
+    // is arbitrary either way, and this way it is fairly arbitrary.
+    //
+    // Shuffled once per run, not per render, so "Suggest another" walks a
+    // stable list rather than reshuffling under the reader.
+    for (let i = scored.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const t = scored[i]; scored[i] = scored[j]; scored[j] = t;
+    }
+    scored.sort(function (a, b) { return b.s - a.s; });
+
+    ranked = scored;
     shown = 0;
     renderResult();
   }

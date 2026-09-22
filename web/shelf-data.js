@@ -305,7 +305,7 @@ const SHELF = [
     "where": "Our resource",
     "url": "citizenship-test.html",
     "button": "Ours · The Citizenship Practice Test",
-    "mode": "understand",
+    "mode": "both",
     "capacity": "minutes",
     "reach": "solo",
     "disposition": [

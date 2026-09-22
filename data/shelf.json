@@ -442,7 +442,7 @@
       "where": "Our resource",
       "url": "citizenship-test.html",
       "button": "Ours · The Citizenship Practice Test",
-      "mode": "understand",
+      "mode": "both",
       "capacity": "minutes",
       "reach": "solo",
       "disposition": [
@@ -456,7 +456,8 @@
       ],
       "outline_read": "2026-09-21",
       "verified": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "mode_note": "both, not understand (Bill, 2026-09-22). Taking a quiz is doing something rather than reading about it — a concrete task with immediate feedback, finishable in one sitting. Its single disposition stays `learn`, because adding a second to make it win would be fudging."
     },
     {
       "id": "own-voting",

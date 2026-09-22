@@ -71,14 +71,28 @@ def all_answers():
 
 
 def shares(items):
-    """How often each item is the single thing someone is handed."""
-    top, total = {}, 0
+    """How often each item is the single thing someone is handed.
+
+    Ties are SPLIT, because that is what the page now does. next.js
+    shuffles within each equal-score band rather than letting position in
+    the data file decide, so an item tied with three others is offered to
+    about a quarter of the people in that cell. Counting first-past-the-
+    post here would report a distribution no reader ever experiences.
+    """
+    top, total, tied = {}, 0, 0
     for a in all_answers():
         total += 1
-        r = rank(items, a)
-        if r:
-            top[r[0]["id"]] = top.get(r[0]["id"], 0) + 1
-    return top, total
+        scored = [(score(i, a), i["id"]) for i in items]
+        scored = [x for x in scored if x[0] >= 0]
+        if not scored:
+            continue
+        best = max(s for s, _ in scored)
+        winners = [i for s, i in scored if s == best]
+        if len(winners) > 1:
+            tied += 1
+        for w in winners:
+            top[w] = top.get(w, 0) + 1.0 / len(winners)
+    return top, total, tied
 
 
 WHO = [
@@ -105,14 +119,14 @@ def main():
     args = sys.argv[1:]
     only = "--who" if "--who" in args else "--tags" if "--tags" in args else None
     items = shipping()
-    top, total = shares(items)
+    top, total, tied = shares(items)
     held = [i for i in DB["items"] if i not in items]
 
     if only != "--who":
         print("=" * 74)
         print("THE SHELF — every tag here is Claude's and none is reviewed")
         print("=" * 74)
-        for i in sorted(items, key=lambda x: -top.get(x["id"], 0)):
+        for i in sorted(items, key=lambda x: -top.get(x["id"], 0.0)):
             pct = round(top.get(i["id"], 0) / total * 100)
             ours = "OURS " if i["source"] == "us" else "     "
             bar = "#" * max(0, round(pct / 2))
@@ -121,8 +135,8 @@ def main():
             print(f"    guide  : {i['title'][:62]}")
             print(f"    tags   : {i['mode']:<10} {CAP_LABEL[i['capacity']]:<9} "
                   f"{i['reach']:<6} {', '.join(i['disposition'])}")
-            if pct == 0:
-                print("    ⚠ never the top pick — only reachable via Suggest another")
+            if top.get(i["id"], 0) < 0.5:
+                print("    ⚠ effectively never offered first")
         if held:
             print("\n" + "-" * 74)
             print("HELD — not served, awaiting a ruling on framing")
@@ -145,6 +159,7 @@ def main():
             print(f"    ({len(r)} options in total)")
 
     print("\n" + "=" * 74)
+    print(f"{tied} of {total} answers have a tie at the top, split fairly.")
     print(f"{len(items)} shipping · {len(held)} held · "
           f"{sum(1 for i in items if i['source'] == 'us')} ours · "
           f"{total} answer combinations, "
