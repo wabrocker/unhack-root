@@ -29,9 +29,9 @@ DB = ROOT / "data" / "shelf.json"
 OUT = ROOT / "web" / "shelf-data.js"
 
 REQUIRED = ("id", "source", "action", "blurb", "title", "where", "url",
-            "button", "mode", "capacity", "reach", "disposition", "verified")
+            "button", "mode", "capacity", "reach", "disposition", "verified",
+            "family", "form")
 MODES = {"understand", "do", "both"}
-CAPS = {"minutes", "hour", "day", "many"}
 REACH = {"group", "solo", "either"}
 DISPOSITIONS = {"make", "talk", "dig", "showup", "support", "learn"}
 
@@ -40,6 +40,26 @@ def validate(db):
     """Everything checkable without a network, checked before it ships."""
     problems = []
     seen = set()
+    lib = db.get("library")
+    if not lib:
+        return ["no `library` block: a library must declare its own rule, "
+                "families and time vocabulary rather than hardcode them"]
+    # Declared per library, never hardcoded — that is what makes the format
+    # portable to a collection about something else entirely.
+    CAPS = set(lib["capacities"])
+    FAMILIES = set(lib["families"])
+    FORMS = set(lib["forms"])
+    if lib.get("visibility") not in ("public", "private"):
+        problems.append("library.visibility must be 'public' or 'private' — "
+                        "it decides what may be on the shelf at all, not just "
+                        "who can see it")
+    if lib.get("visibility") == "private" and not lib.get("access"):
+        problems.append("a private library must declare how access is "
+                        "controlled: obscurity, passphrase or accounts")
+    for key, fam in lib["families"].items():
+        for f in ("label", "note", "colour", "emblem"):
+            if not fam.get(f):
+                problems.append(f"family {key!r}: missing {f}")
     for it in db["items"]:
         where = it.get("id", "<no id>")
         for f in REQUIRED:
@@ -53,7 +73,13 @@ def validate(db):
         if it.get("mode") not in MODES:
             problems.append(f"{where}: mode {it.get('mode')!r}")
         if it.get("capacity") not in CAPS:
-            problems.append(f"{where}: capacity {it.get('capacity')!r}")
+            problems.append(f"{where}: capacity {it.get('capacity')!r} "
+                            f"is not one this library declares")
+        if it.get("family") not in FAMILIES:
+            problems.append(f"{where}: family {it.get('family')!r} "
+                            f"is not one this library declares")
+        if it.get("form") not in FORMS:
+            problems.append(f"{where}: form {it.get('form')!r}")
         if it.get("reach") not in REACH:
             problems.append(f"{where}: reach {it.get('reach')!r}")
         bad = set(it.get("disposition") or []) - DISPOSITIONS
@@ -91,8 +117,10 @@ def render(db):
     for it in shippable(db):
         items.append({k: it[k] for k in (
             "id", "action", "blurb", "title", "where", "url", "button",
-            "mode", "capacity", "reach", "disposition") if k in it})
+            "mode", "capacity", "reach", "disposition",
+            "family", "form") if k in it})
         items[-1]["outline"] = it.get("outline")
+    library = json.dumps(db["library"], indent=2, ensure_ascii=False)
     src = db["sources"]["opet"]
     body = json.dumps(items, indent=2, ensure_ascii=False)
     held = [i for i in db["items"] if i not in shippable(db)]
@@ -130,6 +158,10 @@ const SHELF_SOURCE = {{
 }};
 
 const SHELF = {body};
+
+/* The library declares its own rule, families and time vocabulary, so the
+ * renderer holds no knowledge of this particular subject. */
+const LIBRARY = {library};
 
 /* Counts for the shelf page, generated so they cannot drift from the data.
  * "considered" is everything we looked at in this collection. */

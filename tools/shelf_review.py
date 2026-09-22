@@ -26,9 +26,12 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DB = json.loads((ROOT / "data" / "shelf.json").read_text())
 
-CAP = {"minutes": 1, "hour": 2, "day": 3, "many": 4}
-CAP_LABEL = {"minutes": "20 min", "hour": "1 hr/wk", "day": "a day",
-             "many": "hours/wk"}
+# Read from the data, not hardcoded: this tool works on any library in
+# the format, not only this one.
+LIB = DB["library"]
+CAP = {k: v["thickness"] for k, v in LIB["capacities"].items()}
+CAP_LABEL = {k: v["label"][:9] for k, v in LIB["capacities"].items()}
+FAM = LIB["families"]
 DISPOSITIONS = ["talk", "dig", "make", "showup", "support", "learn"]
 DISP_LABEL = {"talk": "talking", "dig": "digging", "make": "making",
               "showup": "showing up", "support": "backing", "learn": "learning"}
@@ -124,8 +127,14 @@ def main():
 
     if only != "--who":
         print("=" * 74)
-        print("THE SHELF — every tag here is Claude's and none is reviewed")
+        print(f"{LIB['name'].upper()}")
+        print(f"rule: {LIB['rule']}")
+        print("every tag below is Claude's and none is reviewed")
         print("=" * 74)
+        from collections import Counter
+        byfam = Counter(i["family"] for i in items)
+        print("  " + " · ".join(f"{FAM[k]['label']} {byfam.get(k,0)}"
+                                for k in FAM))
         for i in sorted(items, key=lambda x: -top.get(x["id"], 0.0)):
             pct = round(top.get(i["id"], 0) / total * 100)
             ours = "OURS " if i["source"] == "us" else "     "
@@ -135,6 +144,9 @@ def main():
             print(f"    guide  : {i['title'][:62]}")
             print(f"    tags   : {i['mode']:<10} {CAP_LABEL[i['capacity']]:<9} "
                   f"{i['reach']:<6} {', '.join(i['disposition'])}")
+            fam = FAM[i["family"]]
+            print(f"    shelf  : {fam['label']} ({fam['colour']})"
+                  f"{'' if i['form'] == 'book' else '  [' + i['form'] + ']'}")
             if top.get(i["id"], 0) < 0.5:
                 print("    ⚠ effectively never offered first")
         if held:

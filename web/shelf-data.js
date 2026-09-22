@@ -38,6 +38,8 @@ const SHELF = [
       "dig",
       "learn"
     ],
+    "family": "see",
+    "form": "book",
     "outline": [
       "What today’s media environment does to a story — sensationalism, algorithms, consolidation",
       "Bias and literacy tools: AdFontes Media Bias Chart, AllSides, the News Literacy Project",
@@ -61,6 +63,8 @@ const SHELF = [
       "learn",
       "dig"
     ],
+    "family": "see",
+    "form": "book",
     "outline": [
       "Local media — why community papers and public radio see things national outlets miss",
       "Public and independent media, and how each is funded",
@@ -83,6 +87,8 @@ const SHELF = [
       "talk",
       "support"
     ],
+    "family": "talk",
+    "form": "book",
     "outline": [
       "Multimedia and educational resources — PBS LearningMedia, KidCitizen",
       "Reading lists for children and teenagers",
@@ -105,6 +111,8 @@ const SHELF = [
       "talk",
       "learn"
     ],
+    "family": "talk",
+    "form": "book",
     "outline": [
       "What a democracy is made of, and the signs it is coming apart",
       "People-powered action — the “pick up a shovel” half",
@@ -128,6 +136,8 @@ const SHELF = [
       "dig",
       "showup"
     ],
+    "family": "act",
+    "form": "book",
     "outline": [
       "Use what is already there — the library as the community hub it already is",
       "Invest in your news ecosystem: public radio, local journalism",
@@ -152,6 +162,8 @@ const SHELF = [
       "support",
       "make"
     ],
+    "family": "keep",
+    "form": "book",
     "outline": [
       "Daily routines — small practices that actually bring you joy",
       "Regular rituals, weekly or monthly, that you keep",
@@ -177,6 +189,8 @@ const SHELF = [
       "learn",
       "support"
     ],
+    "family": "keep",
+    "form": "book",
     "outline": [
       "Why inaction costs more than action — “courage is the new currency”",
       "A short essay framing the shift from watching to doing",
@@ -199,6 +213,8 @@ const SHELF = [
       "talk",
       "make"
     ],
+    "family": "talk",
+    "form": "book",
     "outline": null
   },
   {
@@ -216,6 +232,8 @@ const SHELF = [
       "learn",
       "support"
     ],
+    "family": "keep",
+    "form": "book",
     "outline": [
       "Films from 1976 to 2019, each with director, year and what it is about",
       "Civil rights and voting rights: Selma, and the march at Edmund Pettus Bridge",
@@ -239,6 +257,8 @@ const SHELF = [
       "support",
       "learn"
     ],
+    "family": "keep",
+    "form": "book",
     "outline": [
       "Seven things to do when the first burst of energy has gone",
       "Start at your own front door rather than nationally",
@@ -263,6 +283,8 @@ const SHELF = [
       "dig",
       "showup"
     ],
+    "family": "act",
+    "form": "book",
     "outline": [
       "Why “local government” is four or five separate bodies, and what each one decides",
       "How to work out which of them decides the thing that actually annoys you",
@@ -288,6 +310,8 @@ const SHELF = [
       "make",
       "talk"
     ],
+    "family": "act",
+    "form": "book",
     "outline": [
       "Check this is the right tool — if they do hold meetings, go to those instead",
       "Invite them, and mean it: the step people skip, and the one that makes it a meeting",
@@ -311,6 +335,8 @@ const SHELF = [
     "disposition": [
       "learn"
     ],
+    "family": "see",
+    "form": "book",
     "outline": [
       "All 128 questions from the current USCIS naturalization civics test",
       "Asked as multiple choice, and sometimes by recall, which is harder and teaches more",
@@ -334,6 +360,8 @@ const SHELF = [
       "dig",
       "talk"
     ],
+    "family": "act",
+    "form": "book",
     "outline": [
       "Check you are registered — at vote.gov, which hands you to your own state",
       "Your three dates, and the one that catches people: the registration deadline",
@@ -344,6 +372,70 @@ const SHELF = [
     ]
   }
 ];
+
+/* The library declares its own rule, families and time vocabulary, so the
+ * renderer holds no knowledge of this particular subject. */
+const LIBRARY = {
+  "name": "The Unhacking Democracy shelf",
+  "rule": "Does this teach a capability you keep?",
+  "rule_long": "Knowing how to check a claim is yours afterwards. Signing a pledge, joining a campaign or backing a particular bill may all be worth doing — they are just not what this shelf is for, and we leave them off whoever they come from, ourselves included.",
+  "ordered": false,
+  "families": {
+    "see": {
+      "label": "See clearly",
+      "note": "Knowing what is true",
+      "colour": "#26374e",
+      "emblem": "compass"
+    },
+    "talk": {
+      "label": "Talk to people",
+      "note": "The human half",
+      "colour": "#5d2328",
+      "emblem": "two-figures"
+    },
+    "act": {
+      "label": "Act where you live",
+      "note": "Your own patch",
+      "colour": "#463322",
+      "emblem": "rooftop"
+    },
+    "keep": {
+      "label": "Keep going",
+      "note": "Staying in it",
+      "colour": "#23402f",
+      "emblem": "oak-leaf"
+    }
+  },
+  "capacities": {
+    "minutes": {
+      "label": "Twenty minutes",
+      "thickness": 1
+    },
+    "hour": {
+      "label": "An hour a week",
+      "thickness": 2
+    },
+    "day": {
+      "label": "A day",
+      "thickness": 3
+    },
+    "many": {
+      "label": "Several hours a week",
+      "thickness": 4
+    }
+  },
+  "forms": {
+    "book": {
+      "note": "A substantial guide."
+    },
+    "pamphlet": {
+      "note": "A thin thing — a bare link-out, a tool, a directory, one page."
+    }
+  },
+  "visibility": "public",
+  "access": "open",
+  "access_note": "Open to anyone. Nothing here is gated, and the exclusion list is published because it is the only falsifiable evidence the rule is real."
+};
 
 /* Counts for the shelf page, generated so they cannot drift from the data.
  * "considered" is everything we looked at in this collection. */

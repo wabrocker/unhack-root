@@ -45,7 +45,9 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "family": "see",
+      "form": "book"
     },
     {
       "id": "media-literacy",
@@ -71,7 +73,9 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "family": "see",
+      "form": "book"
     },
     {
       "id": "talk-to-children",
@@ -97,7 +101,9 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "family": "talk",
+      "form": "book"
     },
     {
       "id": "discussion-guide",
@@ -124,7 +130,9 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "family": "talk",
+      "form": "book"
     },
     {
       "id": "civic-desert",
@@ -152,7 +160,9 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "family": "act",
+      "form": "book"
     },
     {
       "id": "joy-pathways",
@@ -181,7 +191,9 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "family": "keep",
+      "form": "book"
     },
     {
       "id": "spectator-to-agent",
@@ -207,7 +219,9 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "family": "keep",
+      "form": "book"
     },
     {
       "id": "dinners",
@@ -229,7 +243,9 @@
       "verified": "2026-09-21",
       "outline_read": null,
       "reviewed_by_bill": false,
-      "unread_reason": "democracyforward.org returns 403 to our reader; not yet read by a human either"
+      "unread_reason": "democracyforward.org returns 403 to our reader; not yet read by a human either",
+      "family": "talk",
+      "form": "book"
     },
     {
       "id": "empty-chair",
@@ -259,7 +275,9 @@
       "reviewed_by_bill": true,
       "framing_note": "HELD after review 2026-09-21. The steps are genuinely party-neutral — any constituency whose representative will not meet them can run this — but the guide names the RNC and DOGE as the reason it exists. Held because we cannot caveat a page we do not control. A neutral how-to for the same format would clear it.",
       "framing_flag": true,
-      "framing_cleared": false
+      "framing_cleared": false,
+      "family": "act",
+      "form": "book"
     },
     {
       "id": "voting-rights",
@@ -289,7 +307,9 @@
       "reviewed_by_bill": true,
       "framing_note": "HELD after review 2026-09-21. The checklist structure is good and election administration is close to a consensus floor. The problem is narrow: it endorses a specific bill, which is a policy ask sitting inside an otherwise neutral action.",
       "framing_flag": true,
-      "framing_cleared": false
+      "framing_cleared": false,
+      "family": "act",
+      "form": "book"
     },
     {
       "id": "front-door",
@@ -319,7 +339,9 @@
       "reviewed_by_bill": true,
       "framing_note": "HELD after review 2026-09-21. The most frustrating of the five — finding out what your town decides is arguably the best first action there is — and the school-board section names political adversaries. Strongest candidate for a how-to of our own.",
       "framing_flag": true,
-      "framing_cleared": false
+      "framing_cleared": false,
+      "family": "act",
+      "form": "book"
     },
     {
       "id": "courage-films",
@@ -346,7 +368,9 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "family": "keep",
+      "form": "book"
     },
     {
       "id": "keep-going",
@@ -373,7 +397,9 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "family": "keep",
+      "form": "book"
     },
     {
       "id": "own-town",
@@ -402,7 +428,9 @@
       ],
       "outline_read": "2026-09-21",
       "verified": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "family": "act",
+      "form": "book"
     },
     {
       "id": "own-townhall",
@@ -431,7 +459,9 @@
       ],
       "outline_read": "2026-09-21",
       "verified": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "family": "act",
+      "form": "book"
     },
     {
       "id": "own-civics",
@@ -457,7 +487,9 @@
       "outline_read": "2026-09-21",
       "verified": "2026-09-21",
       "reviewed_by_bill": false,
-      "mode_note": "both, not understand (Bill, 2026-09-22). Taking a quiz is doing something rather than reading about it — a concrete task with immediate feedback, finishable in one sitting. Its single disposition stays `learn`, because adding a second to make it win would be fudging."
+      "mode_note": "both, not understand (Bill, 2026-09-22). Taking a quiz is doing something rather than reading about it — a concrete task with immediate feedback, finishable in one sitting. Its single disposition stays `learn`, because adding a second to make it win would be fudging.",
+      "family": "see",
+      "form": "book"
     },
     {
       "id": "own-voting",
@@ -486,7 +518,9 @@
       ],
       "outline_read": "2026-09-21",
       "verified": "2026-09-21",
-      "reviewed_by_bill": false
+      "reviewed_by_bill": false,
+      "family": "act",
+      "form": "book"
     }
   ],
   "excluded": [
@@ -580,5 +614,66 @@
   "own_howtos": {
     "decided": "2026-09-21",
     "note": "Writing our own how-tos is IN SCOPE (Bill, 2026-09-21). The pivot said the app stops inventing solutions and guides people through other people's material — this does not reverse that. Attending a town meeting is not our idea. The distinction is between inventing a solution and writing a neutral how-to for a mechanic that already exists, where nobody publishes one without a side attached. Three candidates, all held items whose structure we want and whose framing we cannot use: what your town decides and when it meets; how to run an empty-chair town hall; a registration and voting-rights checklist."
+  },
+  "library": {
+    "name": "The Unhacking Democracy shelf",
+    "rule": "Does this teach a capability you keep?",
+    "rule_long": "Knowing how to check a claim is yours afterwards. Signing a pledge, joining a campaign or backing a particular bill may all be worth doing — they are just not what this shelf is for, and we leave them off whoever they come from, ourselves included.",
+    "ordered": false,
+    "families": {
+      "see": {
+        "label": "See clearly",
+        "note": "Knowing what is true",
+        "colour": "#26374e",
+        "emblem": "compass"
+      },
+      "talk": {
+        "label": "Talk to people",
+        "note": "The human half",
+        "colour": "#5d2328",
+        "emblem": "two-figures"
+      },
+      "act": {
+        "label": "Act where you live",
+        "note": "Your own patch",
+        "colour": "#463322",
+        "emblem": "rooftop"
+      },
+      "keep": {
+        "label": "Keep going",
+        "note": "Staying in it",
+        "colour": "#23402f",
+        "emblem": "oak-leaf"
+      }
+    },
+    "capacities": {
+      "minutes": {
+        "label": "Twenty minutes",
+        "thickness": 1
+      },
+      "hour": {
+        "label": "An hour a week",
+        "thickness": 2
+      },
+      "day": {
+        "label": "A day",
+        "thickness": 3
+      },
+      "many": {
+        "label": "Several hours a week",
+        "thickness": 4
+      }
+    },
+    "forms": {
+      "book": {
+        "note": "A substantial guide."
+      },
+      "pamphlet": {
+        "note": "A thin thing — a bare link-out, a tool, a directory, one page."
+      }
+    },
+    "visibility": "public",
+    "access": "open",
+    "access_note": "Open to anyone. Nothing here is gated, and the exclusion list is published because it is the only falsifiable evidence the rule is real."
   }
 }
