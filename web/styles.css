@@ -1301,3 +1301,10 @@ body.modal-open { overflow: hidden; }
   box-shadow: 0 1px 0 #8d6b23;
 }
 .bar-btn-gilt:hover { filter: brightness(1.06); border-color: #8d6b23; }
+
+/* The build stamp. Deliberately quiet — it exists so two people testing
+   together can tell whether they are looking at the same thing. */
+.build-stamp {
+  margin-left: .5rem; font-size: .78rem; color: var(--ink-soft);
+  opacity: .6; font-variant-numeric: tabular-nums;
+}

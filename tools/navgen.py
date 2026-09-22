@@ -127,6 +127,7 @@ FOOTER = '''  <footer>
     </p>
     <p>
       Built by <a href="https://billbrocker.com" rel="noopener">Bill Brocker</a>.
+      <span class="build-stamp" id="build-stamp">dev</span>
     </p>
   </footer>'''
 

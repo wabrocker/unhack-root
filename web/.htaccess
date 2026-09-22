@@ -11,6 +11,15 @@
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 
+  <!-- Every script URL is hashed too (see build.sh), so the same rule
+       applies: a change gives it a new URL, and the old one can be kept
+       forever. Without this it fell back to the host's one-week default,
+       which is the one window where a tester can be looking at yesterday
+       and not know it. -->
+  <FilesMatch "\.js$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
   <!-- Not hashed, so a short bound rather than a long cache with no easy
        way to force it — same reasoning as unhack-fl's data/*.json rule. -->
   <FilesMatch "\.svg$">

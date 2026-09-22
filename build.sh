@@ -52,6 +52,7 @@ JS_HASH=$(hash_of web/civics-data.js)$(hash_of web/civics-quiz.js)$(hash_of web/
 # the silent-failure shape again — it renders fine and recommends nothing.
 NEXT_HASH=$(hash_of web/shelf-data.js)$(hash_of web/next.js)$(hash_of web/shelf.js)$(hash_of web/library.js)
 CSS_HASH=$(hash_of web/styles.css)
+BUILD_ID="$(date -u '+%b %-d %H:%M') UTC"    # shown in the footer, see below
 # The page list comes from navgen, which is already the site map. Keeping
 # a second copy here is how howto-town.html got a nav, a breadcrumb, a
 # passing check and a 404 all at the same time.
@@ -64,6 +65,10 @@ for page in $(python3 tools/navgen.py --list); do
       -e "s|src=\"library\.js\"|src=\"library.js?v=${NEXT_HASH}\"|" \
     "web/${page}.html" > "dist/${page}.html"
   grep -q "styles.css?v=${CSS_HASH}" "dist/${page}.html" || { echo "FAIL: css not stamped in ${page}.html"; exit 1; }
+  # Two people testing together need to know whether they are looking at
+  # the same build. This is that, in the footer, where it is out of the
+  # way but can be read aloud over the phone.
+  sed -i.bak -e "s|>dev</span>|>${BUILD_ID}</span>|" "dist/${page}.html" && rm -f "dist/${page}.html.bak"
 done
 cp web/styles.css "dist/styles.css"
 
