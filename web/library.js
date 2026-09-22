@@ -39,14 +39,31 @@
       (EMBLEMS[name] || EMBLEMS.compass) + "</svg>";
   }
 
-  let open = null;
+  let open = null, openItem = null;
 
   function close() {
     if (!open) return;
     open.classList.remove("is-open");
     open.setAttribute("aria-expanded", "false");
     open = null;
+    openItem = null;
     document.body.classList.remove("has-open-book");
+    const bar = document.getElementById("book-bar");
+    if (bar) bar.hidden = true;
+  }
+
+  /* The control for the open book, in ordinary flow under the shelf. It
+     lives here rather than on the cover because a cover rotated in 3D is
+     not reliably hit-testable — the browser reports the shelf behind it
+     even at the button's own centre, on desktop and on a phone. */
+  function showBar(item) {
+    const bar = document.getElementById("book-bar");
+    if (!bar) return;
+    const fam = LIBRARY.families[item.family];
+    document.getElementById("bar-title").textContent = item.title;
+    document.getElementById("bar-meta").textContent =
+      fam.label + " · " + LIBRARY.capacities[item.capacity].label;
+    bar.hidden = false;
   }
 
   function build(item) {
@@ -80,19 +97,19 @@
           '<span class="face-title">' + item.title + "</span>" +
           '<span class="face-rule"></span>' +
           '<span class="face-meta">' + fam.label + " &middot; " + cap.label + "</span>" +
-          '<span class="face-open">Contents</span>' +
         "</span>" +
       "</span>";
 
     book.addEventListener("click", function (e) {
       e.stopPropagation();
-      if (e.target.closest(".face-open")) { openSynopsis(item); return; }
       if (open === book) { close(); return; }   // push it back on the shelf
       close();
       open = book;
+      openItem = item;
       book.classList.add("is-open");
       book.setAttribute("aria-expanded", "true");
       document.body.classList.add("has-open-book");
+      showBar(item);
       book.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
     });
     book.addEventListener("dblclick", function (e) {
@@ -162,6 +179,15 @@
     document.body.classList.add("modal-open");
     take.focus();
   }
+
+  document.getElementById("bar-contents").addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (openItem) openSynopsis(openItem);
+  });
+  document.getElementById("bar-back").addEventListener("click", function (e) {
+    e.stopPropagation();
+    close();
+  });
 
   document.getElementById("synopsis").addEventListener("click", function (e) {
     if (e.target.id === "synopsis" || e.target.classList.contains("syn-close")) {

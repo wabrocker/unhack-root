@@ -1055,6 +1055,10 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
   min-height: 218px; padding-bottom: 2px;
   transform-style: preserve-3d;
 }
+/* Outside the scrolling case. Inside it, the board was only as wide as
+   the visible area, so it ran out from under the books as soon as you
+   scrolled — the shelf edge stopped a few books short. A shelf edge is a
+   fixed piece of furniture; it should not move when you look along it. */
 .shelf-board {
   height: 15px; border-radius: 0 0 8px 8px;
   background:
@@ -1268,3 +1272,32 @@ body.modal-open { overflow: hidden; }
   .desk-actions { width: 100%; }
   .desk-ask { flex: 1 1 auto; text-align: center; }
 }
+
+/* The open book's controls, in ordinary flow. They are not on the cover
+   because a cover rotated in 3D is not reliably hit-testable: at the
+   button's own centre the browser reports the shelf behind it, on desktop
+   and on a phone alike. Real covers have no buttons on them anyway. */
+.book-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem;
+  justify-content: space-between;
+  margin: .7rem 0 0; padding: .7rem .9rem;
+  background: var(--bg-soft); border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.book-bar[hidden] { display: none; }
+.bar-words { min-width: 0; font-family: "EB Garamond", Georgia, serif; }
+.bar-words b { display: block; font-size: 1.05rem; line-height: 1.25; }
+.bar-words span { font-size: .87rem; color: var(--ink-soft); }
+.bar-buttons { display: flex; gap: .5rem; flex: none; }
+.bar-btn {
+  font: inherit; font-size: .92rem; padding: .45rem .9rem; cursor: pointer;
+  border-radius: 6px; border: 1px solid var(--line);
+  background: transparent; color: var(--ink);
+}
+.bar-btn:hover { border-color: var(--accent); }
+.bar-btn-gilt {
+  font-weight: 600; color: #2a2014; border-color: #b8933f;
+  background: linear-gradient(180deg, #e7c878, #c9a24e);
+  box-shadow: 0 1px 0 #8d6b23;
+}
+.bar-btn-gilt:hover { filter: brightness(1.06); border-color: #8d6b23; }
