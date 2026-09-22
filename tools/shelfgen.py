@@ -118,7 +118,7 @@ def render(db):
         items.append({k: it[k] for k in (
             "id", "action", "blurb", "title", "where", "url", "button",
             "mode", "capacity", "reach", "disposition",
-            "family", "form") if k in it})
+            "family", "form", "spine") if k in it})
         items[-1]["outline"] = it.get("outline")
     library = json.dumps(db["library"], indent=2, ensure_ascii=False)
     src = db["sources"]["opet"]

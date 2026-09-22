@@ -47,7 +47,8 @@
       "outline_read": "2026-09-21",
       "reviewed_by_bill": true,
       "family": "see",
-      "form": "book"
+      "form": "book",
+      "spine": "Checking the Facts"
     },
     {
       "id": "media-literacy",
@@ -75,7 +76,8 @@
       "outline_read": "2026-09-21",
       "reviewed_by_bill": true,
       "family": "see",
-      "form": "book"
+      "form": "book",
+      "spine": "Media Literacy Kit"
     },
     {
       "id": "talk-to-children",
@@ -103,7 +105,8 @@
       "outline_read": "2026-09-21",
       "reviewed_by_bill": true,
       "family": "talk",
-      "form": "book"
+      "form": "book",
+      "spine": "Talking With Children"
     },
     {
       "id": "discussion-guide",
@@ -132,7 +135,8 @@
       "outline_read": "2026-09-21",
       "reviewed_by_bill": true,
       "family": "talk",
-      "form": "book"
+      "form": "book",
+      "spine": "Discussion Guide"
     },
     {
       "id": "civic-desert",
@@ -162,7 +166,8 @@
       "outline_read": "2026-09-21",
       "reviewed_by_bill": true,
       "family": "act",
-      "form": "book"
+      "form": "book",
+      "spine": "In a Civic Desert"
     },
     {
       "id": "joy-pathways",
@@ -193,7 +198,8 @@
       "outline_read": "2026-09-21",
       "reviewed_by_bill": true,
       "family": "keep",
-      "form": "book"
+      "form": "book",
+      "spine": "Pathways to Joy"
     },
     {
       "id": "spectator-to-agent",
@@ -221,7 +227,8 @@
       "outline_read": "2026-09-21",
       "reviewed_by_bill": true,
       "family": "keep",
-      "form": "book"
+      "form": "book",
+      "spine": "Spectator to Agent"
     },
     {
       "id": "dinners",
@@ -245,7 +252,8 @@
       "reviewed_by_bill": true,
       "unread_reason": "democracyforward.org returns 403 to our reader; not yet read by a human either",
       "family": "talk",
-      "form": "book"
+      "form": "book",
+      "spine": "Dinners for Democracy"
     },
     {
       "id": "empty-chair",
@@ -277,7 +285,8 @@
       "framing_flag": true,
       "framing_cleared": false,
       "family": "act",
-      "form": "book"
+      "form": "book",
+      "spine": "Empty Chair Town Hall"
     },
     {
       "id": "voting-rights",
@@ -309,7 +318,8 @@
       "framing_flag": true,
       "framing_cleared": false,
       "family": "act",
-      "form": "book"
+      "form": "book",
+      "spine": "Supporting Voting Rights"
     },
     {
       "id": "front-door",
@@ -341,7 +351,8 @@
       "framing_flag": true,
       "framing_cleared": false,
       "family": "act",
-      "form": "book"
+      "form": "book",
+      "spine": "Be More Civically Active"
     },
     {
       "id": "courage-films",
@@ -370,7 +381,8 @@
       "outline_read": "2026-09-21",
       "reviewed_by_bill": true,
       "family": "keep",
-      "form": "book"
+      "form": "book",
+      "spine": "Courageous People"
     },
     {
       "id": "keep-going",
@@ -399,7 +411,8 @@
       "outline_read": "2026-09-21",
       "reviewed_by_bill": true,
       "family": "keep",
-      "form": "book"
+      "form": "book",
+      "spine": "Tools for the Journey"
     },
     {
       "id": "own-town",
@@ -430,7 +443,8 @@
       "verified": "2026-09-21",
       "reviewed_by_bill": true,
       "family": "act",
-      "form": "book"
+      "form": "book",
+      "spine": "What Your Town Decides"
     },
     {
       "id": "own-townhall",
@@ -461,7 +475,8 @@
       "verified": "2026-09-21",
       "reviewed_by_bill": true,
       "family": "act",
-      "form": "book"
+      "form": "book",
+      "spine": "Hold the Meeting Yourself"
     },
     {
       "id": "own-civics",
@@ -489,7 +504,8 @@
       "reviewed_by_bill": true,
       "mode_note": "both, not understand (Bill, 2026-09-22). Taking a quiz is doing something rather than reading about it — a concrete task with immediate feedback, finishable in one sitting. Its single disposition stays `learn`, because adding a second to make it win would be fudging.",
       "family": "see",
-      "form": "book"
+      "form": "book",
+      "spine": "Citizenship Test"
     },
     {
       "id": "own-voting",
@@ -520,7 +536,8 @@
       "verified": "2026-09-21",
       "reviewed_by_bill": true,
       "family": "act",
-      "form": "book"
+      "form": "book",
+      "spine": "Check Your Own Vote"
     }
   ],
   "excluded": [

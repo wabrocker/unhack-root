@@ -68,7 +68,7 @@
       '<span class="spine">' +
         '<span class="band band-top"></span>' +
         emblem(fam.emblem, "gilt-emblem") +
-        '<span class="spine-title">' + item.title + "</span>" +
+        '<span class="spine-title">' + (item.spine || item.title) + "</span>" +
         '<span class="band band-bottom"></span>' +
       "</span>" +
       '<span class="face">' +
@@ -77,6 +77,7 @@
           '<span class="face-title">' + item.title + "</span>" +
           '<span class="face-rule"></span>' +
           '<span class="face-meta">' + fam.label + " &middot; " + cap.label + "</span>" +
+          '<span class="face-open">What it covers</span>' +
         "</span>" +
       "</span>";
 
@@ -219,6 +220,36 @@
   });
 
   render("family");
+
+  /* Arrows, because a horizontal scroll area with no affordance reads as
+     a cropped picture rather than a shelf you can walk along. Hidden at
+     each end so they never point at nothing. */
+  (function () {
+    const box = document.getElementById("shelf-case");
+    const prev = document.getElementById("shelf-prev");
+    const next = document.getElementById("shelf-next");
+    if (!box || !prev || !next) return;
+
+    function step() { return Math.max(160, box.clientWidth * 0.75); }
+    prev.addEventListener("click", function (e) {
+      e.stopPropagation();
+      box.scrollBy({ left: -step(), behavior: "smooth" });
+    });
+    next.addEventListener("click", function (e) {
+      e.stopPropagation();
+      box.scrollBy({ left: step(), behavior: "smooth" });
+    });
+
+    function sync() {
+      const over = box.scrollWidth - box.clientWidth;
+      prev.hidden = box.scrollLeft < 8;
+      next.hidden = over < 8 || box.scrollLeft > over - 8;
+    }
+    box.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", sync);
+    new MutationObserver(sync).observe(box, { childList: true, subtree: true });
+    sync();
+  })();
 
   const legend = document.getElementById("legend");
   if (legend) {

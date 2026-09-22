@@ -1011,25 +1011,57 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
 
 /* The case. Dark on both themes on purpose — a library is a dark room
    with light on the spines, and a white one looks like a spreadsheet. */
-.shelf-case {
-  --case: #2a211a;
-  position: relative; border-radius: 10px; padding: 1.4rem 1.1rem 0;
-  background:
-    linear-gradient(180deg, #0000 0%, #0006 100%),
-    repeating-linear-gradient(90deg, #00000012 0 3px, #0000 3px 9px),
-    var(--case);
-  box-shadow: inset 0 14px 26px -12px #000a, 0 2px 14px #0003;
-  overflow-x: auto; overflow-y: hidden; perspective: 1400px;
+/* The case sits in a frame so the arrows can hang over its edges without
+   being inside the thing that scrolls. */
+.shelf-frame { position: relative; }
+.shelf-nav {
+  position: absolute; top: 0; bottom: 15px; width: 46px; z-index: 6;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; cursor: pointer; padding: 0;
+  color: #f0e3cb; font-size: 26px; line-height: 1;
+  transition: opacity .2s;
 }
+.shelf-nav[hidden] { display: none; }
+.shelf-nav-prev { left: 0;  border-radius: 10px 0 0 0;
+  background: linear-gradient(90deg, #3a2a1ce6 30%, #3a2a1c00 100%); }
+.shelf-nav-next { right: 0; border-radius: 0 10px 0 0;
+  background: linear-gradient(270deg, #3a2a1ce6 30%, #3a2a1c00 100%); }
+.shelf-nav:hover { color: #fff; }
+.shelf-nav svg { width: 22px; height: 22px; filter: drop-shadow(0 1px 2px #000); }
+
+.shelf-case {
+  --case: #6b4f33;
+  position: relative; border-radius: 10px; padding: 1.4rem 1.1rem .5rem;
+  /* Wood: irregular grain rather than an even stripe, a warm mid-brown
+     rather than near-black, and only a soft shadow at the top, so the
+     shelf reads as lit from the room instead of unlit. */
+  background:
+    linear-gradient(180deg, #00000026 0%, #0000 22%, #0000 78%, #0000002e 100%),
+    repeating-linear-gradient(90deg,
+      #00000010 0 2px, #0000 2px 7px, #ffffff0a 7px 8px, #0000 8px 17px,
+      #00000014 17px 19px, #0000 19px 29px),
+    linear-gradient(180deg, #7d5d3d 0%, #6b4f33 45%, #5a4129 100%);
+  box-shadow: inset 0 9px 18px -12px #0008, 0 2px 14px #0003;
+  overflow-x: auto; overflow-y: hidden; perspective: 1400px;
+  /* The scrollbar was a grey browser bar laid across the wood, right where
+     the shelf edge should be. Now that the arrows exist it has nothing
+     left to tell anyone, so it goes and the board is unbroken. Dragging,
+     swiping, trackpads and keyboards all still scroll. */
+  scrollbar-width: none;
+}
+.shelf-case::-webkit-scrollbar { height: 0; width: 0; }
 .shelf-row {
   display: flex; align-items: flex-end; gap: 3px;
   min-height: 218px; padding-bottom: 2px;
   transform-style: preserve-3d;
 }
 .shelf-board {
-  height: 13px; border-radius: 0 0 8px 8px;
-  background: linear-gradient(180deg, #6b5136 0%, #3c2c1c 55%, #241a11 100%);
-  box-shadow: 0 5px 12px -3px #000a;
+  height: 15px; border-radius: 0 0 8px 8px;
+  background:
+    repeating-linear-gradient(90deg,
+      #00000012 0 3px, #0000 3px 11px, #ffffff0c 11px 12px, #0000 12px 23px),
+    linear-gradient(180deg, #9c7850 0%, #7a5c3c 40%, #4e3823 100%);
+  box-shadow: 0 5px 12px -4px #0007, inset 0 1px 0 #ffffff26;
 }
 .shelf-hint { margin: .6rem 0 0; font-size: .85rem; color: var(--ink-soft); }
 .shelf-noscript { color: #e8dcc8; padding: 1rem; }
@@ -1038,13 +1070,13 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
 .book {
   --leather: #463322;
   position: relative; flex: none; padding: 0; cursor: pointer;
-  width: 38px; height: var(--tall, 186px);
+  width: 48px; height: var(--tall, 186px);
   background: none; border: 0;
   transform-style: preserve-3d; transition: transform .45s ease, margin .45s ease;
   transform-origin: bottom center;
 }
-.book-t1 { width: 34px; } .book-t2 { width: 47px; }
-.book-t3 { width: 62px; } .book-t4 { width: 78px; }
+.book-t1 { width: 44px; } .book-t2 { width: 60px; }
+.book-t3 { width: 80px; } .book-t4 { width: 98px; }
 
 .spine, .face {
   position: absolute; inset: 0; border-radius: 3px 5px 5px 3px;
@@ -1062,6 +1094,7 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
    rather than a second panel the same width. Turning the book swings it
    into view. */
 .face {
+  visibility: hidden;          /* only the open book needs one — see below */
   left: 100%; right: auto; width: 132px;
   transform-origin: left center;
   transform: rotateY(-90deg);
@@ -1090,20 +1123,26 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
   color: #d9b45e;
   filter: drop-shadow(0 1px 0 #00000080);
 }
-.gilt-emblem { width: 17px; height: 17px; position: absolute; bottom: 7px; }
-.book-t1 .gilt-emblem { width: 14px; height: 14px; }
+/* A gilt device sits on a pasted label, not straight on the hide. */
+.gilt-emblem {
+  width: 15px; height: 15px; position: absolute; bottom: 9px;
+  padding: 3px; border-radius: 3px;
+  background: linear-gradient(180deg, #ffffff33, #ffffff14);
+  box-shadow: inset 0 0 0 1px #d9b45e40, 0 1px 2px #0005;
+}
+.book-t1 .gilt-emblem { width: 13px; height: 13px; padding: 2px; }
 
 .spine-title {
   writing-mode: vertical-rl; text-orientation: mixed;
-  max-height: calc(100% - 84px); overflow: hidden;
+  max-height: calc(100% - 94px); overflow: hidden;
   font-family: "IM Fell English", Georgia, serif;
-  font-size: 13px; line-height: 1.1; letter-spacing: .02em;
+  font-size: 11px; line-height: 1.12; letter-spacing: .015em;
   text-align: center;
   background: linear-gradient(180deg, #f0d79a 0%, #c9a24e 45%, #8d6b23 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
   text-shadow: 0 1px 0 #00000055;
 }
-.book-t1 .spine-title { font-size: 11.5px; }
+.book-t1 .spine-title { font-size: 10px; }
 
 /* House editions get a gilt rule down each edge. */
 .is-ours .spine::before, .is-ours .spine::after {
@@ -1117,7 +1156,13 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
 .is-pamphlet .band { display: none; }
 
 /* Pulled out and turned toward you. One animation, and it is the most
-   library-ish moment in the thing. */
+   library-ish moment in the thing.
+
+   Only the open book gets a cover in the scene. Every book carrying a
+   132px panel folded back into shared 3D space meant each one intersected
+   its neighbours — which is what the speckled overlap across the spines
+   was, on every platform. */
+.book.is-open .face { visibility: visible; }
 .book.is-open {
   transform: translateY(-14px) rotateY(52deg) scale(1.1); z-index: 5;
   transform-origin: left bottom;
@@ -1137,6 +1182,15 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
 }
 .face-rule { width: 52%; height: 1px; background: #d9b45e66; }
 .face-meta { font-size: 10.5px; color: #e6d6b0b0; font-family: "EB Garamond", serif; }
+/* A stable target for the synopsis: the book moves when it opens, so a
+   second click on where it used to be landed on the case and read as
+   "close". A button on the cover cannot move out from under you. */
+.face-open {
+  margin-top: .5rem; padding: .3rem .65rem; border-radius: 3px;
+  font-family: "EB Garamond", Georgia, serif; font-size: 11px;
+  color: #2a2014; background: linear-gradient(180deg, #e7c878, #c9a24e);
+  box-shadow: 0 1px 0 #8d6b23;
+}
 
 .legend {
   display: flex; flex-wrap: wrap; gap: .5rem 1.4rem;
@@ -1199,6 +1253,7 @@ body.modal-open { overflow: hidden; }
 
 @media (max-width: 640px) {
   .shelf-row { min-height: 190px; }
+  .shelf-nav { width: 34px; }
   .book { height: calc(var(--tall, 186px) * .86); }
   .book.is-open { transform: translateY(-8px) rotateY(48deg) scale(1.05); margin-right: 96px; }
   .face { width: 112px; }

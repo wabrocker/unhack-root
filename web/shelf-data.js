@@ -40,6 +40,7 @@ const SHELF = [
     ],
     "family": "see",
     "form": "book",
+    "spine": "Checking the Facts",
     "outline": [
       "What today’s media environment does to a story — sensationalism, algorithms, consolidation",
       "Bias and literacy tools: AdFontes Media Bias Chart, AllSides, the News Literacy Project",
@@ -65,6 +66,7 @@ const SHELF = [
     ],
     "family": "see",
     "form": "book",
+    "spine": "Media Literacy Kit",
     "outline": [
       "Local media — why community papers and public radio see things national outlets miss",
       "Public and independent media, and how each is funded",
@@ -89,6 +91,7 @@ const SHELF = [
     ],
     "family": "talk",
     "form": "book",
+    "spine": "Talking With Children",
     "outline": [
       "Multimedia and educational resources — PBS LearningMedia, KidCitizen",
       "Reading lists for children and teenagers",
@@ -113,6 +116,7 @@ const SHELF = [
     ],
     "family": "talk",
     "form": "book",
+    "spine": "Discussion Guide",
     "outline": [
       "What a democracy is made of, and the signs it is coming apart",
       "People-powered action — the “pick up a shovel” half",
@@ -138,6 +142,7 @@ const SHELF = [
     ],
     "family": "act",
     "form": "book",
+    "spine": "In a Civic Desert",
     "outline": [
       "Use what is already there — the library as the community hub it already is",
       "Invest in your news ecosystem: public radio, local journalism",
@@ -164,6 +169,7 @@ const SHELF = [
     ],
     "family": "keep",
     "form": "book",
+    "spine": "Pathways to Joy",
     "outline": [
       "Daily routines — small practices that actually bring you joy",
       "Regular rituals, weekly or monthly, that you keep",
@@ -191,6 +197,7 @@ const SHELF = [
     ],
     "family": "keep",
     "form": "book",
+    "spine": "Spectator to Agent",
     "outline": [
       "Why inaction costs more than action — “courage is the new currency”",
       "A short essay framing the shift from watching to doing",
@@ -215,6 +222,7 @@ const SHELF = [
     ],
     "family": "talk",
     "form": "book",
+    "spine": "Dinners for Democracy",
     "outline": null
   },
   {
@@ -234,6 +242,7 @@ const SHELF = [
     ],
     "family": "keep",
     "form": "book",
+    "spine": "Courageous People",
     "outline": [
       "Films from 1976 to 2019, each with director, year and what it is about",
       "Civil rights and voting rights: Selma, and the march at Edmund Pettus Bridge",
@@ -259,6 +268,7 @@ const SHELF = [
     ],
     "family": "keep",
     "form": "book",
+    "spine": "Tools for the Journey",
     "outline": [
       "Seven things to do when the first burst of energy has gone",
       "Start at your own front door rather than nationally",
@@ -285,6 +295,7 @@ const SHELF = [
     ],
     "family": "act",
     "form": "book",
+    "spine": "What Your Town Decides",
     "outline": [
       "Why “local government” is four or five separate bodies, and what each one decides",
       "How to work out which of them decides the thing that actually annoys you",
@@ -312,6 +323,7 @@ const SHELF = [
     ],
     "family": "act",
     "form": "book",
+    "spine": "Hold the Meeting Yourself",
     "outline": [
       "Check this is the right tool — if they do hold meetings, go to those instead",
       "Invite them, and mean it: the step people skip, and the one that makes it a meeting",
@@ -337,6 +349,7 @@ const SHELF = [
     ],
     "family": "see",
     "form": "book",
+    "spine": "Citizenship Test",
     "outline": [
       "All 128 questions from the current USCIS naturalization civics test",
       "Asked as multiple choice, and sometimes by recall, which is harder and teaches more",
@@ -362,6 +375,7 @@ const SHELF = [
     ],
     "family": "act",
     "form": "book",
+    "spine": "Check Your Own Vote",
     "outline": [
       "Check you are registered — at vote.gov, which hands you to your own state",
       "Your three dates, and the one that catches people: the registration deadline",
