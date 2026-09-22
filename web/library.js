@@ -59,7 +59,10 @@
       (item.form === "pamphlet" ? " is-pamphlet" : "") +
       (item.source === "us" ? " is-ours" : "");
     book.style.setProperty("--leather", fam.colour);
-    book.style.setProperty("--tall", (172 + jitter(item.id, 34)) + "px");
+    // Floor raised from 172: the cover has to hold an emblem, a title,
+    // a rule, a line of meta and a button, and the shortest books were
+    // clipping the button off the bottom.
+    book.style.setProperty("--tall", (186 + jitter(item.id, 30)) + "px");
     book.setAttribute("aria-expanded", "false");
     book.setAttribute("aria-label",
       item.title + " — " + fam.label + ", " + cap.label);
@@ -77,13 +80,14 @@
           '<span class="face-title">' + item.title + "</span>" +
           '<span class="face-rule"></span>' +
           '<span class="face-meta">' + fam.label + " &middot; " + cap.label + "</span>" +
-          '<span class="face-open">What it covers</span>' +
+          '<span class="face-open">Contents</span>' +
         "</span>" +
       "</span>";
 
     book.addEventListener("click", function (e) {
       e.stopPropagation();
-      if (open === book) { openSynopsis(item); return; }
+      if (e.target.closest(".face-open")) { openSynopsis(item); return; }
+      if (open === book) { close(); return; }   // push it back on the shelf
       close();
       open = book;
       book.classList.add("is-open");
