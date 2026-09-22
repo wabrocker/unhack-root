@@ -45,7 +45,7 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "family": "see",
       "form": "book"
     },
@@ -73,7 +73,7 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "family": "see",
       "form": "book"
     },
@@ -101,7 +101,7 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "family": "talk",
       "form": "book"
     },
@@ -130,7 +130,7 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "family": "talk",
       "form": "book"
     },
@@ -160,7 +160,7 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "family": "act",
       "form": "book"
     },
@@ -191,7 +191,7 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "family": "keep",
       "form": "book"
     },
@@ -219,7 +219,7 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "family": "keep",
       "form": "book"
     },
@@ -242,7 +242,7 @@
       "outline": null,
       "verified": "2026-09-21",
       "outline_read": null,
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "unread_reason": "democracyforward.org returns 403 to our reader; not yet read by a human either",
       "family": "talk",
       "form": "book"
@@ -368,7 +368,7 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "family": "keep",
       "form": "book"
     },
@@ -397,7 +397,7 @@
       ],
       "verified": "2026-09-21",
       "outline_read": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "family": "keep",
       "form": "book"
     },
@@ -428,7 +428,7 @@
       ],
       "outline_read": "2026-09-21",
       "verified": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "family": "act",
       "form": "book"
     },
@@ -459,7 +459,7 @@
       ],
       "outline_read": "2026-09-21",
       "verified": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "family": "act",
       "form": "book"
     },
@@ -486,7 +486,7 @@
       ],
       "outline_read": "2026-09-21",
       "verified": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "mode_note": "both, not understand (Bill, 2026-09-22). Taking a quiz is doing something rather than reading about it — a concrete task with immediate feedback, finishable in one sitting. Its single disposition stays `learn`, because adding a second to make it win would be fudging.",
       "family": "see",
       "form": "book"
@@ -518,7 +518,7 @@
       ],
       "outline_read": "2026-09-21",
       "verified": "2026-09-21",
-      "reviewed_by_bill": false,
+      "reviewed_by_bill": true,
       "family": "act",
       "form": "book"
     }
@@ -674,6 +674,7 @@
     },
     "visibility": "public",
     "access": "open",
-    "access_note": "Open to anyone. Nothing here is gated, and the exclusion list is published because it is the only falsifiable evidence the rule is real."
+    "access_note": "Open to anyone. Nothing here is gated, and the exclusion list is published because it is the only falsifiable evidence the rule is real.",
+    "classifications_reviewed": "2026-09-22"
   }
 }

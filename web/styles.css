@@ -969,3 +969,243 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
   background: var(--bg-soft);
 }
 .card-lead h3 { margin-top: 0; font-size: 1.3rem; }
+
+/* --- The library ---------------------------------------------------
+   Leather is faked with three things and no images: a cross-spine
+   gradient so the book reads as round rather than flat, a very fine
+   repeating gradient for grain, and raised bands near the ends. Gilt is
+   a gradient with a dark edge under it, because real gold leaf is bright
+   metal over a debossed line and flat yellow never reads as gold. */
+
+.library-fonts { font-family: "EB Garamond", Georgia, serif; }
+
+.desk {
+  display: flex; flex-wrap: wrap; gap: 1rem 1.5rem;
+  align-items: center; justify-content: space-between;
+  margin-top: 1.75rem; padding: 1.15rem 1.3rem;
+  background: var(--bg-soft); border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+.desk-words { flex: 1 1 18rem; min-width: 0; }
+.desk h2 {
+  margin: 0 0 .4rem; font-size: 1.5rem; line-height: 1.2;
+  font-family: "EB Garamond", Georgia, serif; font-weight: 600;
+}
+.desk p { margin: 0; color: var(--ink-soft); font-size: .97rem; }
+.desk-actions { display: flex; align-items: center; gap: .75rem; }
+.desk-ask { white-space: nowrap; }
+
+.shelf-controls {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem;
+  margin: 1.6rem 0 .7rem; font-size: .9rem;
+}
+.controls-label { color: var(--ink-soft); margin-right: .2rem; }
+.shelf-controls button {
+  font: inherit; padding: .3rem .7rem; cursor: pointer;
+  color: var(--ink-soft); background: transparent;
+  border: 1px solid var(--line); border-radius: 999px;
+}
+.shelf-controls button[aria-pressed="true"] {
+  color: var(--bg); background: var(--accent); border-color: var(--accent);
+}
+
+/* The case. Dark on both themes on purpose — a library is a dark room
+   with light on the spines, and a white one looks like a spreadsheet. */
+.shelf-case {
+  --case: #2a211a;
+  position: relative; border-radius: 10px; padding: 1.4rem 1.1rem 0;
+  background:
+    linear-gradient(180deg, #0000 0%, #0006 100%),
+    repeating-linear-gradient(90deg, #00000012 0 3px, #0000 3px 9px),
+    var(--case);
+  box-shadow: inset 0 14px 26px -12px #000a, 0 2px 14px #0003;
+  overflow-x: auto; overflow-y: hidden; perspective: 1400px;
+}
+.shelf-row {
+  display: flex; align-items: flex-end; gap: 3px;
+  min-height: 218px; padding-bottom: 2px;
+  transform-style: preserve-3d;
+}
+.shelf-board {
+  height: 13px; border-radius: 0 0 8px 8px;
+  background: linear-gradient(180deg, #6b5136 0%, #3c2c1c 55%, #241a11 100%);
+  box-shadow: 0 5px 12px -3px #000a;
+}
+.shelf-hint { margin: .6rem 0 0; font-size: .85rem; color: var(--ink-soft); }
+.shelf-noscript { color: #e8dcc8; padding: 1rem; }
+
+/* A book. Width is the time it asks of you; height means nothing. */
+.book {
+  --leather: #463322;
+  position: relative; flex: none; padding: 0; cursor: pointer;
+  width: 38px; height: var(--tall, 186px);
+  background: none; border: 0;
+  transform-style: preserve-3d; transition: transform .45s ease, margin .45s ease;
+  transform-origin: bottom center;
+}
+.book-t1 { width: 34px; } .book-t2 { width: 47px; }
+.book-t3 { width: 62px; } .book-t4 { width: 78px; }
+
+.spine, .face {
+  position: absolute; inset: 0; border-radius: 3px 5px 5px 3px;
+  backface-visibility: hidden;
+  background:
+    linear-gradient(90deg, #0008 0%, #0000 14%, #ffffff14 32%, #0000 62%, #0007 100%),
+    repeating-linear-gradient(0deg, #0000000d 0 2px, #0000 2px 5px),
+    var(--leather);
+  box-shadow: inset 0 0 0 1px #0004, 2px 2px 7px -2px #000a;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; overflow: hidden;
+}
+/* The cover is hinged on the spine's outer edge and folded back 90°, so
+   it is a real cover — much wider than the spine, the way a book is —
+   rather than a second panel the same width. Turning the book swings it
+   into view. */
+.face {
+  left: 100%; right: auto; width: 132px;
+  transform-origin: left center;
+  transform: rotateY(-90deg);
+  border-radius: 2px 6px 6px 2px;
+  background:
+    linear-gradient(105deg, #0007 0%, #ffffff10 8%, #0000 30%, #0000 78%, #0005 100%),
+    repeating-linear-gradient(0deg, #0000000d 0 2px, #0000 2px 5px),
+    var(--leather);
+  box-shadow: inset 0 0 0 1px #0004, inset 0 0 28px -6px #0007;
+}
+/* A blind-tooled border, the way a bound cover is finished. */
+.face::after {
+  content: ""; position: absolute; inset: 9px; border-radius: 2px;
+  border: 1px solid #d9b45e3d;
+  box-shadow: inset 0 0 0 1px #00000030;
+}
+
+.band {
+  position: absolute; left: 0; right: 0; height: 9px;
+  background: linear-gradient(180deg, #ffffff1f, #0006);
+  box-shadow: 0 1px 0 #0006, 0 -1px 0 #0006;
+}
+.band-top { top: 26px; } .band-bottom { bottom: 26px; }
+
+.gilt-emblem, .face-emblem, .legend-emblem, .syn-emblem {
+  color: #d9b45e;
+  filter: drop-shadow(0 1px 0 #00000080);
+}
+.gilt-emblem { width: 17px; height: 17px; position: absolute; bottom: 7px; }
+.book-t1 .gilt-emblem { width: 14px; height: 14px; }
+
+.spine-title {
+  writing-mode: vertical-rl; text-orientation: mixed;
+  max-height: calc(100% - 84px); overflow: hidden;
+  font-family: "IM Fell English", Georgia, serif;
+  font-size: 13px; line-height: 1.1; letter-spacing: .02em;
+  text-align: center;
+  background: linear-gradient(180deg, #f0d79a 0%, #c9a24e 45%, #8d6b23 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  text-shadow: 0 1px 0 #00000055;
+}
+.book-t1 .spine-title { font-size: 11.5px; }
+
+/* House editions get a gilt rule down each edge. */
+.is-ours .spine::before, .is-ours .spine::after {
+  content: ""; position: absolute; top: 14px; bottom: 14px; width: 1px;
+  background: linear-gradient(180deg, #0000, #d9b45e88, #0000);
+}
+.is-ours .spine::before { left: 4px; } .is-ours .spine::after { right: 4px; }
+
+/* A pamphlet is a thin thing: no bands, paler, no gilt edging. */
+.is-pamphlet .spine { filter: saturate(.7) brightness(1.12); }
+.is-pamphlet .band { display: none; }
+
+/* Pulled out and turned toward you. One animation, and it is the most
+   library-ish moment in the thing. */
+.book.is-open {
+  transform: translateY(-14px) rotateY(52deg) scale(1.1); z-index: 5;
+  transform-origin: left bottom;
+  margin-right: 118px; margin-left: 8px;
+}
+.book.is-open .spine-title { opacity: .3; }
+.face-inner {
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  padding: 1.6rem .9rem; text-align: center; width: 100%;
+}
+.face-emblem { width: 28px; height: 28px; }
+.face-title {
+  font-family: "IM Fell English", Georgia, serif;
+  font-size: 15px; line-height: 1.25;
+  background: linear-gradient(180deg, #f3dca6, #c9a24e);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.face-rule { width: 52%; height: 1px; background: #d9b45e66; }
+.face-meta { font-size: 10.5px; color: #e6d6b0b0; font-family: "EB Garamond", serif; }
+
+.legend {
+  display: flex; flex-wrap: wrap; gap: .5rem 1.4rem;
+  margin: 1.5rem 0 0; font-size: .9rem; color: var(--ink-soft);
+}
+.legend-item { display: flex; align-items: center; gap: .45rem; }
+.legend-item b { color: var(--ink); font-weight: 600; }
+.legend-swatch {
+  width: 22px; height: 22px; border-radius: 3px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--leather); box-shadow: inset 0 0 0 1px #0005;
+}
+.legend-emblem { width: 13px; height: 13px; }
+
+/* The synopsis */
+/* [hidden] sets display:none, but a class rule with display:flex beats
+   it on specificity — so the empty dialog was showing on page load. */
+.synopsis[hidden] { display: none; }
+.synopsis {
+  position: fixed; inset: 0; z-index: 40; display: flex;
+  align-items: center; justify-content: center; padding: 1.1rem;
+  background: #0b0906cc; backdrop-filter: blur(2px);
+}
+.syn-card {
+  position: relative; width: min(34rem, 100%); max-height: 84vh; overflow: auto;
+  padding: 1.5rem 1.6rem; border-radius: 8px;
+  background: linear-gradient(180deg, #fdfaf2, #f3ecdc);
+  color: #24201a; box-shadow: 0 18px 50px #000a;
+  font-family: "EB Garamond", Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  .syn-card { background: linear-gradient(180deg, #221d16, #1a1611); color: #eee3cd; }
+}
+.syn-close {
+  position: absolute; top: .5rem; right: .7rem; font-size: 1.5rem; line-height: 1;
+  background: none; border: 0; cursor: pointer; color: inherit; opacity: .55;
+}
+.syn-close:hover { opacity: 1; }
+.syn-title {
+  margin: 0 0 .3rem; font-family: "IM Fell English", Georgia, serif;
+  font-size: 1.6rem; line-height: 1.18; font-weight: 400;
+}
+.syn-meta { margin: 0 0 1rem; font-size: .9rem; opacity: .72;
+  display: flex; align-items: center; gap: .4rem; }
+.syn-emblem { width: 15px; height: 15px; }
+.syn-action { margin: 0 0 1rem; font-size: 1.12rem; font-style: italic; }
+.syn-outline { margin: 0 0 1.3rem; padding-left: 1.15rem; font-size: .97rem; }
+.syn-outline li { margin: .32rem 0; }
+.syn-unread { font-size: .97rem; opacity: .8; margin-bottom: 1.3rem; }
+.take-out {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .72rem 1.1rem; border-radius: 6px; text-decoration: none;
+  font-weight: 600; font-size: 1rem;
+  color: #2a2014; background: linear-gradient(180deg, #e7c878, #c9a24e);
+  box-shadow: 0 2px 0 #8d6b23, 0 4px 10px #0004;
+}
+.take-out svg { width: 19px; height: 19px; }
+.take-out:hover { filter: brightness(1.06); }
+body.modal-open { overflow: hidden; }
+
+@media (max-width: 640px) {
+  .shelf-row { min-height: 190px; }
+  .book { height: calc(var(--tall, 186px) * .86); }
+  .book.is-open { transform: translateY(-8px) rotateY(48deg) scale(1.05); margin-right: 96px; }
+  .face { width: 112px; }
+  /* In a column, `flex: 1 1 18rem` on the words made the box grow into a
+     tall empty panel. Stacked, nothing should stretch. */
+  .desk { flex-direction: column; align-items: flex-start; gap: .9rem; }
+  .desk-words { flex: none; }
+  .desk-actions { width: 100%; }
+  .desk-ask { flex: 1 1 auto; text-align: center; }
+}

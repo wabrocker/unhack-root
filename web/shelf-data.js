@@ -434,7 +434,8 @@ const LIBRARY = {
   },
   "visibility": "public",
   "access": "open",
-  "access_note": "Open to anyone. Nothing here is gated, and the exclusion list is published because it is the only falsifiable evidence the rule is real."
+  "access_note": "Open to anyone. Nothing here is gated, and the exclusion list is published because it is the only falsifiable evidence the rule is real.",
+  "classifications_reviewed": "2026-09-22"
 };
 
 /* Counts for the shelf page, generated so they cannot drift from the data.

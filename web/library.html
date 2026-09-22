@@ -3,23 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>About — Unhacking Democracy</title>
-<meta name="description" content="Any system of rules can be subverted by those who find and exploit its loopholes. Unhacking means giving ordinary citizens the same kind of leverage.">
+<title>The Library — Unhacking Democracy</title>
+<meta name="description" content="A small, deliberately chosen collection of things worth your time. Browse the shelves, or ask a librarian.">
 <link rel="icon" href="logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Unhacking Democracy">
-<meta property="og:title" content="About — Unhacking Democracy">
-<meta property="og:description" content="Any system of rules can be subverted by those who find and exploit its loopholes. Unhacking means giving ordinary citizens the same kind of leverage.">
-<meta property="og:url" content="https://unhackdemocracy.us/about.html">
+<meta property="og:title" content="The Library — Unhacking Democracy">
+<meta property="og:description" content="A small, deliberately chosen collection of things worth your time. Browse the shelves, or ask a librarian.">
+<meta property="og:url" content="https://unhackdemocracy.us/library.html">
 <meta property="og:image" content="https://unhackdemocracy.us/social-preview.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="1200">
 <meta property="og:image:alt" content="&quot;Far More Perilous Today&quot; (AI-generated, after Leutze 1851) — George Washington stands at the prow of a boat lettered DEMOCRACY, gazing toward the Statue of Liberty, while men in top hats fire a cannon down into the ship's own deck and ordinary workers cling to the hull pressing planks over the breaches.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="About — Unhacking Democracy">
-<meta name="twitter:description" content="Any system of rules can be subverted by those who find and exploit its loopholes. Unhacking means giving ordinary citizens the same kind of leverage.">
+<meta name="twitter:title" content="The Library — Unhacking Democracy">
+<meta name="twitter:description" content="A small, deliberately chosen collection of things worth your time. Browse the shelves, or ask a librarian.">
 <meta name="twitter:image" content="https://unhackdemocracy.us/social-preview.jpg">
 </head>
 <body>
@@ -27,20 +30,20 @@
 <div class="wrap">
 
   <nav class="page-nav" aria-label="Breadcrumb">
-    <a href="index.html">&larr; Home</a>
+    <a href="resources.html">&larr; All Resources</a>
   </nav>
 
   <header>
     <nav id="site-menu" class="site-menu" hidden>
       <a href="next.html">Find Your Next Step</a>
-      <a href="about.html" aria-current="page">About Us</a>
+      <a href="about.html">About Us</a>
       <a href="states.html">State Apps</a>
       <div class="menu-group">
         <button type="button" class="submenu-toggle" id="resources-toggle"
-                aria-expanded="false" aria-controls="resources-menu">Resources</button>
+                aria-expanded="false" aria-controls="resources-menu" data-section-current="">Resources</button>
         <div id="resources-menu" class="submenu" hidden>
           <a href="resources.html">All Resources</a>
-          <a href="library.html">The Library</a>
+          <a href="library.html" aria-current="page">The Library</a>
           <a href="shelf.html">The Whole Shelf</a>
           <a href="citizen-primer.html">Citizen Primer</a>
           <a href="citizenship-test.html">Citizenship Practice Test</a>
@@ -76,30 +79,64 @@
     </div>
   </header>
 
+  <main>
 
-  <p>
-    Any system of rules can be subverted by those who find and exploit
-    its loopholes — that's what a hack is, in a legislature as much as
-    in a computer. The powerful hack best because they can afford the
-    lawyers, lobbyists, and engineers to find the gaps, and then make the
-    exploit permanent. <strong>Unhacking</strong> means giving ordinary
-    citizens the same kind of leverage: not a security researcher's
-    skill set, because these exploits happen in public — just the tools
-    to see them and act.
-  </p>
+    <section class="desk">
+      <div class="desk-words">
+        <h2>Browse the shelves, or ask a librarian.</h2>
+        <p>A small collection, chosen on purpose. Every book here teaches
+        something you keep.</p>
+      </div>
+      <div class="desk-actions">
+        <a class="btn-primary desk-ask" href="next.html">Ask a librarian &rarr;</a>
+        <details class="info info-block desk-info">
+          <summary aria-label="What this place is for">i</summary>
+          <div class="info-body">
+            <p><strong>What this place is for.</strong> Democratic systems
+            get exploited in ways that are, on the whole, perfectly legal
+            &mdash; and the repair work is ordinary, unglamorous and
+            available to anyone. This is where the tools for it are kept.</p>
+            <p>Whatever you believe and whoever you vote for: if you want
+            this country&rsquo;s democracy to work, you are in the right
+            place.</p>
+            <p><strong>The one rule for what goes on the shelf:</strong>
+            does it teach you something you keep? Pledges, campaigns and
+            particular bills may be worth your time &mdash; they are just
+            not what this room is for, and we leave them off whoever they
+            come from, ourselves included.</p>
+            <p><a href="index.html">The full mission &rarr;</a> &nbsp;
+            <a href="shelf.html">The same shelf as a plain list &rarr;</a></p>
+          </div>
+        </details>
+      </div>
+    </section>
 
-  <div class="principles">
-    <div>
-      <h3>Cross-partisan by architecture</h3>
-      <p>Every tool here weights toward work with genuine support across
-      parties — transparency, election security, anti-corruption — and
-      away from candidate- or party-specific asks.</p>
+    <div class="shelf-controls">
+      <span class="controls-label">Arrange by</span>
+      <button type="button" data-order="family" aria-pressed="true">Subject</button>
+      <button type="button" data-order="time" aria-pressed="false">Time it takes</button>
+      <button type="button" data-order="recent" aria-pressed="false">Recently read</button>
     </div>
-    <div>
-      <h3>Every claim links to a primary source</h3>
-      <p>Nothing here asks for your trust on faith. Any AI assistance
-      summarizes and cites; it never editorializes, and you can always
-      check the source yourself.</p>
+
+    <div class="shelf-case">
+      <div class="shelf-row" id="shelf">
+        <noscript><p class="shelf-noscript">The room needs JavaScript to
+        build itself. The same collection is a plain list on the
+        <a href="shelf.html">shelf page</a>.</p></noscript>
+      </div>
+      <div class="shelf-board"></div>
+    </div>
+    <p class="shelf-hint">Click a book to pull it out &middot; click it
+    again for what it covers</p>
+
+    <div class="legend" id="legend"></div>
+
+  </main>
+
+  <div class="synopsis" id="synopsis" hidden>
+    <div class="syn-card" role="dialog" aria-modal="true" aria-label="About this book">
+      <button type="button" class="syn-close" aria-label="Close">&times;</button>
+      <div id="synopsis-body"></div>
     </div>
   </div>
 
@@ -115,6 +152,8 @@
 
 </div>
 
+<script src="shelf-data.js"></script>
+<script src="library.js"></script>
 <script>
 // Two disclosures, not one: the menu itself, and the Resources group
 // inside it. Closing the menu closes the group too, so reopening it
