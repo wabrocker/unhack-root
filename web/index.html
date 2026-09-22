@@ -6,6 +6,9 @@
 <title>Unhacking Democracy — concrete, cross-partisan ways to repair it</title>
 <meta name="description" content="Knowledgeable, cross-partisan citizens teaming up to save Democracy. Concrete ways to understand the system and help repair it.">
 <link rel="icon" href="logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 
 <meta property="og:type" content="website">
@@ -36,7 +39,6 @@
                 aria-expanded="false" aria-controls="resources-menu">Resources</button>
         <div id="resources-menu" class="submenu" hidden>
           <a href="resources.html">All Resources</a>
-          <a href="library.html">The Library</a>
           <a href="shelf.html">The Whole Shelf</a>
           <a href="citizen-primer.html">Citizen Primer</a>
           <a href="citizenship-test.html">Citizenship Practice Test</a>
@@ -72,6 +74,83 @@
     </div>
   </header>
 
+  <main>
+
+    <section class="desk">
+      <div class="desk-words">
+        <h2>Browse the shelves, or ask a librarian.</h2>
+        <p>A small collection, chosen on purpose. Every book here teaches
+        something you keep.</p>
+      </div>
+      <div class="desk-actions">
+        <a class="btn-primary desk-ask" href="next.html">Ask a librarian &rarr;</a>
+        <details class="info info-block desk-info">
+          <summary aria-label="What this place is for">i</summary>
+          <div class="info-body">
+            <p><strong>What this place is for.</strong> Democratic systems
+            get exploited in ways that are, on the whole, perfectly legal
+            &mdash; and the repair work is ordinary, unglamorous and
+            available to anyone. This is where the tools for it are kept.</p>
+            <p>Whatever you believe and whoever you vote for: if you want
+            this country&rsquo;s democracy to work, you are in the right
+            place.</p>
+            <p><strong>The one rule for what goes on the shelf:</strong>
+            does it teach you something you keep? Pledges, campaigns and
+            particular bills may be worth your time &mdash; they are just
+            not what this room is for, and we leave them off whoever they
+            come from, ourselves included.</p>
+            <p><a href="index.html">The full mission &rarr;</a> &nbsp;
+            <a href="shelf.html">The same shelf as a plain list &rarr;</a></p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <div class="shelf-controls">
+      <span class="controls-label">Arrange by</span>
+      <button type="button" data-order="family" aria-pressed="true">Subject</button>
+      <button type="button" data-order="time" aria-pressed="false">Time it takes</button>
+      <button type="button" data-order="recent" aria-pressed="false">Recently read</button>
+    </div>
+
+    <div class="shelf-frame">
+      <button type="button" class="shelf-nav shelf-nav-prev" id="shelf-prev"
+              aria-label="Scroll left" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <button type="button" class="shelf-nav shelf-nav-next" id="shelf-next"
+              aria-label="Scroll right" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    <div class="shelf-case" id="shelf-case">
+      <div class="shelf-row" id="shelf">
+        <noscript><p class="shelf-noscript">The room needs JavaScript to
+        build itself. The same collection is a plain list on the
+        <a href="shelf.html">shelf page</a>.</p></noscript>
+      </div>
+    </div>
+      <div class="shelf-board"></div>
+    </div>
+    <div class="book-bar" id="book-bar" hidden>
+      <span class="bar-words">
+        <b id="bar-title"></b>
+        <span id="bar-meta"></span>
+      </span>
+      <span class="bar-buttons">
+        <button type="button" id="bar-contents" class="bar-btn bar-btn-gilt">Contents</button>
+        <button type="button" id="bar-back" class="bar-btn">Put it back</button>
+      </span>
+    </div>
+
+    <p class="shelf-hint">Click a book to pull it off the shelf &middot;
+    click it again to put it back</p>
+
+    <div class="legend" id="legend"></div>
+
+  </main>
+
   <figure class="epigraph">
     <blockquote cite="https://en.wikipedia.org/wiki/The_Fellowship_of_the_Ring">
       <p class="turn">&ldquo;I wish it need not have happened in my time,&rdquo; said Frodo.</p>
@@ -83,21 +162,17 @@
     &ldquo;The Shadow of the Past&rdquo;</figcaption>
   </figure>
 
-  <div class="card card-lead">
-    <h3>Not sure where to start?</h3>
-    <p>Most people aren&rsquo;t. There is too much wrong to take in at once,
-    and no obvious end to pull on. So start with <strong>one thing</strong>
-    &mdash; answer five quick questions and we&rsquo;ll pick an action that
-    matches the time you actually have and the kind of person you actually
-    are. Do it, come back, and the next one is ready.</p>
-    <a class="btn" href="next.html">Find Your Next Step &rarr;</a>
-    <a class="btn btn-quiet" href="shelf.html">Or see the whole shelf &rarr;</a>
-  </div>
-
   <figure class="hero-art">
     <img src="social-preview-hero.jpg" width="1024" height="1024" alt="Painting in the style of Washington Crossing the Delaware: George Washington stands at the prow of a boat lettered DEMOCRACY, gazing toward the Statue of Liberty, while men in top hats fire a cannon down into the ship's own deck and ordinary workers cling to the hull pressing planks over the breaches.">
     <figcaption>&ldquo;Far More Perilous Today&rdquo; — AI-generated, after Leutze (1851)</figcaption>
   </figure>
+
+  <div class="synopsis" id="synopsis" hidden>
+    <div class="syn-card" role="dialog" aria-modal="true" aria-label="About this book">
+      <button type="button" class="syn-close" aria-label="Close">&times;</button>
+      <div id="synopsis-body"></div>
+    </div>
+  </div>
 
   <footer>
     <p>
@@ -112,6 +187,8 @@
 
 </div>
 
+<script src="shelf-data.js"></script>
+<script src="library.js"></script>
 <script>
 // Two disclosures, not one: the menu itself, and the Resources group
 // inside it. Closing the menu closes the group too, so reopening it
