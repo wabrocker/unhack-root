@@ -76,42 +76,21 @@
 
   <main>
 
-    <section class="desk">
-      <div class="desk-words">
-        <h2>Browse the shelves, or ask a librarian.</h2>
-        <p>A small collection, chosen on purpose. Every book here teaches
-        something you keep.</p>
+    <details class="expander">
+      <summary><h2 class="expander-title">J.R.R. Tolkien quote</h2><span class="i-dot" aria-hidden="true">i</span></summary>
+      <div class="expander-body">
+      <figure class="epigraph">
+        <blockquote cite="https://en.wikipedia.org/wiki/The_Fellowship_of_the_Ring">
+          <p class="turn">&ldquo;I wish it need not have happened in my time,&rdquo; said Frodo.</p>
+          <p class="turn">&ldquo;So do I,&rdquo; said Gandalf, &ldquo;and so do all who live to see such
+          times. But that is not for them to decide. <span class="decide">All we have to decide is
+          what to do with the time that is given us.</span>&rdquo;</p>
+        </blockquote>
+        <figcaption>J.R.R. Tolkien, <cite>The Fellowship of the Ring</cite> &mdash;
+        &ldquo;The Shadow of the Past&rdquo;</figcaption>
+      </figure>
       </div>
-      <div class="desk-actions">
-        <a class="btn-primary desk-ask" href="next.html">Ask a librarian &rarr;</a>
-        <details class="info info-block desk-info">
-          <summary aria-label="What this place is for">i</summary>
-          <div class="info-body">
-            <p><strong>What this place is for.</strong> Democratic systems
-            get exploited in ways that are, on the whole, perfectly legal
-            &mdash; and the repair work is ordinary, unglamorous and
-            available to anyone. This is where the tools for it are kept.</p>
-            <p>Whatever you believe and whoever you vote for: if you want
-            this country&rsquo;s democracy to work, you are in the right
-            place.</p>
-            <p><strong>The one rule for what goes on the shelf:</strong>
-            does it teach you something you keep? Pledges, campaigns and
-            particular bills may be worth your time &mdash; they are just
-            not what this room is for, and we leave them off whoever they
-            come from, ourselves included.</p>
-            <p><a href="index.html">The full mission &rarr;</a> &nbsp;
-            <a href="shelf.html">The same shelf as a plain list &rarr;</a></p>
-          </div>
-        </details>
-      </div>
-    </section>
-
-    <div class="shelf-controls">
-      <span class="controls-label">Arrange by</span>
-      <button type="button" data-order="family" aria-pressed="true">Subject</button>
-      <button type="button" data-order="time" aria-pressed="false">Time it takes</button>
-      <button type="button" data-order="recent" aria-pressed="false">Recently read</button>
-    </div>
+    </details>
 
     <div class="shelf-frame">
       <button type="button" class="shelf-nav shelf-nav-prev" id="shelf-prev"
@@ -144,23 +123,50 @@
       </span>
     </div>
 
-    <p class="shelf-hint">Click a book to pull it off the shelf &middot;
-    click it again to put it back</p>
-
-    <div class="legend" id="legend"></div>
+    <details class="expander">
+      <summary><span class="expander-label">Click a book to pull or push it back</span><span class="i-dot" aria-hidden="true">i</span></summary>
+      <div class="expander-body">
+      <div class="legend" id="legend"></div>
+      <div class="shelf-controls">
+        <span class="controls-label">Order by</span>
+        <button type="button" data-order="family" aria-pressed="true">Topic</button>
+        <button type="button" data-order="time" aria-pressed="false">Read Time</button>
+        <button type="button" data-order="recent" aria-pressed="false">Recent Reads</button>
+      </div>
+      <section class="desk">
+        <div class="desk-words">
+          <h2>Browse the shelves, or ask a librarian.</h2>
+          <p>A small collection, chosen on purpose. Every book here teaches
+          something you keep.</p>
+        </div>
+        <div class="desk-actions">
+          <a class="btn-primary desk-ask" href="next.html">Ask a librarian &rarr;</a>
+          <details class="info info-block desk-info">
+            <summary aria-label="What this place is for">i</summary>
+            <div class="info-body">
+              <p><strong>What this place is for.</strong> Democratic systems
+              get exploited in ways that are, on the whole, perfectly legal
+              &mdash; and the repair work is ordinary, unglamorous and
+              available to anyone. This is where the tools for it are kept.</p>
+              <p>Whatever you believe and whoever you vote for: if you want
+              this country&rsquo;s democracy to work, you are in the right
+              place.</p>
+              <p><strong>The one rule for what goes on the shelf:</strong>
+              does it teach you something you keep? Pledges, campaigns and
+              particular bills may be worth your time &mdash; they are just
+              not what this room is for, and we leave them off whoever they
+              come from, ourselves included.</p>
+              <p><a href="index.html">The full mission &rarr;</a> &nbsp;
+              <a href="shelf.html">The same shelf as a plain list &rarr;</a></p>
+            </div>
+          </details>
+        </div>
+      </section>
+      </div>
+    </details>
 
   </main>
 
-  <figure class="epigraph">
-    <blockquote cite="https://en.wikipedia.org/wiki/The_Fellowship_of_the_Ring">
-      <p class="turn">&ldquo;I wish it need not have happened in my time,&rdquo; said Frodo.</p>
-      <p class="turn">&ldquo;So do I,&rdquo; said Gandalf, &ldquo;and so do all who live to see such
-      times. But that is not for them to decide. <span class="decide">All we have to decide is
-      what to do with the time that is given us.</span>&rdquo;</p>
-    </blockquote>
-    <figcaption>J.R.R. Tolkien, <cite>The Fellowship of the Ring</cite> &mdash;
-    &ldquo;The Shadow of the Past&rdquo;</figcaption>
-  </figure>
 
   <figure class="hero-art">
     <img src="social-preview-hero.jpg" width="1024" height="1024" alt="Painting in the style of Washington Crossing the Delaware: George Washington stands at the prow of a boat lettered DEMOCRACY, gazing toward the Statue of Liberty, while men in top hats fire a cannon down into the ship's own deck and ordinary workers cling to the hull pressing planks over the breaches.">

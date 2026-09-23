@@ -1308,3 +1308,44 @@ body.modal-open { overflow: hidden; }
   margin-left: .5rem; font-size: .78rem; color: var(--ink-soft);
   opacity: .6; font-variant-numeric: tabular-nums;
 }
+
+/* ---- Home page expanders (2026-09-23, Bill's order) -----------------
+   Label + i, closed by default, opening IN FLOW. The site's other info
+   panels float, which suits a sentence of help; these hold a quote and a
+   whole section with buttons in it, so they push the page down instead of
+   covering the shelf. The painting below is never inside one. */
+.expander { margin: 1.1rem 0 0; }
+.expander > summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: center; gap: .55rem;
+}
+.expander > summary::-webkit-details-marker { display: none; }
+.expander-title { margin: 0; font-size: 1.15rem; }
+.expander-label { font-size: .92rem; color: var(--ink-soft); }
+.i-dot {
+  flex: none; width: 1.15rem; height: 1.15rem; border-radius: 50%;
+  border: 1px solid var(--line); color: var(--ink-soft);
+  font-size: .72rem; font-weight: 800; font-style: italic;
+  display: flex; align-items: center; justify-content: center;
+}
+.expander > summary:hover .i-dot,
+.expander[open] > summary .i-dot { border-color: var(--accent); color: var(--accent); }
+.expander > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.expander-body { margin-top: .9rem; }
+.expander-body .epigraph { margin-bottom: .4rem; }
+.expander-body .legend { margin-top: 0; }
+.expander-body .desk { margin-top: 1.2rem; }
+
+/* Pulled out of its old place under the heading, the shelf now leads, so
+   it gets the breathing room the heading used to give it. */
+main > .shelf-frame { margin-top: 1.4rem; }
+
+/* "Order by" on one line, phones included — it wrapped at 375px with the
+   old labels. */
+.expander-body .shelf-controls { flex-wrap: nowrap; margin: 1.2rem 0 0; white-space: nowrap; }
+@media (max-width: 400px) {
+  .expander-body .shelf-controls { gap: .3rem; font-size: .84rem; }
+  .expander-body .shelf-controls button { padding: .28rem .55rem; }
+}
+/* The painting follows the closed expander directly now; give it air. */
+main + .hero-art { margin-top: 1.6rem; }
