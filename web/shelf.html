@@ -181,6 +181,19 @@
   menu.addEventListener("click", function (e) {
     if (e.target.tagName === "A") setMenu(false);
   });
+  // Picking anything else on the page — a book, a link, blank space —
+  // means the menu is no longer what you are using, so it gets out of
+  // the way. Escape does the same from the keyboard.
+  document.addEventListener("click", function (e) {
+    if (menu.hidden || menu.contains(e.target) || btn.contains(e.target)) return;
+    setMenu(false);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !menu.hidden) { setMenu(false); btn.focus(); }
+  });
+  // Back and forward restore the page from memory with the menu exactly
+  // as it was left — open, if it was the way you left.
+  window.addEventListener("pageshow", function () { setMenu(false); });
 
   // The group deliberately does NOT spring open on its own pages. At
   // desktop width this panel is absolutely positioned, so opening it on
