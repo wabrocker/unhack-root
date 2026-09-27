@@ -101,7 +101,7 @@ const state = {
 // question differed ONLY by that article, so picking the identical answer
 // was marked WRONG. A study tool that fails a correct answer is worse than
 // one that is merely unhelpful, because the learner corrects toward an
-// error. This normaliser governs both grading and distractor selection, so
+// error. This normalizer governs both grading and distractor selection, so
 // a near-duplicate can no longer be offered against its own twin either.
 function norm(s) {
   return s.toLowerCase()
@@ -114,7 +114,7 @@ function norm(s) {
     // wrong. Stripping only articles caught "President"/"The President"
     // and missed this entire family.
     //
-    // Checked before loosening rather than after: normalising every answer
+    // Checked before loosening rather than after: normalizing every answer
     // in the bank this way produces 26 cross-question collisions, and all
     // 26 are genuine synonym pairs. No two answers that differ in meaning
     // collapse together, so this cannot make a wrong answer count as right.
@@ -180,7 +180,7 @@ const SUBJECT_STOP = new Set([
   // NOTE "president" is deliberately NOT here, so a question that names the
   // office in caps will not draw answers about it. That is worth having,
   // but be clear about what it does NOT do: this extractor reads only
-  // CAPITALISED words, and "Name one power of the president" writes the
+  // CAPITALIZED words, and "Name one power of the president" writes the
   // office lowercase — so it contributes no subject name at all. The fix
   // for that question was retagging the Cabinet question, not this list.
 ]);
@@ -649,7 +649,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { where: "house.gov",
       href: "https://www.house.gov/representatives/find-your-representative",
       note: "Takes your ZIP code, because representatives go by district "
-          + "rather than by state \u2014 which is why your neighbours two "
+          + "rather than by state \u2014 which is why your neighbors two "
           + "streets over may have a different one.",
       qs: [29] },
     { where: "usa.gov state directory",

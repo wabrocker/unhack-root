@@ -39,7 +39,7 @@ const CAPITALS = {
 
 // USCIS gives these places different correct answers, in square brackets on
 // its own question list. A resident of Washington D.C. who answers with a
-// governor's name is WRONG, and a tool that let them practise it that way
+// governor's name is WRONG, and a tool that let them practice it that way
 // would be doing harm.
 const TERRITORIES = {
   "Puerto Rico": "San Juan", "Guam": "Hagatna",

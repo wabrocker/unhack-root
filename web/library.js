@@ -1,8 +1,8 @@
 /* The room.
  *
- * Spines are drawn from the data, not decorated by hand: colour is the
+ * Spines are drawn from the data, not decorated by hand: color is the
  * family, thickness is what the book asks of your week, the gilt emblem
- * repeats the family so the colour is not carrying it alone — dark blue
+ * repeats the family so the color is not carrying it alone — dark blue
  * against dark green is exactly the pair colourblind readers lose.
  *
  * Height varies too, but height means nothing. Real shelves are not
@@ -55,7 +55,7 @@
   /* The control for the open book, in ordinary flow under the shelf. It
      lives here rather than on the cover because a cover rotated in 3D is
      not reliably hit-testable — the browser reports the shelf behind it
-     even at the button's own centre, on desktop and on a phone. */
+     even at the button's own center, on desktop and on a phone. */
   function showBar(item) {
     const bar = document.getElementById("book-bar");
     if (!bar) return;
@@ -75,7 +75,7 @@
     book.className = "book book-t" + cap.thickness +
       (item.form === "pamphlet" ? " is-pamphlet" : "") +
       (item.source === "us" ? " is-ours" : "");
-    book.style.setProperty("--leather", fam.colour);
+    book.style.setProperty("--leather", fam.color);
     // Floor raised from 172: the cover has to hold an emblem, a title,
     // a rule, a line of meta and a button, and the shortest books were
     // clipping the button off the bottom.
@@ -287,7 +287,7 @@
       const f = LIBRARY.families[k];
       const s = document.createElement("span");
       s.className = "legend-item";
-      s.style.setProperty("--leather", f.colour);
+      s.style.setProperty("--leather", f.color);
       s.innerHTML = '<span class="legend-swatch">' +
         emblem(f.emblem, "legend-emblem") + "</span>" +
         "<b>" + f.label + "</b> " + f.note;

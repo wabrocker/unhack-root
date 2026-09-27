@@ -19,9 +19,9 @@ somebody arrives overwhelmed and a menu hands them the same problem in a
 tidier font. A room is different. You can stand in it, look around, and
 leave having taken one thing.
 
-**The encoding does real work.** Size is what an item costs you. Colour is
+**The encoding does real work.** Size is what an item costs you. Color is
 what kind of help it gives. A thin volume is twenty minutes; a thick one is
-a weekend. That is data visualisation wearing furniture, not furniture
+a weekend. That is data visualization wearing furniture, not furniture
 pretending to be data — and if you ever make the sizes arbitrary you have
 thrown the whole idea away and kept the wallpaper.
 
@@ -60,7 +60,7 @@ Declare it:
 - **The exclusion list changes job.** In a public library it is the only
   falsifiable evidence the rule is real, so it must be published. In a
   private one it is a working record — still worth keeping, still written
-  as scope rather than judgement, but nobody is auditing you with it.
+  as scope rather than judgment, but nobody is auditing you with it.
 - **Access is a declared mechanism, not an accident.** *Obscurity* is
   genuinely fine for a small private collection and costs nothing, but it
   is binary and it does not survive forwarding. A *passphrase* is the first
@@ -103,12 +103,12 @@ and can apply the rule themselves to things nobody here chose.
 library is `false`; a course is `true`. It changes what the room means:
 shelves you wander, or a path you walk.
 
-**`families`** — the colour groups, three to five of them. Each declares a
-`label`, a `note`, a `colour` and an `emblem`:
+**`families`** — the color groups, three to five of them. Each declares a
+`label`, a `note`, a `color` and an `emblem`:
 
 ```jsonc
 "see": { "label": "See clearly", "note": "Knowing what is true",
-         "colour": "#26374e", "emblem": "compass" }
+         "color": "#26374e", "emblem": "compass" }
 ```
 
 ⚠ **Choose families by the kind of help, not by subject matter.** Ours are
@@ -118,9 +118,9 @@ field, because **a taxonomy is an argument**. Deciding which subjects
 exist, and which are the same subject, takes a position before a reader has
 read a word. "Kind of help" is a claim nobody has to agree with.
 
-⚠ **The emblem is not decoration, it is the accessibility of the colour.**
+⚠ **The emblem is not decoration, it is the accessibility of the color.**
 Dark blue against dark green is exactly the pair colourblind readers lose.
-Anything colour tells you, the emblem must tell you too.
+Anything color tells you, the emblem must tell you too.
 
 **`capacities`** — the time vocabulary, with a `thickness` that drives how
 fat the book is drawn. Ours runs twenty minutes to several hours a week.
@@ -142,8 +142,8 @@ directory, one page. Whose it is shows in the binding instead.
 }
 ```
 
-**Link, never mirror**, unless it is yours. The licence on your code covers
-your catalogue, not the things it points at.
+**Link, never mirror**, unless it is yours. The license on your code covers
+your catalog, not the things it points at.
 
 ### `items` — the books
 
@@ -191,7 +191,7 @@ which the review sheet says out loud.
 ]
 ```
 
-⚠ **Write reasons as scope, not as judgement.** These are decisions about
+⚠ **Write reasons as scope, not as judgment.** These are decisions about
 *your* shelf, not assessments of other people's work — and the difference
 matters most when the file is public, which it should be. A published
 exclusion list is the only falsifiable evidence that the rule is real.
@@ -201,7 +201,7 @@ exclusion list is the only falsifiable evidence that the rule is real.
 | | |
 |---|---|
 | `tools/shelfgen.py` | Generates `web/shelf-data.js`. `--check` fails the build if the generated file was hand-edited or the data is invalid. |
-| `tools/shelf_verify.py` | Checks the catalogue against the live web — dead links, silently renamed pages, stale dates, unread items. **Never in the build**: a build that makes HTTP calls fails on bad wifi and teaches people to work around it. |
+| `tools/shelf_verify.py` | Checks the catalog against the live web — dead links, silently renamed pages, stale dates, unread items. **Never in the build**: a build that makes HTTP calls fails on bad wifi and teaches people to work around it. |
 | `tools/shelf_review.py` | The review sheet. Tags for precision, worked examples for sanity. |
 
 **The generator is the contract.** Edit the data, never the generated file;
@@ -224,13 +224,13 @@ the menu again.
 
 ### If the librarian can answer questions
 
-It may know **the catalogue, not the subject**. *"Which of these covers
+It may know **the catalog, not the subject**. *"Which of these covers
 checking a claim?"* is retrieval over outlines you wrote. *"What should I
 think about X?"* is a model answering from memory about a contested thing,
 and it is out.
 
 ⚠ **And the gap is the feature.** A librarian that only knows the
-catalogue will constantly be asked for things it does not have — which
+catalog will constantly be asked for things it does not have — which
 makes every unanswerable question a request for the shelf, from the person
 who wanted it, at the moment they wanted it. Better acquisition data than
 any survey.

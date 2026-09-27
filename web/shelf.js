@@ -1,10 +1,10 @@
 /* The whole shelf, deliberately NOT ranked.
  *
- * A browsable catalogue is the menu, and the menu is what the next-step
+ * A browsable catalog is the menu, and the menu is what the next-step
  * page exists to replace. This page exists anyway for two reasons: some
  * people arrive wanting to see what is there rather than be handed
  * something, and a project whose whole currency is that you can check its
- * work cannot refuse to show its own catalogue.
+ * work cannot refuse to show its own catalog.
  *
  * So: reachable from the result and from here, never from the opener;
  * grouped by time needed, which is neutral; and in no order that could be
@@ -35,7 +35,7 @@
   }
 
   // Counts come from the generated data so the page cannot claim a number
-  // the catalogue does not support.
+  // the catalog does not support.
   const counts = document.getElementById("counts");
   if (counts && typeof SHELF_STATS !== "undefined") {
     counts.replaceChildren();
@@ -55,7 +55,7 @@
               "pledges and campaign drives, which this shelf does not carry " +
               "from anyone, ourselves included. Another " + SHELF_STATS.held +
               " are held while we check how they are framed. None of that is " +
-              "a judgement on the guides; it is what this page is for.");
+              "a judgment on the guides; it is what this page is for.");
     counts.appendChild(p2);
   }
 

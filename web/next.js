@@ -59,7 +59,7 @@
       options: [
         { v: "talk",    label: "Talking with people" },
         { v: "dig",     label: "Digging for facts" },
-        { v: "make",    label: "Making or organising something" },
+        { v: "make",    label: "Making or organizing something" },
         { v: "showup",  label: "Showing up in a room" },
         { v: "support", label: "Quietly backing someone else" },
         { v: "learn",   label: "Getting it straight in my own head" },

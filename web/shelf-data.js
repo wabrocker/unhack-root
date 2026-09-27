@@ -5,7 +5,7 @@
  * why, is recorded in data/shelf.json rather than lost, so the sorting
  * stays auditable and reversible.
  *
- * Those are SCOPE decisions about this project, not judgements about the
+ * Those are SCOPE decisions about this project, not judgments about the
  * documents or their publisher. This shelf carries no policy asks, no
  * pledges and no campaign activity — from any source, including our own.
  *
@@ -148,7 +148,7 @@ const SHELF = [
       "Invest in your news ecosystem: public radio, local journalism",
       "Meet the people who actually decide things, at meetings that are already public",
       "Third spaces — holding something in the coffee shop rather than waiting for a venue",
-      "National organisations that work in small places: AmeriCorps Seniors, Weave, Idealist, Mutual Aid Hub",
+      "National organizations that work in small places: AmeriCorps Seniors, Weave, Idealist, Mutual Aid Hub",
       "A list of concrete starting points, from nature clubs to serving as an election official"
     ]
   },
@@ -360,7 +360,7 @@ const SHELF = [
   {
     "id": "own-voting",
     "action": "Check your own registration, then send it to five people who trust you.",
-    "blurb": "Registrations get cancelled and polling places move. Almost nobody checks until the day.",
+    "blurb": "Registrations get canceled and polling places move. Almost nobody checks until the day.",
     "title": "Check your own vote, then five other people’s",
     "where": "Our guide",
     "url": "howto-voting.html",
@@ -398,25 +398,25 @@ const LIBRARY = {
     "see": {
       "label": "See clearly",
       "note": "Knowing what is true",
-      "colour": "#35527c",
+      "color": "#35527c",
       "emblem": "compass"
     },
     "talk": {
       "label": "Talk to people",
       "note": "The human half",
-      "colour": "#86343b",
+      "color": "#86343b",
       "emblem": "two-figures"
     },
     "act": {
       "label": "Act where you live",
       "note": "Your own patch",
-      "colour": "#6e3f1f",
+      "color": "#6e3f1f",
       "emblem": "rooftop"
     },
     "keep": {
       "label": "Keep going",
       "note": "Staying in it",
-      "colour": "#2f5f43",
+      "color": "#2f5f43",
       "emblem": "oak-leaf"
     }
   },

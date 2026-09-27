@@ -143,7 +143,7 @@ RULES = [
     ("meaning",    r'what does .* mean|what is the rule of law'),
     # National things you can name: the Constitution, the anthem, the flag.
     # "Show loyalty to" joins them because its answers — the United States,
-    # the flag — are exactly that, and it was otherwise uncategorised and
+    # the flag — are exactly that, and it was otherwise uncategorized and
     # drawing "Run for office" from the civic-duty answers.
     ("named",      r'what is the name of|supreme law of the land|show loyalty to'),
 ]
@@ -288,7 +288,7 @@ def main():
     c = Counter(i["cat"] for i in items if i["kind"] != "lookup")
     print(f"  {len(items)} questions, {sum(1 for i in items if i['star'])} asterisked, "
           f"{sum(1 for i in items if i['kind'] == 'lookup')} lookup")
-    print(f"  {len(c)} categories, {c['general']} uncategorised")
+    print(f"  {len(c)} categories, {c['general']} uncategorized")
     print(f"  {sum(1 for i in items if i.get('recall'))} asked as recall, "
           f"{sum(1 for i in items if i['d'])} with written distractors")
     print(f"  -> {OUT.relative_to(ROOT)}")

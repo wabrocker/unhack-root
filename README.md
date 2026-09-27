@@ -14,17 +14,17 @@ Florida is [unhack-fl](https://github.com/wabrocker/unhack-fl) and deploys into
 use `--delete`** — it would take the Florida app down as a side effect. See
 [DEPLOY.md](DEPLOY.md).
 
-## The shelf is our opinion, and the licence does not cover the guides
+## The shelf is our opinion, and the license does not cover the guides
 
-`data/shelf.json` is a catalogue of **other people's documents** — currently
+`data/shelf.json` is a catalog of **other people's documents** — currently
 the companion resources to Skye Perryman's *Ordinary People, Extraordinary
-Times*. We link to them and never mirror them. **The MIT licence on this repo
-covers our code and our catalogue, not their work**, which is theirs and
+Times*. We link to them and never mirror them. **The MIT license on this repo
+covers our code and our catalog, not their work**, which is theirs and
 carries its own terms.
 
 The sorting is **a curated opinion, not a neutral index.** The shelf holds
 things that teach a capability a reader keeps. What was left off is recorded
-in the same file with the reason, so the judgement is auditable and reversible
+in the same file with the reason, so the judgment is auditable and reversible
 rather than invisible — and those are **scope decisions about this project,
 not assessments of the documents.** This shelf carries no policy asks, no
 pledges and no campaign activity, from any source including our own.
@@ -33,7 +33,7 @@ Nobody has reviewed the classifications yet: every entry carries
 `reviewed_by_bill: false`, and nine of fifteen carry `outline: null` because
 nobody has read those guides. An outline is never inferred from a title.
 
-`tools/shelf_verify.py` checks the catalogue against the live web — dead
+`tools/shelf_verify.py` checks the catalog against the live web — dead
 links, silently renamed pages, stale dates. It is deliberately **not** part of
 the build.
 
@@ -120,7 +120,7 @@ Issues and pull requests are welcome, particularly:
 If you are reporting a distractor, the question number and what it offered
 you is enough.
 
-## Licence
+## License
 
 MIT — see [LICENSE](LICENSE). The USCIS questions are a U.S. government
 work and carry no copyright.

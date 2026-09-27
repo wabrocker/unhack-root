@@ -5,7 +5,7 @@
     python3 tools/shelfgen.py --check   fail if it is out of date
 
 Same contract as navgen.py, and for the same reason. The shelf is a
-catalogue of somebody else's documents: titles change, URLs rot, guides
+catalog of somebody else's documents: titles change, URLs rot, guides
 get added and withdrawn. Hand-maintaining a JavaScript literal is how a
 link quietly starts 404-ing and nobody notices, because the page still
 renders perfectly and just sends people nowhere.
@@ -57,7 +57,7 @@ def validate(db):
         problems.append("a private library must declare how access is "
                         "controlled: obscurity, passphrase or accounts")
     for key, fam in lib["families"].items():
-        for f in ("label", "note", "colour", "emblem"):
+        for f in ("label", "note", "color", "emblem"):
             if not fam.get(f):
                 problems.append(f"family {key!r}: missing {f}")
     for it in db["items"]:
@@ -140,7 +140,7 @@ def render(db):
  * why, is recorded in data/shelf.json rather than lost, so the sorting
  * stays auditable and reversible.
  *
- * Those are SCOPE decisions about this project, not judgements about the
+ * Those are SCOPE decisions about this project, not judgments about the
  * documents or their publisher. This shelf carries no policy asks, no
  * pledges and no campaign activity — from any source, including our own.
  *

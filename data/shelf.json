@@ -159,7 +159,7 @@
         "Invest in your news ecosystem: public radio, local journalism",
         "Meet the people who actually decide things, at meetings that are already public",
         "Third spaces — holding something in the coffee shop rather than waiting for a venue",
-        "National organisations that work in small places: AmeriCorps Seniors, Weave, Idealist, Mutual Aid Hub",
+        "National organizations that work in small places: AmeriCorps Seniors, Weave, Idealist, Mutual Aid Hub",
         "A list of concrete starting points, from nature clubs to serving as an election official"
       ],
       "verified": "2026-09-21",
@@ -511,7 +511,7 @@
       "id": "own-voting",
       "source": "us",
       "action": "Check your own registration, then send it to five people who trust you.",
-      "blurb": "Registrations get cancelled and polling places move. Almost nobody checks until the day.",
+      "blurb": "Registrations get canceled and polling places move. Almost nobody checks until the day.",
       "title": "Check your own vote, then five other people’s",
       "where": "Our guide",
       "url": "howto-voting.html",
@@ -616,18 +616,18 @@
       "title": "How to Canvass and Canvassing Opportunities",
       "where": "Action 01",
       "url": "https://ordinarypeopleaction.com/2026/08/24/how-to-canvass-and-canvassing-opportunities/",
-      "reason": "Out of scope: campaign activity. The guide routes to Volunteer Blue, a party volunteering programme — the routing is the content, not framing around a capability. Reviewed by Bill 2026-09-21."
+      "reason": "Out of scope: campaign activity. The guide routes to Volunteer Blue, a party volunteering program — the routing is the content, not framing around a capability. Reviewed by Bill 2026-09-21."
     },
     {
       "source": "opet",
       "title": "Act Now, Prepare Now: Protecting Your Neighbors and Community Members",
       "where": "Action 03",
       "url": "https://ordinarypeopleaction.com/2026/08/24/act-now-prepare-now-protecting-your-neighbors-and-community-members/",
-      "reason": "Out of scope: policy. Takes an explicit position on immigration enforcement and directories advocacy organisations. This shelf carries no policy asks from any source, including our own. Reviewed by Bill 2026-09-21."
+      "reason": "Out of scope: policy. Takes an explicit position on immigration enforcement and directories advocacy organizations. This shelf carries no policy asks from any source, including our own. Reviewed by Bill 2026-09-21."
     }
   ],
-  "excluded_note": "These are SCOPE decisions about this project, not judgements about the documents or their publisher. Everything listed here is a real resource that helps somebody; it is simply not what this shelf carries. The shelf holds capabilities a reader keeps. It carries no policy asks, no pledges and no campaign activity — from any source, including ours. Recorded rather than silently dropped so the sorting is auditable and reversible.",
-  "framing_note": "framing_flag marks an entry whose CONTENTS name a party, a figure or a contested position, even where its title and format are a capability. Flagged entries are held out of the shipped shelf until framing_cleared is true — not deleted, and not a judgement on the document. The page's welcome is explicitly cross-partisan, so serving these by default would contradict it before anyone had read a word. Clearing one is a one-word edit and Bill's call. Found by reading the guides on 2026-09-21; the listing page showed none of it.",
+  "excluded_note": "These are SCOPE decisions about this project, not judgments about the documents or their publisher. Everything listed here is a real resource that helps somebody; it is simply not what this shelf carries. The shelf holds capabilities a reader keeps. It carries no policy asks, no pledges and no campaign activity — from any source, including ours. Recorded rather than silently dropped so the sorting is auditable and reversible.",
+  "framing_note": "framing_flag marks an entry whose CONTENTS name a party, a figure or a contested position, even where its title and format are a capability. Flagged entries are held out of the shipped shelf until framing_cleared is true — not deleted, and not a judgment on the document. The page's welcome is explicitly cross-partisan, so serving these by default would contradict it before anyone had read a word. Clearing one is a one-word edit and Bill's call. Found by reading the guides on 2026-09-21; the listing page showed none of it.",
   "own_howtos": {
     "decided": "2026-09-21",
     "note": "Writing our own how-tos is IN SCOPE (Bill, 2026-09-21). The pivot said the app stops inventing solutions and guides people through other people's material — this does not reverse that. Attending a town meeting is not our idea. The distinction is between inventing a solution and writing a neutral how-to for a mechanic that already exists, where nobody publishes one without a side attached. Three candidates, all held items whose structure we want and whose framing we cannot use: what your town decides and when it meets; how to run an empty-chair town hall; a registration and voting-rights checklist."
@@ -641,25 +641,25 @@
       "see": {
         "label": "See clearly",
         "note": "Knowing what is true",
-        "colour": "#35527c",
+        "color": "#35527c",
         "emblem": "compass"
       },
       "talk": {
         "label": "Talk to people",
         "note": "The human half",
-        "colour": "#86343b",
+        "color": "#86343b",
         "emblem": "two-figures"
       },
       "act": {
         "label": "Act where you live",
         "note": "Your own patch",
-        "colour": "#6e3f1f",
+        "color": "#6e3f1f",
         "emblem": "rooftop"
       },
       "keep": {
         "label": "Keep going",
         "note": "Staying in it",
-        "colour": "#2f5f43",
+        "color": "#2f5f43",
         "emblem": "oak-leaf"
       }
     },

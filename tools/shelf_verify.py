@@ -17,8 +17,8 @@ be rewritten under the same title and the same URL. So an old outline_read
 date is reported as something for a human to re-read, not as a pass.
 
 It reports and exits 0 unless something is actually broken. It never edits
-data/shelf.json: what to do about a dead link is a judgement, and a script
-that silently rewrites the catalogue would be the failure it exists to
+data/shelf.json: what to do about a dead link is a judgment, and a script
+that silently rewrites the catalog would be the failure it exists to
 catch.
 """
 

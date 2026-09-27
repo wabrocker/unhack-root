@@ -34,7 +34,7 @@ SITE = {
     "index":            (None,                    None,             None),
     "about":            ("about.html",            "index.html",     "Home"),
     "next":             ("next.html",             "index.html",     "Home"),
-    # Deliberately NOT in the menu: a browsable catalogue is the menu, and
+    # Deliberately NOT in the menu: a browsable catalog is the menu, and
     # the menu is what next.html exists to replace. Reachable from the
     # result and from next.html's own footer link, which is the point at
     # which someone has earned the right to want it.
@@ -116,7 +116,7 @@ HOME_DESCRIPTION = (
     "Concrete ways to understand the system and help repair it."
 )
 
-# The footer carries the author credit as well as the licence. One edit
+# The footer carries the author credit as well as the license. One edit
 # here rather than one per page, same as everything else in this file.
 FOOTER = '''  <footer>
     <p>

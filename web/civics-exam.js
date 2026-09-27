@@ -316,7 +316,7 @@ function showResult() {
 
   // The eight are NOT available during the test, and that is deliberate:
   // they are meant to be learned beforehand, and a sheet within reach would
-  // hide the very gap this measures — recognising a name but not being able
+  // hide the very gap this measures — recognizing a name but not being able
   // to produce it cold. Afterwards is different. Missing one is specific and
   // fixable, so name which and say where to go.
   const missedEight = exam.qs.filter((q, i) => q.kind === "lookup" && !marks[i]);

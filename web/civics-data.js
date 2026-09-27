@@ -9,8 +9,8 @@
 // 20 October 2025 means the 2008 test: 100 questions, 10 asked, 6 to
 // pass. Filed ON OR AFTER means this one: 128 questions, 20 asked, 12 to
 // pass. This file is only the 2025 set, and the page asks before it
-// quizzes — practising the wrong bank before a real interview is worse
-// than not practising.
+// quizzes — practicing the wrong bank before a real interview is worse
+// than not practicing.
 //
 // `kind` is the important field:
 //   static — the answer does not change. 120 of the 128.

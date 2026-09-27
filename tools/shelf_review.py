@@ -145,7 +145,7 @@ def main():
             print(f"    tags   : {i['mode']:<10} {CAP_LABEL[i['capacity']]:<9} "
                   f"{i['reach']:<6} {', '.join(i['disposition'])}")
             fam = FAM[i["family"]]
-            print(f"    shelf  : {fam['label']} ({fam['colour']})"
+            print(f"    shelf  : {fam['label']} ({fam['color']})"
                   f"{'' if i['form'] == 'book' else '  [' + i['form'] + ']'}")
             if top.get(i["id"], 0) < 0.5:
                 print("    ⚠ effectively never offered first")
