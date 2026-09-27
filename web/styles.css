@@ -1023,16 +1023,16 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
 }
 .shelf-nav[hidden] { display: none; }
 .shelf-nav-prev { left: 0;  border-radius: 10px 0 0 0;
-  background: linear-gradient(90deg, #3a2a1ce6 30%, #3a2a1c00 100%); }
+  background: linear-gradient(90deg, #4f3a26d9 30%, #4f3a2600 100%); }
 .shelf-nav-next { right: 0; border-radius: 0 10px 0 0;
-  background: linear-gradient(270deg, #3a2a1ce6 30%, #3a2a1c00 100%); }
+  background: linear-gradient(270deg, #4f3a26d9 30%, #4f3a2600 100%); }
 .shelf-nav:hover { color: #fff; }
 .shelf-nav svg { width: 22px; height: 22px; filter: drop-shadow(0 1px 2px #000); }
 
 .shelf-case {
-  --case: #6b4f33;
+  --case: #967350;
   position: relative; border-radius: 10px; padding: 1.4rem 1.1rem .5rem;
-  /* Wood: irregular grain rather than an even stripe, a warm mid-brown
+  /* Wood: irregular grain rather than an even stripe, a warm honey-brown
      rather than near-black, and only a soft shadow at the top, so the
      shelf reads as lit from the room instead of unlit. */
   background:
@@ -1040,7 +1040,7 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
     repeating-linear-gradient(90deg,
       #00000010 0 2px, #0000 2px 7px, #ffffff0a 7px 8px, #0000 8px 17px,
       #00000014 17px 19px, #0000 19px 29px),
-    linear-gradient(180deg, #7d5d3d 0%, #6b4f33 45%, #5a4129 100%);
+    linear-gradient(180deg, #a8845c 0%, #967350 45%, #82623f 100%);
   box-shadow: inset 0 9px 18px -12px #0008, 0 2px 14px #0003;
   overflow-x: auto; overflow-y: hidden; perspective: 1400px;
   /* The scrollbar was a grey browser bar laid across the wood, right where
@@ -1064,7 +1064,7 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
   background:
     repeating-linear-gradient(90deg,
       #00000012 0 3px, #0000 3px 11px, #ffffff0c 11px 12px, #0000 12px 23px),
-    linear-gradient(180deg, #9c7850 0%, #7a5c3c 40%, #4e3823 100%);
+    linear-gradient(180deg, #c29d70 0%, #a38058 40%, #75583a 100%);
   box-shadow: 0 5px 12px -4px #0007, inset 0 1px 0 #ffffff26;
 }
 .shelf-hint { margin: .6rem 0 0; font-size: .85rem; color: var(--ink-soft); }
@@ -1072,7 +1072,7 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
 
 /* A book. Width is the time it asks of you; height means nothing. */
 .book {
-  --leather: #463322;
+  --leather: #6e3f1f;
   position: relative; flex: none; padding: 0; cursor: pointer;
   width: 48px; height: var(--tall, 186px);
   background: none; border: 0;
@@ -1142,9 +1142,11 @@ details.opener[open] > summary::before { transform: rotate(90deg) translateX(.1r
   font-family: "IM Fell English", Georgia, serif;
   font-size: 11px; line-height: 1.12; letter-spacing: .015em;
   text-align: center;
-  background: linear-gradient(180deg, #f0d79a 0%, #c9a24e 45%, #8d6b23 100%);
+  /* Nearly flat gold. It used to fade to dark bronze top to bottom, so
+     the end of every title sank into the leather. */
+  background: linear-gradient(180deg, #fbe9b8 0%, #f0d48a 50%, #e6c26a 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent;
-  text-shadow: 0 1px 0 #00000055;
+  text-shadow: 0 1px 1px #000000b3;
 }
 .book-t1 .spine-title { font-size: 10px; }
 

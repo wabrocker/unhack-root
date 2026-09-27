@@ -398,25 +398,25 @@ const LIBRARY = {
     "see": {
       "label": "See clearly",
       "note": "Knowing what is true",
-      "colour": "#26374e",
+      "colour": "#35527c",
       "emblem": "compass"
     },
     "talk": {
       "label": "Talk to people",
       "note": "The human half",
-      "colour": "#5d2328",
+      "colour": "#86343b",
       "emblem": "two-figures"
     },
     "act": {
       "label": "Act where you live",
       "note": "Your own patch",
-      "colour": "#463322",
+      "colour": "#6e3f1f",
       "emblem": "rooftop"
     },
     "keep": {
       "label": "Keep going",
       "note": "Staying in it",
-      "colour": "#23402f",
+      "colour": "#2f5f43",
       "emblem": "oak-leaf"
     }
   },
