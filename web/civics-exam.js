@@ -49,6 +49,7 @@ function saveAttempt(a) {
   } catch (e) {
     /* a full quota must not cost somebody their result on screen */
   }
+  document.dispatchEvent(new Event("civics-change"));
 }
 
 // Where a real officer would have put the pen down.

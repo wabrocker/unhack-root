@@ -82,8 +82,31 @@ function recallChance() {
 }
 const DISTRACTORS = 4;  // wrong options offered, however many are wanted
 
+// Mastery is remembered between visits (2026-09-28), so learning 120
+// questions can happen over days, and so the Citizenship Basics badge can
+// see it. Only this browser keeps it. MASTERED_AT records the first time
+// every question was mastered, which "Start again" does not undo.
+const SEEN_KEY = "civics-mastery";
+const MASTERED_AT = "civics-mastered";
+
+function loadSeen() {
+  try { return JSON.parse(localStorage.getItem(SEEN_KEY)) || {}; }
+  catch (e) { return {}; }
+}
+
+function saveSeen() {
+  try {
+    localStorage.setItem(SEEN_KEY, JSON.stringify(state.seen));
+    if (!localStorage.getItem(MASTERED_AT) && typeof pool === "function" && pool().length
+        && pool().every((c) => (state.seen[c.n] || 0) >= MASTERY)) {
+      localStorage.setItem(MASTERED_AT, new Date().toISOString().slice(0, 10));
+    }
+  } catch (e) { /* a full quota must not stop the quiz */ }
+  document.dispatchEvent(new Event("civics-change"));
+}
+
 const state = {
-  seen: {},             // n -> correct-sighting count
+  seen: loadSeen(),     // n -> correct-sighting count
   asked: 0,
   right: 0,
   wrongFirst: 0,        // got it wrong, then later got it right
@@ -396,6 +419,7 @@ function judgeRecall(knew) {
   } else {
     state.seen[cur.q.n] = 0;
   }
+  saveSeen();
   const fb = document.getElementById("quiz").querySelector(".q-feedback");
   fb.querySelector(".recall-judge").remove();
   const next = el("button", "btn", "Next question");
@@ -470,6 +494,7 @@ function answer(btn, picked) {
     state.seen[cur.q.n] = 0;
     cur.q._missed = true;
   }
+  saveSeen();
 
   showFeedback(correct);
   progress();
@@ -551,13 +576,16 @@ function finish() {
   const box = document.getElementById("quiz");
   box.innerHTML = "";
   box.appendChild(el("h3", "q-text", "That is all " + pool().length + " of them."));
+  // Mastery is remembered between visits but this session's score is not,
+  // so someone returning to a finished quiz has asked nothing yet.
   box.appendChild(el("p", null,
-    `You got ${state.right} of ${state.asked} right. `
+    (state.asked ? `You got ${state.right} of ${state.asked} right. ` : "")
     + `You have now answered every question correctly ${MASTERY} times.`));
   const again = el("button", "btn", "Start again");
   again.type = "button";
   again.addEventListener("click", () => {
     state.seen = {}; state.asked = 0; state.right = 0;
+    saveSeen();
     pool().forEach((c) => { delete c._missed; });
     nextQuestion();
   });

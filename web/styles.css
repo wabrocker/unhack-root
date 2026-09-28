@@ -1362,3 +1362,19 @@ main + .hero-art { margin-top: 1.6rem; }
 }
 .signin:hover, .signin:focus-visible { background: var(--bg-soft); }
 .signin[hidden] { display: none; }
+
+/* Achievement badges — Citizenship Basics first (civics-badge.js). */
+.badge-card { margin-top: 1.5rem; }
+.badge-head { display: flex; align-items: center; gap: 1rem; }
+.badge-emblem svg { width: 56px; height: 56px; display: block; filter: grayscale(1) opacity(.45); transition: filter .3s; }
+.badge-card.is-earned .badge-emblem svg { filter: none; }
+.badge-head h3 { margin: 0; }
+.badge-sub { margin: .15rem 0 0; color: var(--ink-soft); font-size: .95rem; }
+.badge-steps { list-style: none; margin: 1rem 0 .5rem; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
+.badge-steps li { display: flex; gap: .7rem; align-items: flex-start; line-height: 1.45; }
+.badge-mark { flex: none; width: 1.4rem; height: 1.4rem; margin-top: .1rem; border-radius: 50%;
+  border: 2px solid var(--line); display: inline-flex; align-items: center; justify-content: center;
+  font-size: .8rem; font-weight: 700; color: #fff; }
+.badge-steps li.done .badge-mark { background: var(--ok); border-color: var(--ok); }
+.badge-note { margin: .75rem 0 0; font-size: .85rem; color: var(--ink-soft); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

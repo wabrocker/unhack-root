@@ -168,6 +168,7 @@ function saveAnswers(a) {
   } catch (e) {
     /* nothing here is worth losing the page over */
   }
+  document.dispatchEvent(new Event("civics-change"));
 }
 
 const answers = loadAnswers();
