@@ -1378,3 +1378,6 @@ main + .hero-art { margin-top: 1.6rem; }
 .badge-steps li.done .badge-mark { background: var(--ok); border-color: var(--ok); }
 .badge-note { margin: .75rem 0 0; font-size: .85rem; color: var(--ink-soft); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* End of a practice session: review what was missed, or start again. */
+.session-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }

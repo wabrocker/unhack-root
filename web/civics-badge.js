@@ -2,7 +2,8 @@
 // 2026-09-28; see "Achievements - badges, levels and counselors" in the
 // vault). Three steps, all of them things this site already does:
 //
-//   1. Master the practice quiz — every quiz question right twice.
+//   1. Score 70% or better in one practice session (20 questions) — a
+//      little above the real test's pass mark of 60% (Bill, 2026-09-28).
 //   2. Pass the practice exam — 12 of 20, the real format.
 //   3. Fill in your eight local answers.
 //
@@ -11,8 +12,8 @@
 // is sent anywhere, and there is no score and no ranking: a badge is a
 // record of what you did.
 //
-// ONCE EARNED, KEPT. The quiz's "Start again" clears its progress, and the
-// local answers change after every election. Neither takes the badge away:
+// ONCE EARNED, KEPT. The local answers change after every election, and
+// clearing them doesn't take the badge away:
 // the date it was earned is written down separately, the moment all three
 // steps are true.
 //
@@ -21,7 +22,8 @@
 // "civics-change" event, and the card redraws.
 
 const BADGE_KEY = "uhd-badges";
-const MASTERED_KEY = "civics-mastered";   // set by civics-quiz.js on finishing
+const BADGE_PRACTICE_KEY = "civics-practice-best";   // set by civics-quiz.js
+const BADGE_PRACTICE_GOAL = 70;                       // percent, in one session
 const LOCAL_ANSWER_QS = [38, 39, 30, 57, 23, 29, 61, 62];
 
 function badgeRead(key, fallback) {
@@ -33,9 +35,9 @@ function citizenshipSteps() {
   const exams = badgeRead("civics-exams", []);
   const answers = badgeRead("civics-answers", {});
   return [
-    { done: !!localStorage.getItem(MASTERED_KEY),
-      label: "Master the practice quiz",
-      how: "Answer every question right twice.",
+    { done: (badgeRead(BADGE_PRACTICE_KEY, {}).pct || 0) >= BADGE_PRACTICE_GOAL,
+      label: "Score " + BADGE_PRACTICE_GOAL + "% in a practice session",
+      how: "20 questions, like the real test — a little above its 60% pass mark.",
       href: "citizenship-test.html#play" },
     { done: exams.some((a) => a && a.passed),
       label: "Pass the practice exam",

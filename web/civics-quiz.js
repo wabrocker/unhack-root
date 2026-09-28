@@ -83,11 +83,8 @@ function recallChance() {
 const DISTRACTORS = 4;  // wrong options offered, however many are wanted
 
 // Mastery is remembered between visits (2026-09-28), so learning 120
-// questions can happen over days, and so the Citizenship Basics badge can
-// see it. Only this browser keeps it. MASTERED_AT records the first time
-// every question was mastered, which "Start again" does not undo.
+// questions can happen over days. Only this browser keeps it.
 const SEEN_KEY = "civics-mastery";
-const MASTERED_AT = "civics-mastered";
 
 function loadSeen() {
   try { return JSON.parse(localStorage.getItem(SEEN_KEY)) || {}; }
@@ -97,12 +94,7 @@ function loadSeen() {
 function saveSeen() {
   try {
     localStorage.setItem(SEEN_KEY, JSON.stringify(state.seen));
-    if (!localStorage.getItem(MASTERED_AT) && typeof pool === "function" && pool().length
-        && pool().every((c) => (state.seen[c.n] || 0) >= MASTERY)) {
-      localStorage.setItem(MASTERED_AT, new Date().toISOString().slice(0, 10));
-    }
   } catch (e) { /* a full quota must not stop the quiz */ }
-  document.dispatchEvent(new Event("civics-change"));
 }
 
 const state = {
@@ -306,11 +298,138 @@ function distractorsFor(q, want) {
   return out;
 }
 
-function nextQuestion() {
-  const left = unmastered();
-  if (!left.length) return finish();
+// ---------- practice sessions ----------
+//
+// Bill, 2026-09-28: practice comes in sessions the size of the real test,
+// scored as a percentage, and every session ends with the chance to go
+// back over what was missed. A session scoring GOAL_PCT or better — a
+// little above the real pass mark of 12 of 20, 60% — is the first step of
+// the Citizenship Basics badge (civics-badge.js reads PRACTICE_KEY).
+const SESSION = 20;
+const GOAL_PCT = 70;                          // 14 of 20
+const PRACTICE_KEY = "civics-practice-best";  // {right, of, pct, on}
 
-  const q = left[Math.floor(Math.random() * left.length)];
+const session = { asked: 0, right: 0, missed: [], review: null, used: new Set() };
+
+// Which questions have ever been asked, so later sessions can lean toward
+// new ones and the summary can say how much of the bank has been covered
+// (Bill, 2026-09-28). Separate from mastery, which a miss resets to zero.
+const TRIED_KEY = "civics-tried";
+const NEW_SHARE = 0.8;                        // share of questions drawn from untried ones
+const tried = new Set((function () {
+  try { return JSON.parse(localStorage.getItem(TRIED_KEY)) || []; } catch (e) { return []; }
+})());
+
+function tally(q, correct) {
+  if (!tried.has(q.n)) {
+    tried.add(q.n);
+    try { localStorage.setItem(TRIED_KEY, JSON.stringify([...tried])); } catch (e) {}
+  }
+  if (session.review) return;                 // going back over misses doesn't score
+  session.asked++;
+  if (correct) session.right++;
+  else if (!session.missed.includes(q)) session.missed.push(q);
+}
+
+function metaText(q) {
+  const where = session.review
+    ? `Review ${session.review.at} of ${session.review.qs.length}`
+    : `Question ${session.asked + 1} of ${SESSION}`;
+  return q.sub + " · " + where;
+}
+
+function sessionSummary() {
+  const pct = Math.round(session.right / session.asked * 100);
+  const on = new Date().toISOString().slice(0, 10);
+  let best = null;
+  try { best = JSON.parse(localStorage.getItem(PRACTICE_KEY)); } catch (e) {}
+  if (!best || pct > best.pct) {
+    try {
+      localStorage.setItem(PRACTICE_KEY, JSON.stringify(
+        { right: session.right, of: session.asked, pct: pct, on: on }));
+    } catch (e) {}
+    document.dispatchEvent(new Event("civics-change"));
+  }
+
+  const box = document.getElementById("quiz");
+  box.innerHTML = "";
+  box.appendChild(el("p", "q-meta", "Practice session"));
+  box.appendChild(el("h3", "q-text",
+    `You got ${session.right} of ${session.asked} right: ${pct}%.`));
+  box.appendChild(el("p", null,
+    `The real test needs ${TEST_PASS} of ${TEST_DRAW}, which is `
+    + `${Math.round(TEST_PASS / TEST_DRAW * 100)}%. `
+    + (pct >= GOAL_PCT
+      ? `This session meets the Citizenship Basics goal of ${GOAL_PCT}%.`
+      : `The Citizenship Basics goal is ${GOAL_PCT}% in one session.`)));
+  const total = pool().length;
+  const covered = pool().filter((c) => tried.has(c.n)).length;
+  box.appendChild(el("p", "session-coverage",
+    `You have now tried ${covered} of the ${total} practice questions `
+    + `(${Math.round(covered / total * 100)}%).`
+    + (covered < total ? " Your next session will be mostly ones you haven't tried yet." : "")));
+  if (!unmastered().length) {
+    box.appendChild(el("p", null, `You have now learned all ${total} questions.`));
+  }
+
+  const row = el("div", "session-actions");
+  const missed = session.missed.slice();
+  if (missed.length) {
+    const rev = el("button", "btn", missed.length === 1
+      ? "Review the one you missed" : `Review the ${missed.length} you missed`);
+    rev.type = "button";
+    rev.addEventListener("click", () => {
+      session.review = { qs: missed, at: 0 };
+      nextQuestion();
+    });
+    row.appendChild(rev);
+  }
+  const again = el("button", missed.length ? "btn ghost" : "btn", "Start a new session");
+  again.type = "button";
+  again.addEventListener("click", newSession);
+  row.appendChild(again);
+  box.appendChild(row);
+  (row.querySelector("button")).focus();
+}
+
+function newSession() {
+  session.asked = 0; session.right = 0; session.missed = []; session.review = null;
+  session.used = new Set();
+  nextQuestion();
+}
+
+function reviewDone() {
+  const box = document.getElementById("quiz");
+  box.innerHTML = "";
+  const n = session.review.qs.length;
+  box.appendChild(el("p", "q-meta", "Review"));
+  box.appendChild(el("h3", "q-text",
+    n === 1 ? "That was the one you missed." : `That was all ${n} you missed.`));
+  const again = el("button", "btn", "Start a new session");
+  again.type = "button";
+  again.addEventListener("click", newSession);
+  box.appendChild(again);
+  again.focus();
+}
+
+function nextQuestion() {
+  let q;
+  if (session.review) {
+    if (session.review.at >= session.review.qs.length) return reviewDone();
+    q = session.review.qs[session.review.at++];
+  } else {
+    if (session.asked >= SESSION) return sessionSummary();
+    // Mostly questions never tried; the rest go back over ones not yet
+    // learned. Nothing repeats within a session. Once everything has been
+    // tried and learned, sessions draw from the whole bank.
+    const fresh = pool().filter((c) => !tried.has(c.n) && !session.used.has(c.n));
+    const weak = unmastered().filter((c) => tried.has(c.n) && !session.used.has(c.n));
+    let left = fresh.length && (!weak.length || Math.random() < NEW_SHARE) ? fresh : weak;
+    if (!left.length) left = pool().filter((c) => !session.used.has(c.n));
+    if (!left.length) left = pool();
+    q = left[Math.floor(Math.random() * left.length)];
+    session.used.add(q.n);
+  }
   const need = q.need || 1;
   // Any member of the answer set is correct, so the ones SHOWN are chosen
   // at random — otherwise a question with several right answers would only
@@ -350,7 +469,7 @@ function renderRecall() {
   const { q } = state.current;
   const box = document.getElementById("quiz");
   box.innerHTML = "";
-  box.appendChild(el("p", "q-meta", q.sub));
+  box.appendChild(el("p", "q-meta", metaText(q)));
   box.appendChild(el("h3", "q-text", q.q));
   box.appendChild(el("p", "q-need",
     q.need > 1 ? "The interview asks for " + q.need + "." : ""));
@@ -413,6 +532,7 @@ function judgeRecall(knew) {
   if (cur.answered) return;
   cur.answered = true;
   state.asked++;
+  tally(cur.q, knew);
   if (knew) {
     state.right++;
     state.seen[cur.q.n] = (state.seen[cur.q.n] || 0) + 1;
@@ -436,7 +556,7 @@ function render() {
   const box = document.getElementById("quiz");
   box.innerHTML = "";
 
-  const meta = el("p", "q-meta", q.sub);
+  const meta = el("p", "q-meta", metaText(q));
   box.appendChild(meta);
   box.appendChild(el("h3", "q-text", q.q));
   const need = state.current.need;
@@ -477,6 +597,7 @@ function answer(btn, picked) {
   cur.answered = true;
   const correct = right;
   state.asked++;
+  tally(cur.q, correct);
 
   document.querySelectorAll(".q-option").forEach((b) => {
     b.disabled = true;
@@ -570,26 +691,6 @@ function progress() {
     : `The real test asks ${TEST_DRAW} questions. You need ${TEST_PASS} right. `
       + `At this rate you would get about ${expect}. `
       + `Learn about ${READY_AT} to be ready.`;
-}
-
-function finish() {
-  const box = document.getElementById("quiz");
-  box.innerHTML = "";
-  box.appendChild(el("h3", "q-text", "That is all " + pool().length + " of them."));
-  // Mastery is remembered between visits but this session's score is not,
-  // so someone returning to a finished quiz has asked nothing yet.
-  box.appendChild(el("p", null,
-    (state.asked ? `You got ${state.right} of ${state.asked} right. ` : "")
-    + `You have now answered every question correctly ${MASTERY} times.`));
-  const again = el("button", "btn", "Start again");
-  again.type = "button";
-  again.addEventListener("click", () => {
-    state.seen = {}; state.asked = 0; state.right = 0;
-    saveSeen();
-    pool().forEach((c) => { delete c._missed; });
-    nextQuestion();
-  });
-  box.appendChild(again);
 }
 
 // ---------- start ----------
