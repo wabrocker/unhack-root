@@ -116,11 +116,11 @@ HOME_DESCRIPTION = (
     "Concrete ways to understand the system and help repair it."
 )
 
-# Sign in, on every page (Bill, 2026-09-28). uhdem.com is the members'
+# Join, on every page (Bill, 2026-09-28; 'Sign in' until uhdem.com has accounts to sign in to). uhdem.com is the members'
 # front door. Hidden once this browser knows its owner has joined: the
 # script below sets that from ?joined=1, which the confirmation link will
 # carry once sign-ups are real. Until then it always shows.
-SIGNIN = '    <a class="signin" id="signin" href="https://uhdem.com/">&larr; Sign in</a>\n'
+SIGNIN = '    <a class="signin" id="signin" href="https://uhdem.com/">&larr; Join</a>\n'
 
 # The footer carries the author credit as well as the license. One edit
 # here rather than one per page, same as everything else in this file.
@@ -181,7 +181,7 @@ SCRIPT = '''<script>
   // as it was left — open, if it was the way you left.
   window.addEventListener("pageshow", function () { setMenu(false); });
 
-  // Members don't need the sign-in link. Remembered in this browser only.
+  // Members don't need the Join link. Remembered in this browser only.
   try {
     if (/[?&]joined=1(&|$)/.test(location.search)) localStorage.setItem("uhd-joined", "1");
     if (localStorage.getItem("uhd-joined")) document.getElementById("signin").hidden = true;

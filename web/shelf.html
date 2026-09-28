@@ -30,7 +30,7 @@
     <nav class="page-nav" aria-label="Breadcrumb">
       <a href="resources.html">&larr; All Resources</a>
     </nav>
-    <a class="signin" id="signin" href="https://uhdem.com/">&larr; Sign in</a>
+    <a class="signin" id="signin" href="https://uhdem.com/">&larr; Join</a>
   </div>
 
   <header>
@@ -198,7 +198,7 @@
   // as it was left — open, if it was the way you left.
   window.addEventListener("pageshow", function () { setMenu(false); });
 
-  // Members don't need the sign-in link. Remembered in this browser only.
+  // Members don't need the Join link. Remembered in this browser only.
   try {
     if (/[?&]joined=1(&|$)/.test(location.search)) localStorage.setItem("uhd-joined", "1");
     if (localStorage.getItem("uhd-joined")) document.getElementById("signin").hidden = true;

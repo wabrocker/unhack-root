@@ -1352,7 +1352,7 @@ main > .shelf-frame { margin-top: 1.4rem; }
 /* The painting follows the closed expander directly now; give it air. */
 main + .hero-art { margin-top: 1.6rem; }
 
-/* The top row: the breadcrumb on inner pages, and Sign in on every page. */
+/* The top row: the breadcrumb on inner pages, and Join on every page. */
 .topline { margin: 0 0 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
 .topline .page-nav { margin: 0; }
 .signin {
