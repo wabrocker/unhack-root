@@ -116,6 +116,12 @@ HOME_DESCRIPTION = (
     "Concrete ways to understand the system and help repair it."
 )
 
+# Sign in, on every page (Bill, 2026-09-28). uhdem.com is the members'
+# front door. Hidden once this browser knows its owner has joined: the
+# script below sets that from ?joined=1, which the confirmation link will
+# carry once sign-ups are real. Until then it always shows.
+SIGNIN = '    <a class="signin" id="signin" href="https://uhdem.com/">&larr; Sign in</a>\n'
+
 # The footer carries the author credit as well as the license. One edit
 # here rather than one per page, same as everything else in this file.
 FOOTER = '''  <footer>
@@ -175,6 +181,12 @@ SCRIPT = '''<script>
   // as it was left — open, if it was the way you left.
   window.addEventListener("pageshow", function () { setMenu(false); });
 
+  // Members don't need the sign-in link. Remembered in this browser only.
+  try {
+    if (/[?&]joined=1(&|$)/.test(location.search)) localStorage.setItem("uhd-joined", "1");
+    if (localStorage.getItem("uhd-joined")) document.getElementById("signin").hidden = true;
+  } catch (e) {}
+
   // The group deliberately does NOT spring open on its own pages. At
   // desktop width this panel is absolutely positioned, so opening it on
   // load dropped it straight over the site title. The button carries
@@ -198,7 +210,9 @@ def render(slug, source):
         raise SystemExit(f"FAIL: {slug}.html has {n} script blocks, expected 1")
 
     # Rebuilt from scratch rather than patched in place, so moving the
-    # breadcrumb is one edit here instead of six by hand.
+    # breadcrumb is one edit here instead of six by hand. The top row holds
+    # the breadcrumb and the sign-in link, so remove either shape.
+    s = re.sub(r'  <div class="topline">.*?\n  </div>\n\n?', "", s, flags=re.S)
     s = re.sub(r'  <nav class="page-nav".*?</nav>\n\n?', "", s, flags=re.S)
 
     # The home page's three description tags, from one string.
@@ -217,12 +231,12 @@ def render(slug, source):
     s, n = re.subn(r'  <footer>.*?  </footer>', FOOTER, s, flags=re.S)
     if n != 1:
         raise SystemExit(f"FAIL: {slug}.html has {n} footers, expected 1")
-    if parent:
-        crumb = (f'  <nav class="page-nav" aria-label="Breadcrumb">\n'
-                 f'    <a href="{parent}">&larr; {plabel}</a>\n  </nav>\n\n')
-        s, n = re.subn(r"(  <header>\n)", crumb + r"\1", s, count=1)
-        if n != 1:
-            raise SystemExit(f"FAIL: {slug}.html has no <header>")
+    crumb = (f'    <nav class="page-nav" aria-label="Breadcrumb">\n'
+             f'      <a href="{parent}">&larr; {plabel}</a>\n    </nav>\n') if parent else ""
+    top = '  <div class="topline">\n' + crumb + SIGNIN + '  </div>\n\n'
+    s, n = re.subn(r"(  <header>\n)", top + r"\1", s, count=1)
+    if n != 1:
+        raise SystemExit(f"FAIL: {slug}.html has no <header>")
 
     return s
 

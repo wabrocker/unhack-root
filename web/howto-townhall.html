@@ -26,9 +26,12 @@
 
 <div class="wrap">
 
-  <nav class="page-nav" aria-label="Breadcrumb">
-    <a href="next.html">&larr; Find Your Next Step</a>
-  </nav>
+  <div class="topline">
+    <nav class="page-nav" aria-label="Breadcrumb">
+      <a href="next.html">&larr; Find Your Next Step</a>
+    </nav>
+    <a class="signin" id="signin" href="https://uhdem.com/">&larr; Sign in</a>
+  </div>
 
   <header>
     <nav id="site-menu" class="site-menu" hidden>
@@ -300,6 +303,12 @@
   // Back and forward restore the page from memory with the menu exactly
   // as it was left — open, if it was the way you left.
   window.addEventListener("pageshow", function () { setMenu(false); });
+
+  // Members don't need the sign-in link. Remembered in this browser only.
+  try {
+    if (/[?&]joined=1(&|$)/.test(location.search)) localStorage.setItem("uhd-joined", "1");
+    if (localStorage.getItem("uhd-joined")) document.getElementById("signin").hidden = true;
+  } catch (e) {}
 
   // The group deliberately does NOT spring open on its own pages. At
   // desktop width this panel is absolutely positioned, so opening it on

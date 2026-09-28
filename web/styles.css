@@ -543,7 +543,7 @@ body:not(.options-on) .mix-row { display: none; }
 /* Printing gives you the sheet and nothing else — the steps have been
    done by then, and a printout of instructions is not what you carry. */
 @media print {
-  header, .page-nav, .site-menu, footer, .source,
+  header, .page-nav, .signin, .site-menu, footer, .source,
   #place-step, #steps, .card:not(.sheet), .sheet .btn { display: none; }
   .sheet { border: 0; padding: 0; }
   body { background: #fff; color: #000; }
@@ -1351,3 +1351,14 @@ main > .shelf-frame { margin-top: 1.4rem; }
 }
 /* The painting follows the closed expander directly now; give it air. */
 main + .hero-art { margin-top: 1.6rem; }
+
+/* The top row: the breadcrumb on inner pages, and Sign in on every page. */
+.topline { margin: 0 0 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.topline .page-nav { margin: 0; }
+.signin {
+  margin-left: auto; display: inline-flex; align-items: center; min-height: 36px; padding: 0 .9rem;
+  border: 1px solid var(--accent); border-radius: 999px; color: var(--accent);
+  font-size: .92rem; font-weight: 600; text-decoration: none;
+}
+.signin:hover, .signin:focus-visible { background: var(--bg-soft); }
+.signin[hidden] { display: none; }
