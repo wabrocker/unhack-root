@@ -502,11 +502,16 @@ function renderRecall() {
 }
 
 function revealRecall() {
+  // Once only. The button and the Enter key both land here, and hiding the
+  // entry row was not enough: its CSS display beat the hidden attribute, so
+  // the button stayed and every press added the answers again.
+  if (state.current.revealed) return;
+  state.current.revealed = true;
   const { q } = state.current;
   const box = document.getElementById("quiz");
   const typed = (box.querySelector(".recall-input") || {}).value || "";
   const entry = box.querySelector(".recall-entry");
-  if (entry) entry.hidden = true;
+  if (entry) entry.remove();
 
   const fb = box.querySelector(".q-feedback");
   fb.className = "q-feedback";
