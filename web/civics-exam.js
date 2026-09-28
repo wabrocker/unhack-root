@@ -116,17 +116,42 @@ function startExam() {
   box.appendChild(el("h3", "q-text", "Before you start"));
   box.appendChild(interviewFacts());
 
+  // A soft gate (Bill, 2026-09-28): say where they stand against the
+  // practice goal and suggest practicing first, but never lock the exam —
+  // "how would I do right now?" is a fair question, and the badge already
+  // asks for both. PRACTICE_KEY and GOAL_PCT come from civics-quiz.js.
+  let best = null;
+  try { best = JSON.parse(localStorage.getItem(PRACTICE_KEY)); } catch (e) {}
+  const ready = !!best && best.pct >= GOAL_PCT;
+  box.appendChild(el("p", "exam-readiness " + (ready ? "ready" : ""), ready
+    ? `You're ready: your best practice session is ${best.pct}%.`
+    : (best ? `Your best practice session so far is ${best.pct}%. `
+            : "You haven't finished a practice session yet. ")
+      + `Reaching ${GOAL_PCT}% in practice first gives you a good margin over the `
+      + `real test's 60% pass mark, and it's the first step of the Citizenship Basics badge.`));
+
   const row = el("div", "recall-judge");
-  const go = el("button", "btn", "Begin");
-  go.type = "button";
-  go.addEventListener("click", beginExam);
-  row.appendChild(go);
-  const no = el("button", "btn ghost", "Not now");
-  no.type = "button";
-  no.addEventListener("click", leaveExam);
-  row.appendChild(no);
+  if (ready) {
+    const go = el("button", "btn", "Begin");
+    go.type = "button";
+    go.addEventListener("click", beginExam);
+    row.appendChild(go);
+    const no = el("button", "btn ghost", "Not now");
+    no.type = "button";
+    no.addEventListener("click", leaveExam);
+    row.appendChild(no);
+  } else {
+    const practice = el("button", "btn", "Practice first");
+    practice.type = "button";
+    practice.addEventListener("click", leaveExam);
+    row.appendChild(practice);
+    const anyway = el("button", "btn ghost", "Take the exam anyway");
+    anyway.type = "button";
+    anyway.addEventListener("click", beginExam);
+    row.appendChild(anyway);
+  }
   box.appendChild(row);
-  go.focus();
+  row.querySelector("button").focus();
   syncExamButton();
 }
 

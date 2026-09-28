@@ -1382,3 +1382,8 @@ main + .hero-art { margin-top: 1.6rem; }
 
 /* End of a practice session: review what was missed, or start again. */
 .session-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+
+/* Before the practice exam: where you stand against the practice goal. */
+.exam-readiness { margin: 1rem 0 .25rem; padding: .7rem .9rem; border-radius: var(--radius);
+  background: var(--bg-soft); border: 1px solid var(--line); line-height: 1.5; }
+.exam-readiness.ready { border-color: var(--ok); }
