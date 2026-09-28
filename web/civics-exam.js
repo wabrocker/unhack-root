@@ -137,6 +137,19 @@ function beginExam() {
   askExam();
 }
 
+// Open the exam from a link (the Citizenship Basics badge card, or
+// citizenship-test.html#exam from another page). The exam lives behind the
+// Options switch, so a link to it has to turn that on first; clicking the
+// radios runs the same handlers a person's click would.
+function openExam() {
+  const on = document.querySelector('input[name="opts"][value="on"]');
+  if (on && !on.checked) on.click();
+  const ex = document.querySelector('input[name="mode"][value="exam"]');
+  if (ex && !ex.checked) ex.click();
+  else if (document.getElementById("exam").hidden) startExam();
+  document.getElementById("exam").scrollIntoView({ block: "start" });
+}
+
 function leaveExam() {
   document.getElementById("exam").hidden = true;
   document.getElementById("play").hidden = false;
@@ -394,4 +407,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const facts = document.getElementById("interview-facts");
   if (facts) facts.appendChild(interviewFacts());
   showExamStatus();
+  if (location.hash === "#exam") openExam();
+  window.addEventListener("hashchange", () => { if (location.hash === "#exam") openExam(); });
 });

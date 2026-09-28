@@ -38,11 +38,11 @@ function citizenshipSteps() {
     { done: (badgeRead(BADGE_PRACTICE_KEY, {}).pct || 0) >= BADGE_PRACTICE_GOAL,
       label: "Score " + BADGE_PRACTICE_GOAL + "% in a practice session",
       how: "20 questions, like the real test — a little above its 60% pass mark.",
-      href: "citizenship-test.html#play" },
+      href: "citizenship-test.html#play", open: "practice" },
     { done: exams.some((a) => a && a.passed),
       label: "Pass the practice exam",
       how: "20 questions, 12 right to pass — the real format.",
-      href: "citizenship-test.html#play" },
+      href: "citizenship-test.html#exam", open: "exam" },
     { done: LOCAL_ANSWER_QS.every((n) => (answers["q" + n] || "").trim()),
       label: "Fill in your eight local answers",
       how: "Your governor, senators, representative and the rest.",
@@ -113,6 +113,17 @@ function drawCitizenshipBadge() {
       const a = document.createElement("a");
       a.href = s.href;
       a.textContent = s.label;
+      // Already on the practice test page: switch to the right mode here
+      // rather than following a link to the page you're on, which does
+      // nothing when the exam is tucked behind the Options switch.
+      a.addEventListener("click", (e) => {
+        if (s.open === "exam" && typeof openExam === "function") {
+          e.preventDefault(); openExam();
+        } else if (s.open === "practice" && typeof leaveExam === "function") {
+          e.preventDefault(); leaveExam();
+          document.getElementById("play").scrollIntoView({ block: "start" });
+        }
+      });
       t.appendChild(a);
       t.appendChild(document.createTextNode(" — " + s.how));
     }
