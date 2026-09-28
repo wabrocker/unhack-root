@@ -127,6 +127,7 @@ function startExam() {
   row.appendChild(no);
   box.appendChild(row);
   go.focus();
+  syncExamButton();
 }
 
 function beginExam() {
@@ -137,17 +138,22 @@ function beginExam() {
   askExam();
 }
 
-// Open the exam from a link (the Citizenship Basics badge card, or
-// citizenship-test.html#exam from another page). The exam lives behind the
-// Options switch, so a link to it has to turn that on first; clicking the
-// radios runs the same handlers a person's click would.
+// Open the exam without the Options switch: from its own button (Bill,
+// 2026-09-28 — passing it is part of the Citizenship Basics badge, so it
+// shouldn't be hidden), from the badge card, or from
+// citizenship-test.html#exam. The mode radio is set to match so the
+// Options row, if someone opens it, tells the truth.
 function openExam() {
-  const on = document.querySelector('input[name="opts"][value="on"]');
-  if (on && !on.checked) on.click();
   const ex = document.querySelector('input[name="mode"][value="exam"]');
-  if (ex && !ex.checked) ex.click();
-  else if (document.getElementById("exam").hidden) startExam();
+  if (ex) ex.checked = true;
+  if (document.getElementById("exam").hidden) startExam();
   document.getElementById("exam").scrollIntoView({ block: "start" });
+}
+
+function syncExamButton() {
+  const b = document.getElementById("take-exam");
+  if (b) b.textContent = document.getElementById("exam").hidden
+    ? "Take the practice exam" : "Back to practice";
 }
 
 function leaveExam() {
@@ -156,6 +162,7 @@ function leaveExam() {
   const practice = document.querySelector('input[name="mode"][value="practice"]');
   if (practice) practice.checked = true;
   showExamStatus();
+  syncExamButton();
 }
 
 function askExam() {
@@ -407,6 +414,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const facts = document.getElementById("interview-facts");
   if (facts) facts.appendChild(interviewFacts());
   showExamStatus();
+  const take = document.getElementById("take-exam");
+  if (take) take.addEventListener("click", () => {
+    if (document.getElementById("exam").hidden) openExam(); else leaveExam();
+  });
   if (location.hash === "#exam") openExam();
   window.addEventListener("hashchange", () => { if (location.hash === "#exam") openExam(); });
 });

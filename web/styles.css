@@ -499,7 +499,8 @@ footer a { color: var(--accent); }
    says WHICH test this is, and somebody who filed before 20 October 2025
    sits a different one. A warning that can be switched off is not a
    warning. */
-.opt-row { display: flex; align-items: center; gap: .5rem; margin: .1rem 0 .9rem; }
+.opt-row { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: .1rem 0 .9rem; }
+.opt-row .btn { white-space: nowrap; }
 .info-ref {
   display: inline-flex; align-items: center; justify-content: center;
   width: 1.05em; height: 1.05em; border: 1px solid var(--line);
