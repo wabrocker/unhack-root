@@ -61,13 +61,48 @@ function citizenshipEarned() {
   return null;
 }
 
-// The emblem: a star in a ring, in the site's own blue and the shelf's gold.
-const BADGE_SVG =
-  '<svg viewBox="0 0 64 64" aria-hidden="true">' +
-  '<circle cx="32" cy="32" r="30" fill="#123f52"/>' +
-  '<circle cx="32" cy="32" r="25" fill="none" stroke="#e6c26a" stroke-width="2.5"/>' +
-  '<path d="M32 17l4.4 9 9.9 1.4-7.2 7 1.7 9.8L32 39.6l-8.8 4.6 1.7-9.8-7.2-7 9.9-1.4z" fill="#e6c26a"/>' +
-  '</svg>';
+// The emblems: team-crest shields, like a sports league's logos (Bill,
+// 2026-10-05). A locked badge is DRAWN in grays rather than filtered, so
+// its colors aren't in the page at all until it's earned: only people who
+// finish get to see what it looks like.
+const BADGE_SHIELD = "M32 3 L58 11 V31 C58 46.5 46.5 56 32 61 C17.5 56 6 46.5 6 31 V11 Z";
+const BADGE_INNER = "M32 8.5 L53 15 V31 C53 43.5 44 51.5 32 55.6 C20 51.5 11 43.5 11 31 V15 Z";
+const BADGE_COLORS = {
+  earned: { field: "#0f2c4c", rim: "#e6c26a", line: "#ffffff", mark: "#ffffff", accent: "#c8102e" },
+  locked: { field: "#c3c9cf", rim: "#9aa3ab", line: "#e9ecef", mark: "#f4f6f8", accent: "#aab3bb" },
+};
+
+// Citizenship Basics: the Capitol dome under a star.
+function citizenshipEmblem(earned) {
+  const c = BADGE_COLORS[earned ? "earned" : "locked"];
+  return '<svg viewBox="0 0 64 64" aria-hidden="true">' +
+    '<path d="' + BADGE_SHIELD + '" fill="' + c.field + '" stroke="' + c.rim + '" stroke-width="3" stroke-linejoin="round"/>' +
+    '<path d="' + BADGE_INNER + '" fill="none" stroke="' + c.line + '" stroke-width="1.2" stroke-opacity=".55"/>' +
+    '<path d="M32 12.5l1.9 3.9 4.3.6-3.1 3 .7 4.3-3.8-2-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="' + c.accent + '"/>' +
+    '<rect x="30.6" y="24.5" width="2.8" height="3.5" fill="' + c.mark + '"/>' +
+    '<path d="M21.5 34.5 A10.5 10.5 0 0 1 42.5 34.5 Z" fill="' + c.mark + '"/>' +
+    '<rect x="19.5" y="34.5" width="25" height="2.4" fill="' + c.rim + '"/>' +
+    '<g fill="' + c.mark + '"><rect x="21" y="37.6" width="2.4" height="7"/><rect x="25.9" y="37.6" width="2.4" height="7"/>' +
+    '<rect x="30.8" y="37.6" width="2.4" height="7"/><rect x="35.7" y="37.6" width="2.4" height="7"/><rect x="40.6" y="37.6" width="2.4" height="7"/></g>' +
+    '<rect x="17.5" y="45" width="29" height="3.2" fill="' + c.rim + '"/>' +
+    '</svg>';
+}
+
+// Trust Basics: a magnifying glass with a check mark — check before you
+// trust. Drawn here so the badge has one look wherever it appears; the
+// badge itself isn't built yet, so for now it is only ever shown locked.
+function trustEmblem(earned) {
+  const c = earned
+    ? { field: "#0d4a3f", rim: "#e6c26a", line: "#ffffff", mark: "#ffffff", accent: "#e6c26a" }
+    : BADGE_COLORS.locked;
+  return '<svg viewBox="0 0 64 64" aria-hidden="true">' +
+    '<path d="' + BADGE_SHIELD + '" fill="' + c.field + '" stroke="' + c.rim + '" stroke-width="3" stroke-linejoin="round"/>' +
+    '<path d="' + BADGE_INNER + '" fill="none" stroke="' + c.line + '" stroke-width="1.2" stroke-opacity=".55"/>' +
+    '<circle cx="29" cy="29" r="10.5" fill="none" stroke="' + c.mark + '" stroke-width="4"/>' +
+    '<path d="M36.6 36.6 L45 45" stroke="' + c.mark + '" stroke-width="5.5" stroke-linecap="round"/>' +
+    '<path d="M24 29.5 l3.6 3.6 l6.8 -7.4" fill="none" stroke="' + c.accent + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
+    '</svg>';
+}
 
 function drawCitizenshipBadge() {
   const box = document.getElementById("badge-citizenship-basics");
@@ -80,7 +115,7 @@ function drawCitizenshipBadge() {
 
   const head = document.createElement("div");
   head.className = "badge-head";
-  head.innerHTML = '<span class="badge-emblem">' + BADGE_SVG + "</span>";
+  head.innerHTML = '<span class="badge-emblem">' + citizenshipEmblem(!!earned) + "</span>";
   const words = document.createElement("div");
   const h = document.createElement("h3");
   h.textContent = "Citizenship Basics";

@@ -1367,8 +1367,8 @@ main + .hero-art { margin-top: 1.6rem; }
 /* Achievement badges — Citizenship Basics first (civics-badge.js). */
 .badge-card { margin-top: 1.5rem; }
 .badge-head { display: flex; align-items: center; gap: 1rem; }
-.badge-emblem svg { width: 56px; height: 56px; display: block; filter: grayscale(1) opacity(.45); transition: filter .3s; }
-.badge-card.is-earned .badge-emblem svg { filter: none; }
+.badge-emblem svg { width: 64px; height: 64px; display: block; }
+.badge-card.is-earned .badge-emblem svg { filter: drop-shadow(0 2px 3px rgba(0,0,0,.25)); }
 .badge-head h3 { margin: 0; }
 .badge-sub { margin: .15rem 0 0; color: var(--ink-soft); font-size: .95rem; }
 .badge-steps { list-style: none; margin: 1rem 0 .5rem; padding: 0; display: flex; flex-direction: column; gap: .55rem; }
