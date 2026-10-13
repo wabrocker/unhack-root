@@ -104,6 +104,11 @@ function trustEmblem(earned) {
     '</svg>';
 }
 
+// The card folds: closed, it shows the crest and the two title lines with a
+// + on the right; open, the steps (Bill, 2026-10-13). Redraws keep it as
+// the person left it.
+let badgeOpen = false;
+
 function drawCitizenshipBadge() {
   const box = document.getElementById("badge-citizenship-basics");
   if (!box) return;
@@ -128,7 +133,14 @@ function drawCitizenshipBadge() {
   words.appendChild(h);
   words.appendChild(sub);
   head.appendChild(words);
-  box.appendChild(head);
+  const fold = document.createElement("details");
+  fold.className = "badge-fold";
+  fold.open = badgeOpen;
+  fold.addEventListener("toggle", () => { badgeOpen = fold.open; });
+  const summary = document.createElement("summary");
+  summary.appendChild(head);
+  fold.appendChild(summary);
+  box.appendChild(fold);
 
   const ol = document.createElement("ol");
   ol.className = "badge-steps";
@@ -165,12 +177,12 @@ function drawCitizenshipBadge() {
     li.appendChild(t);
     ol.appendChild(li);
   });
-  box.appendChild(ol);
+  fold.appendChild(ol);
 
   const note = document.createElement("p");
   note.className = "badge-note";
   note.textContent = "Kept in this browser only. Nothing is sent anywhere, and nobody else sees it.";
-  box.appendChild(note);
+  fold.appendChild(note);
 }
 
 document.addEventListener("civics-change", drawCitizenshipBadge);
