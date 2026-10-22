@@ -22,63 +22,35 @@
 // defeats the lucky guess: luck does not survive being asked again.
 
 const MASTERY = 2;      // correct sightings before a question is retired
-// Half the questions should arrive as recall. But 21 of them are recall
-// ALWAYS — they have no honest distractors — so a plain coin flip on the
-// rest overshoots. The flip has to be biased DOWN to compensate:
+// THREE FORMATS, A THIRD EACH (Bill, 2026-10-22): typing (recall), multiple
+// choice, and true/false. The mix used to be adjustable (Typing: Less /
+// Medium / More); that control is gone, because choosing it was one more
+// thing to understand before answering a question.
 //
-//   want:  RECALL_SHARE * N        of N questions
-//   have:  alwaysRecall            for free
-//   so:    p = (RECALL_SHARE*N - alwaysRecall) / (N - alwaysRecall)
+// 21 questions are recall ALWAYS — they have no honest distractors, so they
+// can be neither multiple choice nor true/false. So the recall share for the
+// rest is biased down to land the whole bank near a third:
 //
-// With 120 quizzable and 21 always-recall that is 39/99 ≈ 0.394, not the
-// 1/3 it looks like by eye — a flat third would land at 54:66. Computed
-// from the data rather than written down, so it stays balanced if the
-// always-recall count changes when the categories are next edited.
-// Three mixes, because people learn differently and the right balance is a
-// preference rather than a fact. The number is the share of questions that
-// should arrive as RECALL.
+//   p = (RECALL_SHARE*N - alwaysRecall) / (N - alwaysRecall)
 //
-// "More multiple choice" cannot reach zero recall: 21 questions have no
-// honest distractors and are recall whatever this says. That floor is 17.5%
-// of the bank, which is why the low setting is 25% rather than something
-// smaller — it leaves the flip doing visible work instead of pinning at 0.
-const MIX = {
-  choice: { share: 0.25, label: "More multiple choice" },
-  even:   { share: 0.50, label: "An even mix" },
-  recall: { share: 0.75, label: "More recall" },
-};
-const MIX_KEY = "civics-mix";
-
-function mixKey() {
-  const k = localStorage.getItem(MIX_KEY);
-  return MIX[k] ? k : "even";
-}
-
-function setMix(k) {
-  if (MIX[k]) localStorage.setItem(MIX_KEY, k);
-  showMixEffect();
-}
-
-// The actual numbers for the chosen mix, because "more" and "less" mean
-// nothing without them — and the always-recall floor makes the low setting
-// behave differently from what the label implies.
-function showMixEffect() {
-  const el = document.getElementById("mix-effect");
-  if (!el) return;
-  const all = CIVICS.filter((c) => c.kind !== "lookup" && c.a.length);
-  const always = all.filter((c) => c.r).length;
-  const rec = Math.round(always + recallChance() * (all.length - always));
-  el.textContent = `About ${rec} of the ${all.length} would be recall, `
-                 + `${all.length - rec} multiple choice.`;
-}
+// and whatever isn't recall splits evenly between the other two formats.
+// Computed from the data, so it stays balanced if the categories change.
+const RECALL_SHARE = 1 / 3;
 
 function recallChance() {
   const all = CIVICS.filter((c) => c.kind !== "lookup" && c.a.length);
   const always = all.filter((c) => c.r).length;
   const flexible = all.length - always;
   if (flexible <= 0) return 0;
-  const p = (MIX[mixKey()].share * all.length - always) / flexible;
+  const p = (RECALL_SHARE * all.length - always) / flexible;
   return Math.max(0, Math.min(1, p));
+}
+
+function pickFormat(q) {
+  if (q.r) return "recall";
+  const p = recallChance(), r = Math.random();
+  if (r < p) return "recall";
+  return r < p + (1 - p) / 2 ? "choice" : "tf";
 }
 const DISTRACTORS = 4;  // wrong options offered, however many are wanted
 
@@ -436,10 +408,21 @@ function nextQuestion() {
   // ever teach its first one.
   // Questions with no honest distractors are ALWAYS recall. The rest are a
   // coin flip between the two formats.
-  if (q.r || Math.random() < recallChance()) {
+  const format = pickFormat(q);
+  if (format === "recall") {
     state.current = { q, need, recall: true, shown: q.a.slice(),
                       options: [], picked: [], answered: false };
     return render();
+  }
+  // True/false: one proposed answer, right half the time. A wrong one is a
+  // distractor matched on subject and shape, so "false" is never obvious.
+  if (format === "tf") {
+    const truth = Math.random() < 0.5;
+    const claim = truth ? shuffle(q.a)[0] : distractorsFor(q, 1)[0];
+    if (claim) {
+      state.current = { q, need, tf: true, truth, claim, shown: [], answered: false };
+      return render();
+    }
   }
   const shown = shuffle(q.a).slice(0, need);
   // Four distractors regardless of how many are wanted, so a "name five"
@@ -555,8 +538,75 @@ function judgeRecall(knew) {
   progress();
 }
 
+// True/false: the question, one proposed answer, and two buttons. Whatever
+// the verdict, every accepted answer shows afterwards: the point is seeing
+// the right answer, not the score.
+function renderTF() {
+  const { q, claim } = state.current;
+  const box = document.getElementById("quiz");
+  box.innerHTML = "";
+  box.appendChild(el("p", "q-meta", metaText(q)));
+  box.appendChild(el("h3", "q-text", q.q));
+  box.appendChild(el("p", "q-need",
+    q.a.length > 1 ? "True or false: this is one of the right answers." : "True or false: this is the right answer."));
+  box.appendChild(el("p", "tf-claim", claim));
+  const list = el("div", "q-options tf-options");
+  [["True", true], ["False", false]].forEach(([label, val]) => {
+    const b = el("button", "q-option", label);
+    b.type = "button";
+    b.addEventListener("click", () => answerTF(b, val));
+    list.appendChild(b);
+  });
+  box.appendChild(list);
+  box.appendChild(el("div", "q-feedback"));
+  progress();
+}
+
+function answerTF(btn, val) {
+  const cur = state.current;
+  if (cur.answered) return;
+  cur.answered = true;
+  const correct = val === cur.truth;
+  state.asked++;
+  tally(cur.q, correct);
+  document.querySelectorAll(".q-option").forEach((b) => {
+    b.disabled = true;
+    if ((b.textContent === "True") === cur.truth) b.classList.add("is-right");
+  });
+  if (!correct) btn.classList.add("is-wrong");
+  if (correct) {
+    state.right++;
+    // A coin flip gets true/false right half the time, so it can't be the
+    // answer that marks a question LEARNED: progress stops one short, and
+    // the final right answer has to be typed or picked from five.
+    state.seen[cur.q.n] = Math.min((state.seen[cur.q.n] || 0) + 1, MASTERY - 1);
+  } else {
+    state.seen[cur.q.n] = 0;
+    cur.q._missed = true;
+  }
+  saveSeen();
+
+  const fb = document.getElementById("quiz").querySelector(".q-feedback");
+  fb.className = "q-feedback " + (correct ? "ok" : "no");
+  fb.appendChild(el("p", "fb-verdict", correct ? "Correct." : "Not correct."));
+  // Name the claim, then whatever else counts: no repeating the claim back.
+  const others = cur.q.a.filter((x) => norm(x) !== norm(cur.claim));
+  fb.appendChild(el("p", "fb-answer",
+    "\u201C" + cur.claim + (cur.truth ? "\u201D is right." : "\u201D isn't right.")
+    + (!others.length ? ""
+      : cur.truth ? " These also count: " + others.join(" · ")
+      : (others.length === 1 ? " The answer is: " : " Any of these counts: ") + others.join(" · "))));
+  const next = el("button", "btn", "Next question");
+  next.type = "button";
+  next.addEventListener("click", nextQuestion);
+  fb.appendChild(next);
+  next.focus();
+  progress();
+}
+
 function render() {
   if (state.current.recall) return renderRecall();
+  if (state.current.tf) return renderTF();
   const { q, options } = state.current;
   const box = document.getElementById("quiz");
   box.innerHTML = "";
@@ -750,13 +800,6 @@ document.addEventListener("DOMContentLoaded", function () {
       if (intro.open) intro.scrollIntoView({ block: "nearest" });
     });
   }
-
-  const chosen = mixKey();
-  document.querySelectorAll('input[name="mix"]').forEach((r) => {
-    r.checked = r.value === chosen;
-    r.addEventListener("change", () => setMix(r.value));
-  });
-  showMixEffect();
 
   nextQuestion();
 

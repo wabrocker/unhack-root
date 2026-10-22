@@ -309,6 +309,12 @@ footer a { color: var(--accent); }
 .fb-also { margin: 0 0 .9rem; font-size: .9rem; color: var(--ink-soft); }
 .q-need { margin: -.6rem 0 .8rem; font-size: .85rem; font-weight: 700; color: var(--accent); }
 .q-need:empty { display: none; }
+/* True/false (Bill, 2026-10-22): the proposed answer, then two buttons. */
+.tf-claim { margin: 0 0 .9rem; padding: .7rem .9rem; border-left: 3px solid var(--accent); background: var(--bg-soft, #f3f5f7); border-radius: 0 8px 8px 0; font-weight: 600; }
+.tf-options { flex-direction: row; }
+.tf-options .q-option { flex: 1; text-align: center; }
+/* The premise, under the title: practice is how you learn. */
+.premise { margin: -.4rem 0 1rem; color: var(--ink-soft); font-size: .95rem; max-width: 40rem; }
 
 /* A fold, for material that has to be present but must not compete with
    the thing the page is for. <details> rather than script: it works with
