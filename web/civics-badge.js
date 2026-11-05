@@ -112,8 +112,13 @@ let badgeOpen = false;
 function drawCitizenshipBadge() {
   const box = document.getElementById("badge-citizenship-basics");
   if (!box) return;
-  const steps = citizenshipSteps();
   const earned = citizenshipEarned();
+  // Earning took all three steps, so an earned badge shows them done, even
+  // in a browser that never saw the answers (another device, or answers
+  // cleared since: once earned, kept).
+  const stepsHere = citizenshipSteps();
+  const doneElsewhere = !!earned && stepsHere.some((s) => !s.done);
+  const steps = earned ? stepsHere.map((s) => Object.assign({}, s, { done: true })) : stepsHere;
   const doneCount = steps.filter((s) => s.done).length;
   box.innerHTML = "";
   box.className = "card badge-card" + (earned ? " is-earned" : "");
@@ -178,6 +183,13 @@ function drawCitizenshipBadge() {
     ol.appendChild(li);
   });
   fold.appendChild(ol);
+
+  if (doneElsewhere) {
+    const away = document.createElement("p");
+    away.className = "badge-note";
+    away.textContent = "All three were done when you earned the badge. Your scores and answers stay on the device where you entered them.";
+    fold.appendChild(away);
+  }
 
   const note = document.createElement("p");
   note.className = "badge-note";
