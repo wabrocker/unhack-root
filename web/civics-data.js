@@ -41,7 +41,7 @@
 // permanent resident 20+ years may study instead of all 128.
 
 const CIVICS_VERSION = "2025";
-const CIVICS_SOURCE = "https://www.uscis.gov/citizenship/2025test";
+const CIVICS_SOURCE = "https://www.uscis.gov/citizenship-resource-center/naturalization-test-and-study-resources/2025-civics-test";
 const CIVICS_UPDATES = "https://www.uscis.gov/citizenship/testupdates";
 
 const CIVICS = [
