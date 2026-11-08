@@ -4,8 +4,11 @@
 //
 //   1. Score 70% or better in one practice session (20 questions) — a
 //      little above the real test's pass mark of 60% (Bill, 2026-09-28).
-//   2. Pass the practice exam — 12 of 20, the real format.
-//   3. Fill in your eight local answers.
+//   2. Fill in your eight local answers.
+//   3. Pass the practice exam — 12 of 20, the real format.
+//
+// The local answers come before the exam because the exam can ask them
+// (Bill, 2026-11-08, matching the project diagram).
 //
 // It reads what the three pages already save, so nothing here asks the
 // person to do anything twice. Everything stays in this browser. Nothing
@@ -39,14 +42,14 @@ function citizenshipSteps() {
       label: "Score " + BADGE_PRACTICE_GOAL + "% in a practice session",
       how: "20 questions, like the real test — a little above its 60% pass mark.",
       href: "citizenship-test.html#play", open: "practice" },
-    { done: exams.some((a) => a && a.passed),
-      label: "Pass the practice exam",
-      how: "20 questions, 12 right to pass — the real format.",
-      href: "citizenship-test.html#exam", open: "exam" },
     { done: LOCAL_ANSWER_QS.every((n) => (answers["q" + n] || "").trim()),
       label: "Fill in your eight local answers",
       how: "Your governor, senators, representative and the rest.",
       href: "citizenship-answers.html" },
+    { done: exams.some((a) => a && a.passed),
+      label: "Pass the practice exam",
+      how: "20 questions, 12 right to pass — the real format.",
+      href: "citizenship-test.html#exam", open: "exam" },
   ];
 }
 
