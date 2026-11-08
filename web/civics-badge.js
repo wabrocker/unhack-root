@@ -152,7 +152,7 @@ function drawCitizenshipBadge() {
 
   const ol = document.createElement("ol");
   ol.className = "badge-steps";
-  steps.forEach((s) => {
+  steps.forEach((s, i) => {
     const li = document.createElement("li");
     li.className = s.done ? "done" : "";
     const mark = document.createElement("span");
@@ -164,6 +164,11 @@ function drawCitizenshipBadge() {
     if (s.done) {
       t.innerHTML = "<b></b> <span class=\"sr-only\">(done)</span>";
       t.querySelector("b").textContent = s.label;
+      // Done, but not in this browser: say where, on the step itself
+      // (Bill, 2026-11-08: the answers page looked empty under a ✓).
+      if (!stepsHere[i].done) {
+        t.appendChild(document.createTextNode(" — done on the device where you earned the badge."));
+      }
     } else {
       const a = document.createElement("a");
       a.href = s.href;
@@ -190,7 +195,7 @@ function drawCitizenshipBadge() {
   if (doneElsewhere) {
     const away = document.createElement("p");
     away.className = "badge-note";
-    away.textContent = "All three were done when you earned the badge. Your scores and answers stay on the device where you entered them.";
+    away.textContent = "Your scores and answers stay in the browser where you entered them. Only the badge and its date travel with you.";
     fold.appendChild(away);
   }
 
@@ -199,6 +204,32 @@ function drawCitizenshipBadge() {
   note.textContent = "Kept in this browser only. Nothing is sent anywhere, and nobody else sees it.";
   fold.appendChild(note);
 }
+
+// On the answers page: an earned badge with no answers in this browser
+// means they were typed somewhere else. Say so before the empty form
+// (Bill, 2026-11-08).
+function drawAnswersAway() {
+  const anchor = document.getElementById("place-step");
+  if (!anchor) return;
+  let away = document.getElementById("answers-away");
+  const answers = badgeRead("civics-answers", {});
+  const none = !LOCAL_ANSWER_QS.some((n) => (answers["q" + n] || "").trim());
+  const show = !!citizenshipEarned() && none;
+  if (!show) { if (away) away.remove(); return; }
+  if (away) return;
+  away = document.createElement("div");
+  away.id = "answers-away";
+  away.className = "card";
+  away.appendChild(document.createElement("p"));
+  away.firstChild.className = "plain";
+  away.firstChild.textContent = "You filled these in on another device when you earned the badge. "
+    + "They stay there, in that browser. Fill them in here too if you want them on this one.";
+  anchor.parentNode.insertBefore(away, anchor);
+}
+
+document.addEventListener("civics-change", drawAnswersAway);
+document.addEventListener("DOMContentLoaded", drawAnswersAway);
+if (document.readyState !== "loading") drawAnswersAway();
 
 document.addEventListener("civics-change", drawCitizenshipBadge);
 document.addEventListener("DOMContentLoaded", drawCitizenshipBadge);
