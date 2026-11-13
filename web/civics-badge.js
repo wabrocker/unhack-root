@@ -37,16 +37,20 @@ function badgeRead(key, fallback) {
 function citizenshipSteps() {
   const exams = badgeRead("civics-exams", []);
   const answers = badgeRead("civics-answers", {});
+  // On c4pc.me, a signed-in member's steps done on another device come back
+  // as marks in "c4pc-steps" (never as scores). Nothing sets it here on
+  // unhackdemocracy.us, so there it's always empty.
+  const away = badgeRead("c4pc-steps", {});
   return [
-    { done: (badgeRead(BADGE_PRACTICE_KEY, {}).pct || 0) >= BADGE_PRACTICE_GOAL,
+    { done: (badgeRead(BADGE_PRACTICE_KEY, {}).pct || 0) >= BADGE_PRACTICE_GOAL || !!away["citizenship-practice"],
       label: "Score " + BADGE_PRACTICE_GOAL + "% in a practice session",
       how: "20 questions, like the real test — a little above its 60% pass mark.",
       href: "citizenship-test.html#play", open: "practice" },
-    { done: LOCAL_ANSWER_QS.every((n) => (answers["q" + n] || "").trim()),
+    { done: LOCAL_ANSWER_QS.every((n) => (answers["q" + n] || "").trim()) || !!away["citizenship-answers"],
       label: "Fill in your eight local answers",
       how: "Your governor, senators, representative and the rest.",
       href: "citizenship-answers.html" },
-    { done: exams.some((a) => a && a.passed),
+    { done: exams.some((a) => a && a.passed) || !!away["citizenship-exam"],
       label: "Pass the practice exam",
       how: "20 questions, 12 right to pass — the real format.",
       href: "citizenship-test.html#exam", open: "exam" },
